@@ -15,4 +15,5 @@ class Pages extends CI_Controller{
 	public function contact(){
 		$this->load->view('contact');
 	}
+	
 }

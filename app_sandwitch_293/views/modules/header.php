@@ -3,6 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>Document sans titre</title>
+<script src="../../../assets/js/jquery-1.7.2.min.js" type="text/javascript"></script>
 </head>
 
 <body>
