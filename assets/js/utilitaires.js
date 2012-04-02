@@ -1,6 +1,6 @@
 // JavaScript Document
 
-function checkEmptyForm(var array){
+function checkEmptyForm(array){
 	
 	for (i in array){
 		$("#"+array[i]).removeClass("ui-state-error");	
@@ -14,10 +14,20 @@ function checkEmptyForm(var array){
 }
 
 function updateTips(tips){
-	$( ".validateTips" )
+	$( ".updateTips" )
 		.text( tips )
 		.addClass( "ui-state-highlight" );
 		setTimeout(function() {
-			$( ".validateTips" ).removeClass( "ui-state-highlight", 1500 );
+			$( ".updateTips" ).removeClass( "ui-state-highlight", 1500 );
 		}, 500 );
+}
+
+
+function notification(titre,message,duration){
+	$.notifier.broadcast({
+			ttl: titre,
+			msg:message,
+			duration : duration
+		}
+	);
 }
