@@ -10,7 +10,11 @@ $(document).ready(function(){
 				data :'p=connexion&login='+$("#login").val()+'&password='+$("#password").val(),
 				dataType: 'json',
 				success : function(data){
-					
+					$("#conteneur_form").fadeIn('slow');
+					notification('Connexion','Bienvenue !');
+					setTimeout(function(){
+						$("#conteneur_form").remove();
+					},'400');
 				},
 				error : function(data){
 					alert('Ajax error occured');
@@ -40,7 +44,7 @@ $(document).ready(function(){
     </form>
   
 </div>
-<?php
+<?php // Si déjà connecté, ne pas laissé voir les formulaires.
 /*
 	Page d'acceuil : Contient le formulaire de login et l'acceuil par transparence en dessous.
 	
