@@ -6,4 +6,5 @@ class News extends MY_Model{
 		$this->table_name = 'news';
 	}
 	
+	
 }
