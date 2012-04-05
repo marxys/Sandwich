@@ -4,8 +4,8 @@
 
 class MY_Model extends CI_Model
 {
-	private $table_name;
-	private $table_titles;
+	protected $table_name;
+	protected $table_titles;
 	
 	
 	public function __construct() {
