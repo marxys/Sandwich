@@ -1,5 +1,5 @@
 <?php
-class News extends BigBrother{
+class News extends MY_Model{
 
 	function __construct(){
 		parent::__construct();

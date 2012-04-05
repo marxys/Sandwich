@@ -24,9 +24,6 @@ class MY_Model extends CI_Model
 			}
 			
 	}
-	/**
-	 *	Insère une nouvelle ligne dans la base de données.
-	 */
 	 
 	 public function isUnique($field,$value) {
 			
@@ -36,6 +33,9 @@ class MY_Model extends CI_Model
 		if($nbr[0] > 0) return false;
 		else return true;
 	}
+	/**
+	 *	Insère une nouvelle ligne dans la base de données.
+	 */
 	
 	function insert($row) {
 

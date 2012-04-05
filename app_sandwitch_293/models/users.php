@@ -1,5 +1,5 @@
 <?php
-class Users extends BigBrother{
+class Users extends MY_Model{
 
 	function __construct(){
 		parent::__construct();
