@@ -24,12 +24,17 @@ class Users extends CI_Controller {
 		$this->load->model('user_model');
 	}
 	public function inscription($nom,$prenom,$login,$password,$email) {
-		
-		array(		 'nom' => $nom,
-			      'prenom' => $prenom,
-		           'login' => $login,
-				'password' => md5('sand_key'.$password.$nom.$prenom.$login.$email),
-				   'email' => $email		);
+		if($this->user_model->isUnique('login',$login) && $this->user_model->isUnique('email',$email)) {
+				$this->user_model->insert(
+						array(		 'nom' => $nom,
+								  'prenom' => $prenom,
+								   'login' => $login,
+								'password' => md5('sand_key'.$password.$nom.$prenom.$login.$email),
+								   'email' => $email		));
+								   
+				echo 'user inséré';
+		}
+		else 'impossible insérer';
 		
 	}
 	
