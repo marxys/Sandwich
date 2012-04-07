@@ -3,7 +3,7 @@
 $GLOBALS["mysql_occurence"] = 0;
  
 
-class class_mysql {
+class Mysql {
 	
 	
         var $mysql_handle;

@@ -9,21 +9,27 @@ class MY_Model extends CI_Model
 	
 	
 	public function __construct() {
-		parent::__construct();
+		
+		
 		$this->load->library('mysql');	
 		if(!$this->mysql->connect()) log_message('error',$this->mysql->error);
 		
-			
 		
+		parent::__construct();	
+	}
+	
+	public function init() {
 		$query = "SELECT * FROM ".$this->table_name." LIMIT 1";	
-		$result = $this->bdd->query($query);
-			
+		$result = $this->mysql->query($query);
 			for ($i=0; $i<$result->columnCount(); $i++){
 				$col = $result->getColumnMeta($i);
 				$this->table_titles[$i] = $col['name'];
 			}
 			
 	}
+	/**
+	 *	Insère une nouvelle ligne dans la base de données.
+	 */
 	 
 	 public function isUnique($field,$value) {
 			
@@ -33,9 +39,6 @@ class MY_Model extends CI_Model
 		if($nbr[0] > 0) return false;
 		else return true;
 	}
-	/**
-	 *	Insère une nouvelle ligne dans la base de données.
-	 */
 	
 	function insert($row) {
 
@@ -133,7 +136,7 @@ class MY_Model extends CI_Model
 					
 				
 				if($a%3==2) {
-					$quote = $this->bdd->quote($entree);
+					$quote = $this->mysql->quote($entree);
 					$where.= " $quote ";
 					
 				}
@@ -155,7 +158,7 @@ class MY_Model extends CI_Model
 						if(!$i) $where .= " ( ";
 						else  $where .= " OR ";
 						
-						$quote = $this->bdd->quote("%$keyword%");
+						$quote = $this->mysql->quote("%$keyword%");
 						$where .= " $title LIKE $quote ";
 						$i++;
 					}
@@ -171,7 +174,7 @@ class MY_Model extends CI_Model
 		
 		$query.= " $sort $limit";
 		
-		$reponse = $this->bdd->query($query);
+		$reponse = $this->mysql->query($query);
 		
 		log_message('debug',$query);
 		

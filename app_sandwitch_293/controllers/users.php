@@ -21,21 +21,38 @@ class Users extends CI_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->titre_defaut = 'iSandwich';
-		$this->load->model('user_model');
+		$this->load->model('users_model');
+		$this->users_model->init();
 	}
-	public function inscription($nom,$prenom,$login,$password,$email) {
-		if($this->user_model->isUnique('login',$login) && $this->user_model->isUnique('email',$email)) {
-				$this->user_model->insert(
+	public function inscription() {
+		
+		$this->load->helper(array('form', 'url'));
+		
+		$this->load->library('form_validation');
+				
+		if ($this->form_validation->run() == FALSE)
+		{	
+			$this->load->view('inscription/error');
+			$this->load->view('inscription/form');
+		}
+		else
+		{
+			if($this->users_model->isUnique('login',$login) && $this->users_model->isUnique('email',$email)) {
+					if($this->users_model->insert(
 						array(		 'nom' => $nom,
 								  'prenom' => $prenom,
 								   'login' => $login,
 								'password' => md5('sand_key'.$password.$nom.$prenom.$login.$email),
-								   'email' => $email		));
-								   
-				echo 'user inséré';
+								   'email' => $email		))) {
+						
+							$this->load->view('inscription/success');
+					}
+					else 	$this->load->view('inscription/form');
+				
+			}
+			else $this->load->view('inscription/form');
+			
 		}
-		else 'impossible insérer';
-		
 	}
 	
 	public function desinscription() {
