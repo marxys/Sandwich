@@ -22,6 +22,7 @@ class Users extends CI_Controller {
 		parent::__construct();
 		$this->titre_defaut = 'iSandwich';
 		$this->load->model('users_model');
+		$this->load->library('input');
 		$this->users_model->init();
 	}
 	public function inscription() {
@@ -58,8 +59,12 @@ class Users extends CI_Controller {
 	public function desinscription() {
 		
 	}
-	public function login() {
-		
+	public function login() { // doit renvoyer du json
+		$login = $this->input->post('username');
+		$mdp = $this->input->post('password');
+		if( $login && $mdp ){ // pas besoin de gerer une erreur de formulaire sur la vue, le js s'en occupe.
+			// Login à la bdd 
+		}
 	}
 	public function logout() {
 		

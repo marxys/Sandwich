@@ -4,44 +4,55 @@ $(document).ready(function(){
 		event.preventDefault(); // Supprime l'action par defaut du formulaire submit (rechargement de page)
 		// Verification que les formulaires sont remplis
 		if(checkEmptyForm(new Array('login','password'))){
-			$.ajax({
-				type: 'POST',
-				url :'../controller/ajax/ajax_request/',
-				data :'p=connexion&login='+$("#login").val()+'&password='+$("#password").val(),
-				dataType: 'json',
-				success : function(data){
-					$("#conteneur_form").fadeIn('slow');
-					notification('Connexion','Bienvenue !');
-					setTimeout(function(){
-						$("#conteneur_form").remove();
-					},'400');
-				},
-				error : function(data){
-					alert('Ajax error occured');
-				}
-			});
+			var login_success = 'login_success';
+			ajax_request(login_success,'p=connexion&login='+$("#login").val()+'&password='+$("#password").val(),'../controller/ajax/ajax_request/');
 		}
 		else{
-			updateTips('Veuillez remplir tous les éléments de formulaire requis.');
+			updateTips('Veuillez remplir tous les éléments de formulaire requis.','p_login');
 		}
 	});
 	$(function(){
-		$("#button").button();
+		$(".button").button();
 	});
 });
 
 </script>
 
 <div id="conteneur_form">
-	<p class="updateTips"> Veuillez rentrez vos information de connexion. </p>
+	<p id= 'p_login'> Veuillez rentrez vos information de connexion. </p>
 	<form id="form_login" method="post">
-	<h5>Nom d'utilisateur</h5>
-	<input id="login" type="text" name="username" value="" size="50" class="text ui-widget-content ui-corner-all" />
-
-	<h5>Mot de passe</h5>
-	<input id="password" type="password" name="password" value="" size="50" class="text ui-widget-content ui-corner-all" /> <br/>
-    <input id="button" type="submit" value="Connexion"/>
+        <h5>Nom d'utilisateur</h5>
+        <input id="login" type="text" name="username" value="" size="50" class="text ui-widget-content ui-corner-all" />
+    
+        <h5>Mot de passe</h5>
+        <input id="password" type="password" name="password" value="" size="50" class="text ui-widget-content ui-corner-all" /> <br/>
+        <input id="button_login" class='button' type="submit" value="Connexion"/>
     </form>
+    <div id="inscription">
+    
+	<p id='p_record'> Indiquez vos données utilisateur pour vous inscrire :  </p>
+	<form id="form_record" method="post">
+    
+        <label for="prenom">Prénom : </label>
+        <input id="prenom" type="text" name="prenom" value="" size="50" class="text ui-widget-content ui-corner-all" />
+        
+        <label for="nom">Nom : </label>
+        <input id="nom" type="text" name="nom" value="" size="50" class="text ui-widget-content ui-corner-all" />
+        
+        <label for="login"> Nom d'utilisateur : </label>
+        <input id="login" type="text" name="login" value="" size="50" class="text ui-widget-content ui-corner-all" />
+    
+        <label for="password" >Mot de passe</label>
+        <input id="password" type="password" name="password" value="" size="50" class="text ui-widget-content ui-corner-all" /> 
+        
+        <label for="email"> Adresse e-mail : </label>
+        <input id="email" type="text" name="email" value="" size="50" class="text ui-widget-content ui-corner-all" />
+        
+        <br/>
+        <input id="button_record" class='button' type="submit" value="S'enregistrer"/>
+    </form>
+  
+</div>
   
 </div>
 <?php // Si déjà connecté, ne pas laissé voir les formulaires.

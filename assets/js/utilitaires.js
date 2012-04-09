@@ -13,8 +13,8 @@ function checkEmptyForm(array){
 	return true;
 }
 
-function updateTips(tips){
-	$( ".updateTips" )
+function updateTips(tips,id){
+	$( "#"+id )
 		.text( tips )
 		.addClass( "ui-state-highlight" );
 		setTimeout(function() {
@@ -30,4 +30,24 @@ function notification(titre,message,duration){
 			duration : duration
 		}
 	);
+}
+function login_success(){
+	$("#conteneur_form").fadeIn('slow');
+			notification('Connexion','Bienvenue !');
+			setTimeout(function(){
+			$("#conteneur_form").remove();
+	},'400');
+}
+
+function ajax_request(func_success,param,url){
+	$.ajax({
+		type: 'POST',
+		url :url,
+		data :param,
+		dataType: 'json',
+		success : window[func_success](),
+		error : function(data){
+			alert('Ajax error occured');
+		}
+	});
 }
