@@ -8,7 +8,6 @@ class Pages extends CI_Controller{
 	public function index(){
 		$this->load->view('modules/header'); 
 		$this->load->view('acceuil');
-		$this->load->view('inscription/form');
 		$this->load->view('modules/footer'); 
 		//$this->load->view('welcome_message');
 	}
