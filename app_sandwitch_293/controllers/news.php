@@ -35,4 +35,15 @@ class News extends CI_Controller{
 			// Renvoyer qu'il manque des éléments. => Recharger la page avec message d'erreur ?? 
 		}
 	}
+	function del($id){
+		
+		$news = $this->get($id);
+		$news = $news->fetch();
+		if($news['etablissement_id'] == $id){
+			$this->delete($id);
+		}
+		else{
+		 	$this->load->views(''); // load la vue erreur, vous n'avez pas les droits.
+		}
+	}
 }
