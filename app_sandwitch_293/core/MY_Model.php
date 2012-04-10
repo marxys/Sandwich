@@ -1,6 +1,22 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 // -----------------------------------------------------------------------------
+/* Protocol json
+['error'] = (int)
+['message'] = (string)
+[10/04/12 21:39:23] Martin: ['functions'] = array((string),..)
+[10/04/12 21:41:16] Martin: ['functions'] ['name'] = (string)
+['functions'] ['args'] = array((strings),...)
+[10/04/12 21:42:56] Martin: ['fonctions'][X(int)]['name']
+['fonctions'][X(int)]['args'][X(int)]
+*/
+
+/*
+ Gestion des session : 
+ 
+- user_id (int)
+- type  (int) 0 : non_identifie, 1 : client, 2 : sandwicherie, 3 : admin
+*/
 
 class MY_Model extends CI_Model
 {
