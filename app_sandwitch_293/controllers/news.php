@@ -20,15 +20,20 @@ class News extends CI_Controller{
 	
 		// ajouter la date de creation.
 		if($titre && $description && $etablissement){
-			$result = $this->news->add(array(
-						'titre'=> $titre,
-						'description' => $description,
-						'etablissement_id' => $etablissement));
-			if($result){
-				// Recharger la page
+			if(){ // Verifier avec session pour les droits
+				$result = $this->news->add(array(
+							'titre'=> $titre,
+							'description' => $description,
+							'etablissement_id' => $etablissement));
+				if($result){
+					// Recharger la page
+				}
+				else{
+					// Recharger la page en indiquant qu'il y eut une erreur lors de l'ajout.
+				}
 			}
 			else{
-				// Recharger la page en indiquant qu'il y eut une erreur lors de l'ajout.
+				// Renvoyer qu'il manque les droits.
 			}
 		}
 		else{

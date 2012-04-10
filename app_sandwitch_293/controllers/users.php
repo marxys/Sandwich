@@ -63,11 +63,25 @@ class Users extends CI_Controller {
 		$login = $this->input->post('login');
 		$mdp = $this->input->post('password');
 		if( $login && $mdp ){ // pas besoin de gerer une erreur de formulaire sur la vue, le js s'en occupe.
-			// Login à la bdd 
+			// attribution de la session
+			$user = $this->user_model->get_by_login($login); // récupere l'utilsateur
+			if($user){ // Si c'est bien un utilisateur normal
+				$password = md5('sand_key'.$mdp.$user['nom'].$user['prenom'].$login.$user['email']);
+				if($password == $user['password']){
+					$this->load->library('session'); // intialistation de la session.
+					// renvoyer du json
+				}
+				else{
+					// Renvoyer du json
+				}
+			}else{ // Si c'est une sandwicherie
+				// a faire plus tard.
+			}
 		}
 	}
 	public function logout() {
-		
+		if(isset($this->session))
+			$this->session->sess_destroy();
 	}
 	public function edit_profil() {
 		
