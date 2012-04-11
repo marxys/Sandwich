@@ -9,6 +9,7 @@ class Json {
 		
 		// initialiser $jsonencode	
 		$this->i = 0;
+		$this->json['error'] = 0;
     }
 	public function get(){
 		return $this->jsonencode;
@@ -23,6 +24,7 @@ class Json {
 	
 	// $fun = (string) 
 	// $args = array($string,..);
+	// 0 si aucuns args
 	public function call($fun,$args){
 		$this->jsonencode['functions'][$i]['name'] = $fun; 
 		$this->jsonencode['functions'][$i]['args'] = $args;

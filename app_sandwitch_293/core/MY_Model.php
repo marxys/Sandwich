@@ -1,15 +1,6 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 // -----------------------------------------------------------------------------
-/* Protocol json
-['error'] = (int)
-['message'] = (string)
-['functions'] = array((string),..)
-['functions'] ['name'] = (string)
-['functions'] ['args'] = array((strings),...)
-['fonctions'][X(int)]['name']
-['fonctions'][X(int)]['args'][X(int)]
-*/
 
 /*
  Gestion des session : 

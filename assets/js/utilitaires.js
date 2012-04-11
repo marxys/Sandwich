@@ -45,7 +45,9 @@ function ajax_request(func_success,param,url){
 		url :url,
 		data :param,
 		dataType: 'json',
-		success : window[func_success](),
+		success : function(data){
+			window[''+data['function']]();
+		},
 		error : function(data){
 			alert('Ajax error occured');
 		}

@@ -77,7 +77,7 @@ class Users extends CI_Controller {
 							 );
 					$this->session->set_userdata($array);
 					$this->json->setMessage('Connexion réussie');
-					$this->json->setFunctions(array('login_success'));
+					$this->json->call('login_success',0);
 					//...
 					echo json_encode($this->json->get());
 				}
@@ -85,7 +85,7 @@ class Users extends CI_Controller {
 					// Renvoyer du json
 					$this->json->setError(-1);
 					$this->json->setMessage('Mot de passe erroné');
-					$this->json->setFunctions(array('login_failed'));
+					$this->json->call('login_failed',0);
 					echo json_encode($this->json->get());					
 				}
 			}else{ // Si c'est une sandwicherie
