@@ -3,6 +3,7 @@
 class Json {
 	
 	private $jsonencode;
+	private $i;
 	
     public function __construct(){
 		
@@ -18,6 +19,12 @@ class Json {
 	public function setMessage($message){
 		$this->jsonencode['message'] = $message;
 	}
-	public function setFunctions($array){
+	
+	// $fun = (string) 
+	// $args = array($string,..);
+	public function call($fun,$args){
+		$this->jsonencode['functions'][$i]['name'] = $fun; 
+		$this->jsonencode['functions'][$i]['args'] = $args;
+		$this->i++;
 	}
 }
