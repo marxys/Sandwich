@@ -8,6 +8,7 @@ class Json {
     public function __construct(){
 		
 		// initialiser $jsonencode	
+		$this->i = 0;
     }
 	public function get(){
 		return $this->jsonencode;
