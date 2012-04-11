@@ -24,6 +24,7 @@ class Users extends CI_Controller {
 		$this->load->model('users_model');
 		$this->load->library('input');
 		$this->users_model->init();
+		$this->load->library('json');
 	}
 	public function inscription() {
 		
@@ -68,11 +69,24 @@ class Users extends CI_Controller {
 			if($user){ // Si c'est bien un utilisateur normal
 				$password = md5('sand_key'.$mdp.$user['nom'].$user['prenom'].$login.$user['email']);
 				if($password == $user['password']){
-					$this->load->library('session'); // intialistation de la session.
+					// modification de la session.
 					// renvoyer du json
+					$array = array(
+								'user_id' => $user['user_id'],
+								'type' => 1
+							 );
+					$this->session->set_userdata($array);
+					$this->json->setMessage('Connexion réussie');
+					$this->json->setFunctions(array('login_success'));
+					//...
+					echo json_encode($this->json->get());
 				}
 				else{
 					// Renvoyer du json
+					$this->json->setError(-1);
+					$this->json->setMessage('Mot de passe erroné');
+					$this->json->setFunctions(array('login_failed'));
+					echo json_encode($this->json->get());					
 				}
 			}else{ // Si c'est une sandwicherie
 				// a faire plus tard.
@@ -81,7 +95,8 @@ class Users extends CI_Controller {
 	}
 	public function logout() {
 		if(isset($this->session))
-			$this->session->sess_destroy();
+		$this->session->sess_destroy();
+		// + redirigé acceuil;
 	}
 	public function edit_profil() {
 		

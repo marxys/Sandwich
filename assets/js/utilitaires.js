@@ -33,9 +33,9 @@ function notification(titre,message,duration){
 }
 function login_success(){
 	$("#conteneur_form").fadeIn('slow');
-			notification('Connexion','Bienvenue !');
-			setTimeout(function(){
-			$("#conteneur_form").remove();
+	notification('Connexion','Bienvenue !');
+	setTimeout(function(){
+		$("#conteneur_form").remove();
 	},'400');
 }
 

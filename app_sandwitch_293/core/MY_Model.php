@@ -4,10 +4,10 @@
 /* Protocol json
 ['error'] = (int)
 ['message'] = (string)
-[10/04/12 21:39:23] Martin: ['functions'] = array((string),..)
-[10/04/12 21:41:16] Martin: ['functions'] ['name'] = (string)
+['functions'] = array((string),..)
+['functions'] ['name'] = (string)
 ['functions'] ['args'] = array((strings),...)
-[10/04/12 21:42:56] Martin: ['fonctions'][X(int)]['name']
+['fonctions'][X(int)]['name']
 ['fonctions'][X(int)]['args'][X(int)]
 */
 
@@ -23,7 +23,6 @@ class MY_Model extends CI_Model
 	protected $table_name;
 	protected $table_titles;
 	
-	
 	public function __construct() {
 		
 		
@@ -32,6 +31,8 @@ class MY_Model extends CI_Model
 		
 		
 		parent::__construct();	
+		
+	
 	}
 	
 	public function init() {
