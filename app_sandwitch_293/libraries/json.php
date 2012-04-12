@@ -26,8 +26,8 @@ class Json {
 	// $args = array($string,..);
 	// 0 si aucuns args
 	public function call($fun,$args){
-		$this->jsonencode['functions'][$i]['name'] = $fun; 
-		$this->jsonencode['functions'][$i]['args'] = $args;
+		$this->jsonencode['functions'][$this->i]['name'] = $fun; 
+		$this->jsonencode['functions'][$this->i]['args'] = $args;
 		$this->i++;
 	}
 }

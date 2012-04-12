@@ -5,7 +5,7 @@ $(document).ready(function(){
 		// Verification que les formulaires sont remplis
 		if(checkEmptyForm(new Array('login','password'))){
 			var login_success = 'login_success';
-			ajax_request(login_success,'p=connexion&login='+$("#login").val()+'&password='+$("#password").val(),'../controller/ajax/ajax_request/');
+			ajax_request(login_success,'login='+$("#login").val()+'&password='+$("#password").val(),'index.php/users/login');
 		}
 		else{
 			updateTips('Veuillez remplir tous les éléments de formulaire requis.','p_login');

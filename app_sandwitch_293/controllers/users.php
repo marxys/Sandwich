@@ -65,7 +65,7 @@ class Users extends CI_Controller {
 		$mdp = $this->input->post('password');
 		if( $login && $mdp ){ // pas besoin de gerer une erreur de formulaire sur la vue, le js s'en occupe.
 			// attribution de la session
-			$user = $this->user_model->get_by_login($login); // récupere l'utilsateur
+			$user = $this->users_model->get_by_login($login); // récupere l'utilsateur
 			if($user){ // Si c'est bien un utilisateur normal
 				$password = md5('sand_key'.$mdp.$user['nom'].$user['prenom'].$login.$user['email']);
 				if($password == $user['password']){
@@ -90,7 +90,12 @@ class Users extends CI_Controller {
 				}
 			}else{ // Si c'est une sandwicherie
 				// a faire plus tard.
+				$this->json->setError(-1);
+				$this->json->setMessage('Mot de passe erroné');
+				$this->json->call('login_failed',array());
+				echo json_encode($this->json->get());	
 			}
+			
 		}
 	}
 	public function logout() {

@@ -9,7 +9,7 @@ class Users_model extends MY_Model
 	}
 	
 	
-	public get_by_login($login){
+	public function get_by_login($login){
 		$query = "SELECT *, COUNT(*) as 'is_present' FROM ".$this->table_name." WHERE login = $login";
 		$result = $this->mysql->query($query);
 		if($result['is_present'] > 0){
