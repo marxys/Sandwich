@@ -28,31 +28,69 @@ class Users extends CI_Controller {
 	}
 	public function inscription() {
 		
-		$this->load->helper(array('form', 'url'));
+		$prenom = $this->input->post('prenom');
+		$nom = $this->input->post('nom');
+		$login = $this->input->post('login');
+		$mdp = $this->input->post('password');
+		$email = $this->input->post('email');					
+		$type = $this->input->post('type');
 		
-		$this->load->library('form_validation');
-				
-		if ($this->form_validation->run() == FALSE)
-		{	
-			$this->load->view('inscription/error');
-			$this->load->view('inscription/form');
-		}
-		else
-		{
-			if($this->users_model->isUnique('login',$login) && $this->users_model->isUnique('email',$email)) {
+		if($prenom && $nom && $login && $mdp && $email && $type){
+			if($type == "client")
+				$type = 1;
+			elseif($type == "etablissement")
+				$type = 2;
+			if($this->users_model->isUnique('login',$login)){
+				if($this->users_model->isUnique('email',$email)){
 					if($this->users_model->insert(
 						array(		 'nom' => $nom,
 								  'prenom' => $prenom,
 								   'login' => $login,
 								'password' => md5('sand_key'.$password.$nom.$prenom.$login.$email),
-								   'email' => $email		))) {
+								   'email' => $email,
+								   'type'  => $type	))) {
 						
-							$this->load->view('inscription/success');
+						if($type == 2){
+							$this->load->model('etablissement_model');
+							$this->etablissement_model->init();
+							$user = $this->users_model->get_by_login($login);
+							if($this->etablissement_model->insert(
+								array(    'user_id' => $user['id'],
+										  'date_ajout' => date() ))){
+								// renvoi json => inscription réussite
+								
+								$this->json->setError(0);
+								$this->json->setMessage('Inscription réussie ! Vous pouvez maintenenant vous connecter :-)');
+								$this->call('inscription',array($this->json->getError(),$this->json->getMessage()));
+							}
+							else{
+								//  Creation de l'établissement lie a l'utilisateur a échoue. Veuillez contacter l'agence pour signaler le probleme. L'inscription ne s'est pas deroulee comme prevu.
+								$this->json->setError(-1);
+								$this->json->setMessage("Création de l'établissement a échoué. Veuillez contacter l'agence pour signaler le problème.");
+								$this->call('inscription',array($this->json->getError(),$this->json->getMessage()));
+							}
+						}
 					}
-					else 	$this->load->view('inscription/form');
-				
+					else {
+						// echec de l'inscription
+						$this->json->setError(-1);
+						$this->json->setMessage("Erreur : Echec de la création d'un nouvel utilisateur. Veuillez réessayer.");
+						$this->call('inscription',array($this->json->getError(),$this->json->getMessage()));
+					}
+				}
+				else{
+					// email deja utilise
+					$this->json->setError(-1);
+					$this->json->setMessage("Erreur : Cet email est déjà utilisé par un de nos utilisateur");
+					$this->call('inscription',array($this->json->getError(),$this->json->getMessage()));
+				}
 			}
-			else $this->load->view('inscription/form');
+			else{
+				 //  login deja utilise.
+				 $this->json->setError(-1);
+				 $this->json->setMessage("Erreur : Ce login est déjà utilisé par un de nos utilisateur");
+				 $this->call('inscription',array($this->json->getError(),$this->json->getMessage()));
+			}
 			
 		}
 	}
@@ -66,32 +104,28 @@ class Users extends CI_Controller {
 		if( $login && $mdp ){ // pas besoin de gerer une erreur de formulaire sur la vue, le js s'en occupe.
 			// attribution de la session
 			$user = $this->users_model->get_by_login($login); // récupere l'utilsateur
-			if($user){ // Si c'est bien un utilisateur normal
+			if($user){ 
 				$password = md5('sand_key'.$mdp.$user['nom'].$user['prenom'].$login.$user['email']);
 				if($password == $user['password']){
 					// modification de la session.
 					// renvoyer du json
 					$array = array(
-								'user_id' => $user['user_id'],
-								'type' => 1
+								'user_id' => $user['id'],
+								'type' => $user['type']
 							 );
 					$this->session->set_userdata($array);
-					$this->json->setMessage('Connexion réussie');
+					$this->json->setError(0);
 					$this->json->call('login_success',0);
-					//...
 					echo json_encode($this->json->get());
 				}
-				else{
+				else{ // si mot de passe incorrect
 					// Renvoyer du json
 					$this->json->setError(-1);
-					$this->json->setMessage('Mot de passe erroné');
-					$this->json->call('login_failed',0);
+					$this->json->call('login_failed',array());
 					echo json_encode($this->json->get());					
 				}
-			}else{ // Si c'est une sandwicherie
-				// a faire plus tard.
+			}else{  // Si l'utilisateur n'existe pas
 				$this->json->setError(-1);
-				$this->json->setMessage('Mot de passe erroné');
 				$this->json->call('login_failed',array());
 				echo json_encode($this->json->get());	
 			}

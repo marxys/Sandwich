@@ -66,7 +66,7 @@ function ajax_request(func_success,param,url){
 			}
 		},
 		error : function(data){
-			alert('Ajax error occured '+location.href);
+			alert('Ajax error occured');
 		}
 	});
 }
