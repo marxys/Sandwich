@@ -46,7 +46,7 @@ class Users extends CI_Controller {
 						array(		 'nom' => $nom,
 								  'prenom' => $prenom,
 								   'login' => $login,
-								'password' => md5('sand_key'.$password.$nom.$prenom.$login.$email),
+								'password' => md5('sand_key'.$mdp.$nom.$prenom.$login.$email),
 								   'email' => $email,
 								   'type'  => $type	))) {
 						
@@ -55,19 +55,23 @@ class Users extends CI_Controller {
 							$this->etablissement_model->init();
 							$user = $this->users_model->get_by_login($login);
 							if($this->etablissement_model->insert(
-								array(    'user_id' => $user['id'],
-										  'date_ajout' => date() ))){
+								array(    'date_ajout' => date('d-m-y'),
+								          'user_id' => $user['id'], ))){
 								// renvoi json => inscription réussite
 								
 								$this->json->setError(0);
 								$this->json->setMessage('Inscription réussie ! Vous pouvez maintenenant vous connecter :-)');
-								$this->call('inscription',array($this->json->getError(),$this->json->getMessage()));
+								$this->json->call('inscription',array($this->json->getError(),$this->json->getMessage()));
+								echo json_encode($this->json->get());	
+
 							}
 							else{
 								//  Creation de l'établissement lie a l'utilisateur a échoue. Veuillez contacter l'agence pour signaler le probleme. L'inscription ne s'est pas deroulee comme prevu.
 								$this->json->setError(-1);
 								$this->json->setMessage("Création de l'établissement a échoué. Veuillez contacter l'agence pour signaler le problème.");
-								$this->call('inscription',array($this->json->getError(),$this->json->getMessage()));
+								$this->json->call('inscription',array($this->json->getError(),$this->json->getMessage()));
+								echo json_encode($this->json->get());	
+
 							}
 						}
 					}
@@ -75,21 +79,25 @@ class Users extends CI_Controller {
 						// echec de l'inscription
 						$this->json->setError(-1);
 						$this->json->setMessage("Erreur : Echec de la création d'un nouvel utilisateur. Veuillez réessayer.");
-						$this->call('inscription',array($this->json->getError(),$this->json->getMessage()));
+						$this->json->call('inscription',array($this->json->getError(),$this->json->getMessage()));
+						echo json_encode($this->json->get());	
+		
 					}
 				}
 				else{
 					// email deja utilise
 					$this->json->setError(-1);
 					$this->json->setMessage("Erreur : Cet email est déjà utilisé par un de nos utilisateur");
-					$this->call('inscription',array($this->json->getError(),$this->json->getMessage()));
+					$this->json->call('inscription',array($this->json->getError(),$this->json->getMessage()));
+					echo json_encode($this->json->get());					
 				}
 			}
 			else{
 				 //  login deja utilise.
 				 $this->json->setError(-1);
 				 $this->json->setMessage("Erreur : Ce login est déjà utilisé par un de nos utilisateur");
-				 $this->call('inscription',array($this->json->getError(),$this->json->getMessage()));
+				 $this->json->call('inscription',array($this->json->getError(),$this->json->getMessage()));
+				 echo json_encode($this->json->get());	
 			}
 			
 		}

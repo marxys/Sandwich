@@ -46,7 +46,10 @@ function login_success(){
 function login_failed(){
 	updateTips('Login ou mot de passe incorrect','p_login');
 }
-function ajax_request(func_success,param,url){
+function inscription(error,message){
+	updateTips(message,'p_record');
+}
+function ajax_request(param,url){
 	$.ajax({
 		type: 'POST',
 		url :url,
@@ -59,9 +62,9 @@ function ajax_request(func_success,param,url){
 				array_args = data['functions'][i]['args'];
 				switch(array_args.length){
 					case 0 : window[''+data['functions'][i]['name']](); break;
-					case 1 : window[''+detail['name']](array_args[0]); break;
-					case 2 : window[''+detail['name']](array_args[0],array_args[1]); break;
-					case 3 : window[''+detail['name']](array_args[0],array_args[1],array_args[2]); break;
+					case 1 : window[''+data['functions'][i]['name']](array_args[0]); break;
+					case 2 : window[''+data['functions'][i]['name']](array_args[0],array_args[1]); break;
+					case 3 : window[''+data['functions'][i]['name']](array_args[0],array_args[1],array_args[2]); break;
 				}
 			}
 		},

@@ -18,6 +18,12 @@ class Json {
 	public function setError($err){
 		$this->jsonencode['error'] = $err;
 	}
+	public function getError(){
+		return $this->jsonencode['error'];
+	}
+	public function getMessage(){
+		return $this->jsonencode['message'];
+	}
 	public function setMessage($message){
 		$this->jsonencode['message'] = $message;
 	}
