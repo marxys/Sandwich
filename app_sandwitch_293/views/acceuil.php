@@ -26,12 +26,12 @@ $(document).ready(function(){
 
 <div id="conteneur_form">
 
-<div id='page_garde'>
-
- <div id="inscription">
+    <div id='page_garde'>
     
-        <p id='p_record'> Indiquez vos données utilisateur pour vous inscrire :  </p>
+        <div id="inscription">
         
+            <p id='p_record'> Indiquez vos données utilisateur pour vous inscrire :  </p>
+            
             <label for="prenom">Prénom : </label>
             <input id="prenom" type="text" name="prenom" value="" size="50" class="text ui-widget-content ui-corner-all" />
             
@@ -52,25 +52,22 @@ $(document).ready(function(){
             </select>
             <br/>
             <div id="button_record">S'enregistrer</div>
-  
-	</div>
-	<div id='login_contener'>
-    	<img class="sand" src="../../assets/imgs/sandwich.png" />
-        <img class="logo" src="../../assets/imgs/title.png" />
-        <p id= 'p_login'> Veuillez rentrez vos information de connexion. </p>
-    <form id="form_login">
-        <h5>Nom d'utilisateur</h5>
-        <input id="login" type="text" name="username" value="" size="50" class="text ui-widget-content ui-corner-all" />
     
-        <h5>Mot de passe</h5>
-        <input id="password" type="password" name="password" value="" size="50" class="text ui-widget-content ui-corner-all" /> <br/>
-        <input id="button_login" type="submit" value="Connexion"/>
-    </form>
+        </div>
+        <div id='login_contener'>
+            <img class="sand" src="../../assets/imgs/sandwich.png" />
+            <img class="logo" src="../../assets/imgs/title.png" />
+            <p id= 'p_login'> Veuillez rentrez vos information de connexion. </p>
+        <form id="form_login">
+            <h5>Nom d'utilisateur</h5>
+            <input id="login" type="text" name="username" value="" size="50" class="text ui-widget-content ui-corner-all" />
+        
+            <h5>Mot de passe</h5>
+            <input id="password" type="password" name="password" value="" size="50" class="text ui-widget-content ui-corner-all" /> <br/>
+            <input id="button_login" type="submit" value="Connexion"/>
+        </form>
+        </div>
     </div>
-</div>
-
-	
-   
 </div>
 <?php // Si déjà connecté, ne pas laissé voir les formulaires.
 /*
