@@ -39,3 +39,19 @@
 	right: 150px;	
 	
 }
+
+#form_login {
+	display:block;
+	position: relative;
+	top : -240px;
+	left: 40%;	
+}
+#button_login {
+
+	
+	display:block;
+	
+	height:40px;
+		
+	
+}

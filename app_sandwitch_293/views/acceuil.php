@@ -57,15 +57,18 @@ $(document).ready(function(){
         <div id='login_contener'>
             <img class="sand" src="../../assets/imgs/sandwich.png" />
             <img class="logo" src="../../assets/imgs/title.png" />
-            <p id= 'p_login'> Veuillez rentrez vos information de connexion. </p>
+           
         <form id="form_login">
-            <h5>Nom d'utilisateur</h5>
-            <input id="login" type="text" name="username" value="" size="50" class="text ui-widget-content ui-corner-all" />
-        
-            <h5>Mot de passe</h5>
-            <input id="password" type="password" name="password" value="" size="50" class="text ui-widget-content ui-corner-all" /> <br/>
-            <input id="button_login" type="submit" value="Connexion"/>
-        </form>
+        	 <p id= 'p_login'> Veuillez rentrez vos information de connexion. </p>
+             <table>
+  				<tr>
+    				<td><input id="login" type="text" name="username" value="login" size="50" class="text ui-widget-content ui-corner-all" /></td>
+    				<td rowspan="2"><input id="button_login" type="submit" value="Connexion"/></td>
+  				</tr>
+  				<tr>
+    				<td><input id="password" type="password" name="password" value="password" size="50" class="text ui-widget-content ui-corner-all" /></td>
+  				</tr>
+
         </div>
     </div>
 </div>
