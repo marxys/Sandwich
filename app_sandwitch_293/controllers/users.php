@@ -129,19 +129,19 @@ class Users extends CI_Controller {
 							 );
 					$this->session->set_userdata($array);
 					$this->json->setError(0);
-					$this->json->call('login_success',0);
+					$this->json->call('login_success',array());
 					echo json_encode($this->json->get());
 				}
 				else{ // si mot de passe incorrect
 					// Renvoyer du json
 					$this->json->setError(-1);
-					$this->json->setMessage('Login ou mot de passe incorrect. md5 généré :'.$password.' md5 stocké :'.$user['password']);
+					$this->json->setMessage('Login ou mot de passe incorrect');
 					$this->json->call('login_failed',array($this->json->getMessage()));
 					echo json_encode($this->json->get());					
 				}
 			}else{  // Si l'utilisateur n'existe pas
 				$this->json->setError(-1);
-				$this->json->setMessage('Il n\'existe pas d\'utilisateur avec ce login '.$user);
+				$this->json->setMessage('Il n\'existe pas d\'utilisateur avec ce login');
 				$this->json->call('login_failed',array($this->json->getMessage()));
 				echo json_encode($this->json->get());	
 			}
