@@ -6,8 +6,11 @@ class Pages extends CI_Controller{
 	}
 	// Chargé par défaut.
 	public function index(){
+		if(sizeof($this->session->all_userdata()) != 7)
+			$this->session->set_userdata(array(  'user_id' => 0, 'type'=>0));
 		$this->load->view('modules/header'); 
 		$this->load->view('acceuil');
+	//	print_r($this->session->all_userdata());
 		$this->load->view('modules/footer'); 
 		//$this->load->view('welcome_message');
 	}

@@ -148,7 +148,6 @@ class Users extends CI_Controller {
 		}
 	}
 	public function logout() {
-		if(isset($this->session))
 		$this->session->sess_destroy();
 		// + redirigé acceuil;
 	}
