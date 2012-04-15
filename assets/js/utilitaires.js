@@ -44,7 +44,7 @@ function login_success(){
 }
 
 function login_failed(message){
-	updateTips(message);
+	updateTips(message,'p_login');
 }
 function inscription(error,message){
 	updateTips(message,'p_record');

@@ -6,8 +6,11 @@ class News extends CI_Controller{
 	
 	function __construc(){
 		parent::__construc();
-		$this->load->model('news');
+		$this->load->model('news_model');
+		$this->news_model->init();
 		$this->load->library('input');
+		$this->load->model('etablissement_model');
+		$this->etablissement_model->init();
 	}
 	/*
 	Ajoute un élément News à la base de données, les variables sont passée par POST
@@ -15,36 +18,38 @@ class News extends CI_Controller{
 	function add(){
 		$titre = $this->input->post('titre');
 		$description = $this->input->post('description');
-		$etablissement = $this->input->post('etablissement_id');
-		
-	
+		$user_id = $this->input->post('user_id');
 		// ajouter la date de creation.
-		if($titre && $description && $etablissement){
-			if(){ // Verifier avec session pour les droits
-				$result = $this->news->add(array(
-							'titre'=> $titre,
-							'description' => $description,
-							'etablissement_id' => $etablissement));
-				if($result){
-					// Recharger la page
+		if($titre && $description && $user_id){
+			$etablissement = $this->etablissement_model->get_by_user_id($user_id);
+			$etablissement = $etablissement->fetch();
+			if($etblissement){ // si l'etablissement associé a ce user_id existe
+				if($this->session->userdata('user_id') == $user_id){ // Verifier si la personne connectée est la bonne
+					if($this->news_model->insert(array(
+								'titre'=> $titre,
+								'description' => $description,
+								'etablissement_id' => $etablissement))){
+						
+					}			
+					else{
+						// Recharger la page en indiquant qu'il y eut une erreur lors de l'ajout.
+					}
 				}
 				else{
-					// Recharger la page en indiquant qu'il y eut une erreur lors de l'ajout.
+					// Renvoyer qu'il manque les droits.
 				}
-			}
-			else{
-				// Renvoyer qu'il manque les droits.
 			}
 		}
 		else{
 			// Renvoyer qu'il manque des éléments. => Recharger la page avec message d'erreur ?? 
 		}
 	}
-	function del($id){
+	function del($id_news){
 		
-		$news = $this->get($id);
+		$news = $this->news_model->get($id);
 		$news = $news->fetch();
-		if($news['etablissement_id'] == $id){
+		
+		if($news['id'] == $this->session->userdata){
 			$this->delete($id);
 		}
 		else{

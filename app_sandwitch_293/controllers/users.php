@@ -25,6 +25,8 @@ class Users extends CI_Controller {
 		$this->load->library('input');
 		$this->users_model->init();
 		$this->load->library('json');
+		$this->load->model('etablissement_model');
+		$this->etablissement_model->init();
 	}
 	public function inscription() {
 		
@@ -51,12 +53,9 @@ class Users extends CI_Controller {
 								   'type'  => $type	))) {
 						
 						if($type == 2){
-							$this->load->model('etablissement_model');
-							$this->etablissement_model->init();
 							$user = $this->users_model->get_by_login($login);
 							if($this->etablissement_model->insert(
-								array(    'date_ajout' => date('y-m-d'),
-								          'user_id' => $user['id'] ))){
+								array(  'user_id' => $user['id'] ))){
 								// renvoi json => inscription réussite
 								
 								$this->json->setError(0);
@@ -68,7 +67,7 @@ class Users extends CI_Controller {
 							else{
 								//  Creation de l'établissement lie a l'utilisateur a échoue. Veuillez contacter l'agence pour signaler le probleme. L'inscription ne s'est pas deroulee comme prevu.
 								$this->json->setError(-1);
-								$this->json->setMessage("Création de l'établissement a échoué. Veuillez contacter l'agence pour signaler le problème.");
+								$this->json->setMessage("Création de l'établissement a échoué. Veuillez contacter l'agence pour signaler le problème. ".$this->mysql->error);
 								$this->json->call('inscription',array($this->json->getError(),$this->json->getMessage()));
 								echo json_encode($this->json->get());	
 
