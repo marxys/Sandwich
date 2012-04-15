@@ -150,6 +150,9 @@ class Users extends CI_Controller {
 	public function logout() {
 		$this->session->sess_destroy();
 		// + redirigé acceuil;
+		$this->load->view('modules/header'); 
+		$this->load->view('acceuil');
+		$this->load->view('modules/footer'); 
 	}
 	public function edit_profil() {
 		
