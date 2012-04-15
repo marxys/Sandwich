@@ -55,8 +55,8 @@ class Users extends CI_Controller {
 							$this->etablissement_model->init();
 							$user = $this->users_model->get_by_login($login);
 							if($this->etablissement_model->insert(
-								array(    'date_ajout' => date('d-m-y'),
-								          'user_id' => $user['id'], ))){
+								array(    'date_ajout' => date('y-m-d'),
+								          'user_id' => $user['id'] ))){
 								// renvoi json => inscription réussite
 								
 								$this->json->setError(0);
@@ -73,6 +73,12 @@ class Users extends CI_Controller {
 								echo json_encode($this->json->get());	
 
 							}
+						}
+						else if($type == 1){
+							$this->json->setError(0);
+							$this->json->setMessage('Inscription réussie ! Vous pouvez maintenenant vous connecter :-)');
+							$this->json->call('inscription',array($this->json->getError(),$this->json->getMessage()));
+							echo json_encode($this->json->get());	
 						}
 					}
 					else {
@@ -129,12 +135,14 @@ class Users extends CI_Controller {
 				else{ // si mot de passe incorrect
 					// Renvoyer du json
 					$this->json->setError(-1);
-					$this->json->call('login_failed',array());
+					$this->json->setMessage('Login ou mot de passe incorrect. md5 généré :'.$password.' md5 stocké :'.$user['password']);
+					$this->json->call('login_failed',array($this->json->getMessage()));
 					echo json_encode($this->json->get());					
 				}
 			}else{  // Si l'utilisateur n'existe pas
 				$this->json->setError(-1);
-				$this->json->call('login_failed',array());
+				$this->json->setMessage('Il n\'existe pas d\'utilisateur avec ce login '.$user);
+				$this->json->call('login_failed',array($this->json->getMessage()));
 				echo json_encode($this->json->get());	
 			}
 			

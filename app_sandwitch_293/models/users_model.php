@@ -4,15 +4,16 @@ class Users_model extends MY_Model
 {
 	
 	public function __construct() {
-		$this->table_name = 'user';	
 		parent::__construct();
+		$this->table_name = 'user';	
 	}
 	
 	
 	public function get_by_login($login){
-		$query = "SELECT *, COUNT(*) as 'is_present' FROM ".$this->table_name." WHERE login = $login";
+		$query = "SELECT *, COUNT(*) AS 'is_present' FROM ".$this->table_name." WHERE login = $login";
 		$result = $this->mysql->query($query);
-		if($result['is_present'] > 0){
+		$result = $result->fetchAll();
+		if(intval($result['is_present']) > 0){
 			return $result;
 		}
 		return false;

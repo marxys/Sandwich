@@ -43,11 +43,18 @@ function login_success(){
 	},'400');
 }
 
-function login_failed(){
-	updateTips('Login ou mot de passe incorrect','p_login');
+function login_failed(message){
+	updateTips(message);
 }
 function inscription(error,message){
 	updateTips(message,'p_record');
+	if(error == -1)
+		notification("inscription","Erreur survenue durant l'inscription");
+	else{
+		notification("inscription","Vous êtes désormais inscrit");
+		$('#prenom').val(''); $('#nom').val(''); $('#login_record').val(''); $('#password_record').val(''); $('#email').val('');
+	}
+
 }
 function ajax_request(param,url){
 	$.ajax({
