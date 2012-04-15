@@ -54,7 +54,7 @@ $(document).ready(function(){
             <div id="button_record">S'enregistrer</div>
   
 	</div>
-	<div id='login'>
+	<div id='login_contener'>
     	<img class="sand" src="../../assets/imgs/sandwich.png" />
         <img class="logo" src="../../assets/imgs/title.png" />
         <p id= 'p_login'> Veuillez rentrez vos information de connexion. </p>
