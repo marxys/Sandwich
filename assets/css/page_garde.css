@@ -1,0 +1,41 @@
+@charset "UTF-8";
+#page_garde {
+	background: -moz-linear-gradient(top left, rgb(253,251,241), rgb(247,236,159));
+	position: absolute;
+	top:0px;
+	bottom:0px;
+	left:0px;
+	right:0px;
+	width:100%;
+	height:100%;
+	overflow:hidden;
+
+}
+
+#login {
+		background: -moz-linear-gradient(to left, rgb(150,1,1), rgb(251,2,2));
+		box-shadow: 0 0 9px #000000;
+ 	 	-moz-box-shadow: 0 0 9px #000000;  
+  		-webkit-box-shadow: 0 0 9px #000000; 
+		position:absolute;
+		top:65%;
+		height:150px;
+		width:100%;
+
+	
+}
+
+#login .sand {
+	
+	position: relative;
+	top:-50px;
+	left: 40px;	
+	
+}
+#login .logo {
+	
+	position: relative;
+	top:-60px;
+	right: 150px;	
+	
+}
