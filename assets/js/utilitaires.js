@@ -15,11 +15,11 @@ function checkEmptyForm(array){
 
 function updateTips(tips,id){
 	$( "#"+id )
-		.text( tips )
-		.addClass( "ui-state-highlight" );
-		setTimeout(function() {
-			$( ".updateTips" ).removeClass( "ui-state-highlight", 1500 );
-		}, 500 );
+		.text( tips );
+		//.addClass( "ui-state-highlight" );
+		//setTimeout(function() {
+			//$( ".updateTips" ).removeClass( "ui-state-highlight", 1500 );
+		//}, 500 );
 }
 
 
@@ -36,11 +36,11 @@ function notification(titre,message,duration){
 // TOUT CE QUI CONCERNE LES REQUETES AJAX //
 
 function login_success(){
-	$("#conteneur_form").fadeIn('slow');
+	$("#conteneur_form").fadeOut(3000);
 	notification('Connexion','Bienvenue !');
 	setTimeout(function(){
 		$("#conteneur_form").remove();
-	},'400');
+	},'3000');
 }
 
 function login_failed(message){

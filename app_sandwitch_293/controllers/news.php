@@ -45,15 +45,18 @@ class News extends CI_Controller{
 		}
 	}
 	function del($id_news){
-		
-		$news = $this->news_model->get($id);
-		$news = $news->fetch();
-		
-		if($news['id'] == $this->session->userdata){
-			$this->delete($id);
+	
+		$join_news_etab = $this->news_model->get_news_and_etablissement($id_news);
+		if($join_news_etab['is_present'] > 0){
+			if($join_news_etab['user_id'] == $this->session->userdata['user_id']){
+				$this->news_model->delete($id);
+			}
+			else{
+				$this->load->views(''); // load la vue erreur, vous n'avez pas les droits.
+			}
 		}
 		else{
-		 	$this->load->views(''); // load la vue erreur, vous n'avez pas les droits.
+			$this->load->views('');
 		}
 	}
 }
