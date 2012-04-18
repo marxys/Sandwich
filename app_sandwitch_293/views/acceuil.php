@@ -46,7 +46,7 @@ if($this->session->userdata('type') == 0){ ?>
                 <input id="password_record" type="password" name="password" value="" size="50" class="text ui-widget-content ui-corner-all" /> 
                 
                 <label for="email"> Adresse e-mail : </label>
-                <input id="email" type="text" name="email" value="" size="50" class="ui-widget-content ui-corner-all" size="50" />
+                <input id="email" type="text" name="email" value="" size="50" class="ui-widget-content ui-corner-all" size="50"/>
                 <select id="type" class="text ui-widget-content ui-corner-all">
                     <option selected>client
                     <option>etablissement
@@ -55,32 +55,16 @@ if($this->session->userdata('type') == 0){ ?>
                 <div id="button_record">S'enregistrer</div>
         
             </div>
-            <div id='login_contener'>
-                <img class="sand" src="../../assets/imgs/sandwich.png" />
-                <img class="logo" src="../../assets/imgs/title.png" />
-                <p id= 'p_login'> Veuillez rentrez vos information de connexion. </p>
-            <form id="form_login">
-                <h5>Nom d'utilisateur</h5>
-                <input id="login" type="text" name="username" value="" size="50" class="text ui-widget-content ui-corner-all" />
-            
-
-            <label for="email"> Adresse e-mail : </label>
-            <input id="email" type="text" name="email" value="" size="50" class="ui-widget-content ui-corner-all" size="50" />
-            <select id="type" class="text ui-widget-content ui-corner-all">
-                <option selected>client
-                <option>etablissement
-            </select>
-            <br/>
-            <div id="button_record">S'enregistrer</div>
-    
-        </div>
+        
         <div id='login_contener'>
+     
             <img class="sand" src="../../assets/imgs/sandwich.png" />
             <img class="logo" src="../../assets/imgs/title.png" />
            
         <form id="form_login">
         	 <p id= 'p_login'> Veuillez rentrez vos information de connexion. </p>
              <table>
+             
   				<tr>
     				<td><input id="login" type="text" name="username" value="login" size="50" class="text ui-widget-content ui-corner-all" /></td>
     				<td rowspan="2"><input id="button_login" type="submit" value="Connexion"/></td>
@@ -88,11 +72,11 @@ if($this->session->userdata('type') == 0){ ?>
   				<tr>
     				<td><input id="password" type="password" name="password" value="password" size="50" class="text ui-widget-content ui-corner-all" /></td>
   				</tr>
+			</table>
 
-
-            </form>
-           
-        </div>
+        </form>
+        </div>  
     </div>
+</div>
 <?php 
 } // div affiché uniquement quand l'utilisateur n'est pas connecté?>
