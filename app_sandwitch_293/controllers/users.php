@@ -148,17 +148,37 @@ class Users extends CI_Controller {
 		}
 	}
 	public function logout() {
-		$this->session->sess_destroy();
+		//$this->session->sess_destroy();
 		// + redirigé acceuil;
+		$this->session->set_userdata('type',0);
 		$this->load->view('modules/header'); 
 		$this->load->view('acceuil');
 		$this->load->view('modules/footer'); 
 	}
 	public function edit_profil() {
+		$prenom = $this->input->post('prenom');
+		$nom = $this->input->post('nom');
+		$email = $this->input->post('email');
+		$username = $this->input->post('username');
 		
+		if($this->session->userdata('type') == 1){ // Client
+			if($prenom && $nom && $email && $username){
+				$this->users_model->edit_users(array( 'prenom' => $prenom,
+													  'nom' => $nom,
+													  'email' => $email,
+													  'username' => $username));
+			}
+		}
+		else if($this->session->userdata('type') == 2){ // sandwicherie
+		}
+		
+		$this->load->view('users/profil');
+
+	}
+	public function edit_password(){
 	}
 	public function view_profil() {
-		
+		$this->load->view('users/profil');			
 	}
 	
 
