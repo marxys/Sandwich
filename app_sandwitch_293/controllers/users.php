@@ -183,6 +183,10 @@ class Users extends CI_Controller {
 		$data['title'] = 'Profile de l\'utilisateur '.$user['prenom'].' '.$user['nom'];
 		$data['user'] = $user;
 		$data['type'] = $this->session->userdata('type');
+		if($data['type'] == 2){
+			$etablissement $this->etablissement_model->get_by_user_id($user_id);
+			$data['etablissement'] = $etablissement;
+		}
 		$this->load->view('modules/header');
 		$this->load->view('users/profil',$data);
 		$this->load->view('modules/footer');			
