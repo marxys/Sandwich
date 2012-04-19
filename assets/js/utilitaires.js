@@ -35,12 +35,18 @@ function notification(titre,message,duration){
 
 // TOUT CE QUI CONCERNE LES REQUETES AJAX //
 
-function login_success(){
+function login_success(type_user){
 	$("#conteneur_form").fadeOut(3000);
+	$("#apps").css("visibility","visible").fadeIn(3000);
+	if(type_user == 2){
+		// faire apparaitre les apps pour la sandwicherie
+		$("#ajout_produit").css("visibility","visible");
+		$("#ajouter_news").css("visibility","visible");
+	}
 	notification('Connexion','Bienvenue !');
 	setTimeout(function(){
 		$("#conteneur_form").remove();
-	},'3000');
+	},3000);
 }
 
 function login_failed(message){

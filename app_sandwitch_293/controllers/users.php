@@ -128,7 +128,7 @@ class Users extends CI_Controller {
 							 );
 					$this->session->set_userdata($array);
 					$this->json->setError(0);
-					$this->json->call('login_success',array());
+					$this->json->call('login_success',array($user['type']));
 					echo json_encode($this->json->get());
 				}
 				else{ // si mot de passe incorrect
@@ -178,7 +178,14 @@ class Users extends CI_Controller {
 	public function edit_password(){
 	}
 	public function view_profil() {
-		$this->load->view('users/profil');			
+		$user_id = $this->session->userdata('user_id');
+		$user = $this->users_model->get($user_id); $user = $user->fetch();
+		$data['title'] = 'Profile de l\'utilisateur '.$user['prenom'].' '.$user['nom'];
+		$data['user'] = $user;
+		$data['type'] = $this->session->userdata('type');
+		$this->load->view('modules/header');
+		$this->load->view('users/profil',$data);
+		$this->load->view('modules/footer');			
 	}
 	
 

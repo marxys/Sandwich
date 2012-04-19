@@ -26,7 +26,8 @@ $(document).ready(function(){
 <?php 
 if($this->session->userdata('type') == 0){ ?>
     <div id="conteneur_form">
-    
+    	<script> 		$(document).ready(function(){
+$("#apps").css('visibility','hidden').fadeOut('fast');}); </script>
         <div id='page_garde'>
         
             <div id="inscription">
@@ -83,3 +84,12 @@ if($this->session->userdata('type') == 0){ ?>
 </div>
 <?php 
 } // div affiché uniquement quand l'utilisateur n'est pas connecté?>
+
+<div id="apps">
+	<div id="profil"><a href="index.php/users/view_profil">Profil</a></div>
+    <div id="visite_sandwicherie">Voir les differentes sandwicheries</div>
+    <div id="news">News</div> <!-- peut etre pas necessaire -->
+    <div id="mes_commandes">Mes commandes</div> <!-- peut etre pas necessaire -->
+    <div id="ajout_produit">Ajouter un produit</div> <!-- caché par défaut -->
+    <div id="ajouter_news">Ajourter une news</div> <!-- caché par défaut -->
+</div>
