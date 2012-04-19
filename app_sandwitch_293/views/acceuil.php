@@ -47,7 +47,7 @@ $("#apps").css('visibility','hidden').fadeOut('fast');}); </script>
                 <input id="password_record" type="password" name="password" value="" size="50" class="text ui-widget-content ui-corner-all" /> 
                 <br />
                 <label for="email"> Adresse e-mail : </label>
-                <input id="email" type="text" name="email" value="" size="50" class="ui-widget-content ui-corner-all" size="50"/>
+                <input id="email" type="text" name="email" value="" size="50" class="ui-widget-content ui-corner-all"/>
                 <br />
                 <label for="type"> Type d'utilisation : </label>
                 <select id="type" class="text ui-widget-content ui-corner-all">
