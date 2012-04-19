@@ -1,0 +1,9 @@
+@charset "UTF-8";
+/* CSS Document */
+
+#apps{
+	position: absolute;
+	top : 350px;
+	right : auto;
+	left : auto;
+}
