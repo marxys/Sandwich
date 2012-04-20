@@ -35,23 +35,26 @@ if($this->session->userdata('type') == 0){ ?>
                 
                 <label for="prenom">Prénom : </label>
                 <input id="prenom" type="text" name="prenom" value="" size="50" class="text ui-widget-content ui-corner-all" />
-                
+                <br />
                 <label for="nom">Nom : </label>
                 <input id="nom" type="text" name="nom" value="" size="50" class="text ui-widget-content ui-corner-all" />
-                
+                <br />
                 <label for="login"> Nom d'utilisateur : </label>
                 <input id="login_record" type="text" name="login" value="" size="50" class="text ui-widget-content ui-corner-all" />
-            
-                <label for="password" >Mot de passe</label>
+            	<br />
+                <label for="password" >Mot de passe : </label>
                 <input id="password_record" type="password" name="password" value="" size="50" class="text ui-widget-content ui-corner-all" /> 
-                
+                <br />
                 <label for="email"> Adresse e-mail : </label>
-                <input id="email" type="text" name="email" value="" size="50" class="ui-widget-content ui-corner-all" size="50"/>
+                <input id="email" type="text" name="email" value="" size="50" class="ui-widget-content ui-corner-all" size="50" />
+                <br />
+                <label for="type"> Type d'utilisation : </label>
                 <select id="type" class="text ui-widget-content ui-corner-all">
-                    <option selected>client
-                    <option>etablissement
+                    <option selected>client</option>
+                    <option>etablissement</option>
                 </select>
-                <br/>
+                
+                <br />
                 <div id="button_record">S'enregistrer</div>
         
             </div>

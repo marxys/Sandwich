@@ -46,12 +46,63 @@
 	top : -240px;
 	left: 40%;	
 }
-#button_login {
 
+
+label {
+	display: block;
+	width: 150px;
+	height: 18px;
+	padding: 2px;
+	margin-bottom:2px;
+	text-align: right;
+	float: left;
+}
+
+input, select {
+	height: 18px;
+	padding: 2px;
+	margin-bottom:2px;
+	width:250px;	
+}
+
+
+select {
+	height:24px;
+	margin-bottom:20px;
+	width:255px;
+}
+td, tr, table {
+	border: 0px;
+	margin:0px;
+	padding:0px;
+}
+#button_record {
+	margin-left:150px;	
+}
+#button_login {
 	
 	display:block;
 	
-	height:40px;
-		
+	height:50px;
+	width:100px;	
+	
+}
+#inscription {
+	position:absolute;
+	height:280px;
+	width:440px;
+	background-color: rgba(255,255,255,0.3);
+	-moz-border-radius: 20px;
+	border-radius: 20px;
+	padding: 10px;
+	border-style:solid;
+	border-color: rgb(255,220,150);
+	border-width:1px;
+	margin-top:20px;
+	margin-left: -460px;
+	right:50%;
+	
+	
+	
 	
 }
