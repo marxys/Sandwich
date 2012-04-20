@@ -128,7 +128,7 @@ class Users extends CI_Controller {
 							 );
 					$this->session->set_userdata($array);
 					$this->json->setError(0);
-					$this->json->call('login_success',array());
+					$this->json->call('login_success',array($user['type']));
 					echo json_encode($this->json->get());
 				}
 				else{ // si mot de passe incorrect
@@ -148,17 +148,48 @@ class Users extends CI_Controller {
 		}
 	}
 	public function logout() {
-		$this->session->sess_destroy();
+		//$this->session->sess_destroy();
 		// + redirigé acceuil;
+		$this->session->set_userdata('type',0);
 		$this->load->view('modules/header'); 
 		$this->load->view('acceuil');
 		$this->load->view('modules/footer'); 
 	}
 	public function edit_profil() {
+		$prenom = $this->input->post('prenom');
+		$nom = $this->input->post('nom');
+		$email = $this->input->post('email');
+		$username = $this->input->post('username');
 		
+		if($this->session->userdata('type') == 1){ // Client
+			if($prenom && $nom && $email && $username){
+				$this->users_model->edit_users(array( 'prenom' => $prenom,
+													  'nom' => $nom,
+													  'email' => $email,
+													  'username' => $username));
+			}
+		}
+		else if($this->session->userdata('type') == 2){ // sandwicherie
+		}
+		
+		$this->load->view('users/profil');
+
+	}
+	public function edit_password(){
 	}
 	public function view_profil() {
-		
+		$user_id = $this->session->userdata('user_id');
+		$user = $this->users_model->get($user_id); $user = $user->fetch();
+		$data['title'] = 'Profile de l\'utilisateur '.$user['prenom'].' '.$user['nom'];
+		$data['user'] = $user;
+		$data['type'] = $this->session->userdata('type');
+		if($data['type'] == 2){
+			$etablissement $this->etablissement_model->get_by_user_id($user_id);
+			$data['etablissement'] = $etablissement;
+		}
+		$this->load->view('modules/header');
+		$this->load->view('users/profil',$data);
+		$this->load->view('modules/footer');			
 	}
 	
 

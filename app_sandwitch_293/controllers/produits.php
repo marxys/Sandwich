@@ -11,6 +11,7 @@ class Produits extends CI_Controller{
 	}
 	
 	public function voir_commentaires($id_product){
+	
 		$id_product = intval($id_product);
 		$produit = $this->produits_model->get($id_product); $produit = $produit->fetch();
 		$com_array = $this->commentaires->get_commentaires($id_product);
@@ -23,6 +24,19 @@ class Produits extends CI_Controller{
 	}
 	
 	public function ajouter_commentaire(){
-		
+		$id_product = $this->input->post('id_product'); // dans un input hidden
+		$texte = $this->input->post('texte');
+		if($id_product && $texte){
+			if($session->userdata('type') >= 1){
+				$this->commentaire->add($id_product, $texte);
+				$this->voir_commentaires($id_product); // chargement de la vue
+			}
+			else{
+				$this->load->view(''); // erreur de droit
+			}
+		}
+		else{
+			$this->load->view(''); // Erreur forumulaire incomplet
+		}
 	}
 }
