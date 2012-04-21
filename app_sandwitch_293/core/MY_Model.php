@@ -100,7 +100,7 @@ class MY_Model extends CI_Model
 	/**
 	 *	Modifie une ou plusieurs lignes dans la base de données.
 	 */
-	public function update()
+	public function update($row)
 	{		
 	
 	
