@@ -159,23 +159,50 @@ class Users extends CI_Controller {
 		$prenom = $this->input->post('prenom');
 		$nom = $this->input->post('nom');
 		$email = $this->input->post('email');
-		$username = $this->input->post('username');
+		$username = $this->input->post('login');
 		
 		if($this->session->userdata('type') == 1){ // Client
 			if($prenom && $nom && $email && $username){
-				$this->users_model->edit_users(array( 'prenom' => $prenom,
+				$this->users_model->update(array( 'prenom' => $prenom,
 													  'nom' => $nom,
 													  'email' => $email,
-													  'username' => $username));
+													  'login' => $username));
+			}
+			else{
+				$this->load->view(''); // erreur, il manque des éléments
 			}
 		}
 		else if($this->session->userdata('type') == 2){ // sandwicherie
+		
 		}
 		
-		$this->load->view('users/profil');
+		$this->view_profil();
 
 	}
 	public function edit_password(){
+		if($this->session->userdata('type') > 0){
+			$ancien_mdp = $this->input->post('ancine_mdp');
+			$nv_mdp = $this->input->post('nouveau_mdp');
+			$confirmer_mdp = $this->input->post('confirmer_mdp');
+			$user_id = $this->session->userdata('user_id');
+			if($nv_mdp == $confirmer_mdp){ //on peut modifier le mot de passe
+				$user = $this->users_model->get($user_id); $user = $user->fetch();
+				$password = md5('sand_key'.$ancien_mdp.$user['nom'].$user['prenom'].$user['login'].$user['email']); // mot de passe entré
+				if($password == $user['password']){
+					$this->users_model->update(array('password' => $nv_password));
+					$this->view_profil(); // renvoie la page de profil
+				}
+				else{
+					$this->load->view(''); // erreur mauvais mot de passe
+				}
+			}
+			else{
+				$this->load->view(''); //confirmation incorrecte
+			}
+		}
+		else{
+			$this->load->view(''); // utilisateur pas connecté.
+		}
 	}
 	public function view_profil() {
 		$user_id = $this->session->userdata('user_id');
@@ -184,7 +211,7 @@ class Users extends CI_Controller {
 		$data['user'] = $user;
 		$data['type'] = $this->session->userdata('type');
 		if($data['type'] == 2){
-			$etablissement $this->etablissement_model->get_by_user_id($user_id);
+			$etablissement = $this->etablissement_model->get_by_user_id($user_id);
 			$data['etablissement'] = $etablissement;
 		}
 		$this->load->view('modules/header');
