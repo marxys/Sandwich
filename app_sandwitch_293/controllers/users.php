@@ -163,17 +163,52 @@ class Users extends CI_Controller {
 		
 		if($this->session->userdata('type') == 1){ // Client
 			if($prenom && $nom && $email && $username){
-				$this->users_model->update(array( 'prenom' => $prenom,
+				if($this->users_model->howMany('email',$email) <= 1){
+					if($this->users_model->howMany('login',$login) <= 1){
+						$this->users_model->update(array( 'prenom' => $prenom,
 													  'nom' => $nom,
 													  'email' => $email,
 													  'login' => $username));
+					}
+					else{ // erreur login déjà utilisé par un autre membre
+					}
+				}	
+				else{// erreur email déjà utilisé par un autre membre.
+					
+				}
 			}
 			else{
 				$this->load->view(''); // erreur, il manque des éléments
 			}
 		}
 		else if($this->session->userdata('type') == 2){ // sandwicherie
-		
+			$etablissement_nom = $this->input->post('etablissement_nom');
+			$slogan = $this->input->post('slogan');
+			$addresse = $this->input->post('addresse');
+			$gps = $this->input->post('gps');
+			if( $prenom && $nom && $email && $username && $etablissement_nom && $slogan $$ $addresse && $gps ){
+				if($this->users_model->howMany('email',$email) <= 1){
+					if($this->users_model->howMany('login',$login) <= 1){
+						if($this->etablissement_model->howMany('nom',$etablissement_nom) <= 1){
+							$this->users_model->update(array( 'prenom' => $prenom,
+													  'nom' => $nom,
+													  'email' => $email,
+													  'login' => $username));
+							$this->etablissement_model->update(array( 'nom' => $etablissement_nom,
+																	  'slogon' => $slogan,
+																	  'addresse' => $addresse,
+																	  'gps' => $gps));
+						}
+						else{ // nom de l'etablissement déjà utilisé
+						}
+					}
+					else{ // login déjà utilisé
+					}
+				}
+				else{ // email déjà utilisé
+				}
+			}
+		}else{ // il manque des données
 		}
 		
 		$this->view_profil();
