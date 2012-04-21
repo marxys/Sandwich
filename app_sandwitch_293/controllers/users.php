@@ -165,7 +165,7 @@ class Users extends CI_Controller {
 		if($this->session->userdata('type') == 1){ // Client
 			if($prenom && $nom && $email && $username){
 				if($this->users_model->isThisMine('email',$email,$user_id)){
-					if($this->users_model->isThisMine('login',$username,$user_id) <= 1){
+					if($this->users_model->isThisMine('login',$username,$user_id)){
 						$this->users_model->update(array( 'prenom' => $prenom,
 													  'nom' => $nom,
 													  'email' => $email,

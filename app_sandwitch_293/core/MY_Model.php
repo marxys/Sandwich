@@ -54,7 +54,7 @@ class MY_Model extends CI_Model
 		return $nbr[0];
 	}
 	public function isThisMine($field,$value,$id){
-		$rep = $this->get($id); $rep = $rep->fecth();
+		$rep = $this->get($id); $rep = $rep->fetch();
 		if($rep[$field] == $value){
 			return $this->howMany($field,$value) == 1;
 		}
