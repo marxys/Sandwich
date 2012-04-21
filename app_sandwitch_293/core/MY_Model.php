@@ -53,6 +53,14 @@ class MY_Model extends CI_Model
 		
 		return $nbr[0];
 	}
+	public function isThisMine($field,$value,$id){
+		$rep = $this->get($id); $rep = $rep->fecth();
+		if($rep[$field] == $value){
+			return $this->howMany($field,$value) == 1;
+		}
+		else
+			return $this->isUnique($field,$value);
+	}
 	
 	function insert($row) {
 
@@ -100,7 +108,7 @@ class MY_Model extends CI_Model
 	/**
 	 *	Modifie une ou plusieurs lignes dans la base de données.
 	 */
-	public function update($row)
+	public function update($row,$id)
 	{		
 	
 	

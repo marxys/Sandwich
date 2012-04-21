@@ -160,15 +160,16 @@ class Users extends CI_Controller {
 		$nom = $this->input->post('nom');
 		$email = $this->input->post('email');
 		$username = $this->input->post('login');
+		$user_id = $this->session->userdata('user_id');
 		
 		if($this->session->userdata('type') == 1){ // Client
 			if($prenom && $nom && $email && $username){
-				if($this->users_model->howMany('email',$email) <= 1){
-					if($this->users_model->howMany('login',$login) <= 1){
+				if($this->users_model->isThisMine('email',$email,$user_id)){
+					if($this->users_model->isThisMine('login',$username,$user_id) <= 1){
 						$this->users_model->update(array( 'prenom' => $prenom,
 													  'nom' => $nom,
 													  'email' => $email,
-													  'login' => $username));
+													  'login' => $username),$this->session->userdata('user_id'));
 					}
 					else{ // erreur login déjà utilisé par un autre membre
 					}
@@ -186,10 +187,10 @@ class Users extends CI_Controller {
 			$slogan = $this->input->post('slogan');
 			$addresse = $this->input->post('addresse');
 			$gps = $this->input->post('gps');
-			if( $prenom && $nom && $email && $username && $etablissement_nom && $slogan $$ $addresse && $gps ){
-				if($this->users_model->howMany('email',$email) <= 1){
-					if($this->users_model->howMany('login',$login) <= 1){
-						if($this->etablissement_model->howMany('nom',$etablissement_nom) <= 1){
+			if( $prenom && $nom && $email && $username && $etablissement_nom && $slogan && $addresse && $gps ){
+				if($this->users_model->isThisMine('email',$email) <= 1){
+					if($this->users_model->isThisMine('login',$username) <= 1){
+						if($this->etablissement_model->isThisMine('nom',$etablissement_nom) <= 1){
 							$this->users_model->update(array( 'prenom' => $prenom,
 													  'nom' => $nom,
 													  'email' => $email,
