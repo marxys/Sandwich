@@ -47,6 +47,12 @@ class MY_Model extends CI_Model
 		if($nbr[0] > 0) return false;
 		else return true;
 	}
+	public function howMany($field,$value){
+		$rep = $this->mysql->qexec('user_'.$field.'_isFree','SELECT COUNT(*) FROM user WHERE '.$field.' = ? ',array($value));
+		$nbr = $rep->fetch();
+		
+		return $nbr[0];
+	}
 	
 	function insert($row) {
 
