@@ -7,3 +7,10 @@
 	right : auto;
 	left : auto;
 }
+
+#ajout_produit{
+	visibility:hidden;
+}
+#ajouter_news{
+	visibility:hidden;
+}

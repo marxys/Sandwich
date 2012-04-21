@@ -1,4 +1,7 @@
 <script> 
+/*
+Requete ajax pour l'inscription au site et pour le login
+*/
 $(document).ready(function(){
 	$("#form_login").submit(function(event){
 		event.preventDefault(); // Supprime l'action par defaut du formulaire submit (rechargement de page)
@@ -94,3 +97,11 @@ $("#apps").css('visibility','hidden').fadeOut('fast');}); </script>
     <div id="ajout_produit">Ajouter un produit</div> <!-- caché par défaut -->
     <div id="ajouter_news">Ajourter une news</div> <!-- caché par défaut -->
 </div>
+<?php 
+if($this->session->userdata('type') == 2){ ?>
+<script>$(document).ready(function(){
+	$("#ajout_produit").css('visibility','visible');
+	$("#ajouter_news").css('visibility','visible');
+	
+});</script>
+<?php }?>
