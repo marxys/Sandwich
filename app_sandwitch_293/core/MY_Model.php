@@ -96,7 +96,28 @@ class MY_Model extends CI_Model
 	 */
 	public function update()
 	{		
+	
+	
+		$title = "";
+		$i=0;
+		foreach($this->table_titles as $entree) {
+			if(isset($row[$entree])){
+				
+				if($i != 0) {
+					$title.= ",";
+				}
+				$i++;
+				
+				$title .= " $entree = :$entree ";
+				
+				$value[$entree] = $row[$entree];
+				
+			}
+		}
+		$value['id'] = $id;
 		
+		$query = "UPDATE ".$this->table_name." SET $title WHERE ID = :id";
+		return $this->mysql->qexec($this->table_name.'_update',$query,$value);
 	}
 	
 	/**
@@ -104,7 +125,8 @@ class MY_Model extends CI_Model
 	 */
 	public function delete()
 	{
-		
+		$query = "DELETE FROM ".$this->table_name." WHERE id = ?";
+		return $this->mysql->qexec($this->table_name.'_del',$query,array(intval($id)));
 	}
 
 	/**
@@ -112,7 +134,7 @@ class MY_Model extends CI_Model
 	 */
 	public function count()
 	{
-		
+		return $this->mysql->query("SELECT COUNT(*) FROM ".$this->table_name)->fetchColumn();	
 	}
 	
 	function search($keylocks,$columns, $keywords,$sort, $limit) {	
