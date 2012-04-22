@@ -172,14 +172,18 @@ class Users extends CI_Controller {
 													  'login' => $username),$this->session->userdata('user_id'));
 					}
 					else{ // erreur login déjà utilisé par un autre membre
+						$data['message'] = "Ce login est déjà utilisé par un autre utilisateur";
+						$this->load->view('error',$data);
 					}
 				}	
 				else{// erreur email déjà utilisé par un autre membre.
-					
+					$data['message'] = "Cet email est déjà utilisé par un autre utilisateur";
+					$this->load->view('error',$data);
 				}
 			}
 			else{
-				$this->load->view(''); // erreur, il manque des éléments
+				$data['message'] = "Vous n'avez pas remplis tous les formulaires";
+				$this->load->view('error',$data); // erreur, il manque des éléments
 			}
 		}
 		else if($this->session->userdata('type') == 2){ // sandwicherie
@@ -202,12 +206,18 @@ class Users extends CI_Controller {
 																	  'gps' => $gps));
 						}
 						else{ // nom de l'etablissement déjà utilisé
+							$data['message'] = "Ce nom d'établissement est déjà utilisé par un autre client";
+							$this->load->view('error',$data);
 						}
 					}
 					else{ // login déjà utilisé
+						$data['message'] = "Ce login est déjà utilisé par un autre utilisateur";
+						$this->load->view('error',$data);
 					}
 				}
 				else{ // email déjà utilisé
+					$data['message'] = "cet email est déjà utilisé par un autre utilisateur";
+					$this->load->view('error',$data);
 				}
 			}
 		}else{ // il manque des données
