@@ -25,6 +25,7 @@ class Etablissement extends CI_Controller{
 			$name_array['etablissement'][$i]['id'] = $etab['id'];
 			
 			$data['title'] = $etab['nom'];
+			$data['id'] = $etab['id'];
 			$data['image'] = "../../assets/imgs/$etab.jpg";
 			$data['infos'] = array (
 								'slogan' 			=> $etab['slogan'],
