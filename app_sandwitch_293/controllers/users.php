@@ -171,7 +171,7 @@ class Users extends CI_Controller {
 													  'nom' => $nom,
 													  'email' => $email,
 													  'login' => $username),$this->session->userdata('user_id'));
- 						redirect('/index.php/pages/view_profil', 'location');						}
+ 						redirect('/index.php/pages/view_profil', 'location');	
 					}
 					else{ // erreur login déjà utilisé par un autre membre
 						$data['message'] = "Ce login est déjà utilisé par un autre utilisateur";
@@ -205,7 +205,8 @@ class Users extends CI_Controller {
 							$this->etablissement_model->update(array( 'nom' => $etablissement_nom,
 																	  'adresse' => $adresse,
 																	  'slogan' => $slogan,												  																	  'gps' => $gps),$etablissement['id']);
- 							redirect('/index.php/pages/view_profil', 'location');						}
+ 							redirect('/index.php/pages/view_profil', 'location');	
+						}				
 						else{ // nom de l'etablissement déjà utilisé
 							$data['message'] = "Ce nom d'établissement est déjà utilisé par un autre client";
 							$this->load->view('error',$data);
@@ -234,10 +235,11 @@ class Users extends CI_Controller {
 			$confirmer_mdp = $this->input->post('confirmer_mdp');
 			$user_id = $this->session->userdata('user_id');
 			if($nv_mdp == $confirmer_mdp){ //on peut modifier le mot de passe
+				$user = $this->users_model->get($user_id);
 				$password = md5('sand_key'.$ancien_mdp); // mot de passe entré
 				if($password == $user['password']){
 					$this->users_model->update(array('password' => $nv_mdp),$user_id);
- 					redirect('/index.php/pages/view_profil', 'location');						}
+ 					redirect('/index.php/pages/view_profil', 'location');
 				}
 				else{
 					$data['message'] = "Votre mot de passe est incorrect";
