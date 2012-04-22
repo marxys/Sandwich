@@ -188,9 +188,10 @@ class Users extends CI_Controller {
 			$addresse = $this->input->post('addresse');
 			$gps = $this->input->post('gps');
 			if( $prenom && $nom && $email && $username && $etablissement_nom && $slogan && $addresse && $gps ){
-				if($this->users_model->isThisMine('email',$email) <= 1){
-					if($this->users_model->isThisMine('login',$username) <= 1){
-						if($this->etablissement_model->isThisMine('nom',$etablissement_nom) <= 1){
+				if($this->users_model->isThisMine('email',$email,$user_id)){
+					if($this->users_model->isThisMine('login',$username,$user_id)){
+						$etablissement = $this->etablissement_model->get_by_user_id($user_id);
+						if($this->etablissement_model->isThisMine('nom',$etablissement_nom,$etablissement['id'])){
 							$this->users_model->update(array( 'prenom' => $prenom,
 													  'nom' => $nom,
 													  'email' => $email,
@@ -217,7 +218,7 @@ class Users extends CI_Controller {
 	}
 	public function edit_password(){
 		if($this->session->userdata('type') > 0){
-			$ancien_mdp = $this->input->post('ancine_mdp');
+			$ancien_mdp = $this->input->post('ancien_mdp');
 			$nv_mdp = $this->input->post('nouveau_mdp');
 			$confirmer_mdp = $this->input->post('confirmer_mdp');
 			$user_id = $this->session->userdata('user_id');
@@ -225,19 +226,22 @@ class Users extends CI_Controller {
 				$user = $this->users_model->get($user_id); $user = $user->fetch();
 				$password = md5('sand_key'.$ancien_mdp.$user['nom'].$user['prenom'].$user['login'].$user['email']); // mot de passe entré
 				if($password == $user['password']){
-					$this->users_model->update(array('password' => $nv_password));
+					$this->users_model->update(array('password' => $nv_mdp),$user_id);
 					$this->view_profil(); // renvoie la page de profil
 				}
 				else{
-					$this->load->view(''); // erreur mauvais mot de passe
+					$data['message'] = "Votre mot de passe est incorrect";
+					$this->load->view('error',$data); // erreur mauvais mot de passe
 				}
 			}
 			else{
-				$this->load->view(''); //confirmation incorrecte
+				$data['message'] = "la confirmation du nouveau mot de passe est incorrecte";
+				$this->load->view('error',$data); //confirmation incorrecte
 			}
 		}
 		else{
-			$this->load->view(''); // utilisateur pas connecté.
+			$data['message'] = "Vous n'etes pas connecté";
+			$this->load->view('error',$data); // utilisateur pas connecté.
 		}
 	}
 	public function view_profil() {
