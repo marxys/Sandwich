@@ -22,7 +22,8 @@ class Etablissement extends CI_Controller{
 		$finalview = $this->load->view('modules/header',array('title' => $this->titre_defaut),true);
 		$i=0;
 		foreach ($etablissements as $etab) {
-			$name_array['etablissement'][$i] = $etab['nom'];
+			$name_array['etablissement'][$i]['name'] = $etab['nom'];
+			$name_array['etablissement'][$i]['id'] = $etab['id'];
 			$data['title'] = $etab['nom'];
 			$data['image'] = "../../assets/imgs/$etab.jpg";
 			$data['infos'] = array (
