@@ -48,7 +48,7 @@ class Users extends CI_Controller {
 						array(		 'nom' => $nom,
 								  'prenom' => $prenom,
 								   'login' => $login,
-								'password' => md5('sand_key'.$mdp.$nom.$prenom.$login.$email),
+								'password' => md5('sand_key'.$mdp),
 								   'email' => $email,
 								   'type'  => $type	))) {
 						
@@ -118,7 +118,7 @@ class Users extends CI_Controller {
 			// attribution de la session
 			$user = $this->users_model->get_by_login($login); // récupere l'utilsateur
 			if($user){ 
-				$password = md5('sand_key'.$mdp.$user['nom'].$user['prenom'].$login.$user['email']);
+				$password = md5('sand_key'.$mdp); // bouaaaah arg
 				if($password == $user['password']){
 					// modification de la session.
 					// renvoyer du json
@@ -234,8 +234,7 @@ class Users extends CI_Controller {
 			$confirmer_mdp = $this->input->post('confirmer_mdp');
 			$user_id = $this->session->userdata('user_id');
 			if($nv_mdp == $confirmer_mdp){ //on peut modifier le mot de passe
-				$user = $this->users_model->get($user_id);
-				$password = md5('sand_key'.$ancien_mdp.$user['nom'].$user['prenom'].$user['login'].$user['email']); // mot de passe entré
+				$password = md5('sand_key'.$ancien_mdp); // mot de passe entré
 				if($password == $user['password']){
 					$this->users_model->update(array('password' => $nv_mdp),$user_id);
 					$this->view_profil(); // renvoie la page de profil

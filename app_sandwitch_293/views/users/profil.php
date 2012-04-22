@@ -40,10 +40,12 @@
                 <input type="submit" value="Envoyer" class="bouton"/>
             </form>
         </div>
+        <a href="/index.php"class="bouton">Retour</a>
 <?php }?>
 
 <script> 
 $(document).ready(function(){
 	$(":submit").button();
+	$("a").button();
 });
 </script>
