@@ -23,7 +23,7 @@ class Etablissement extends CI_Controller{
 		foreach ($etablissements as $etab) {
 			$name_array['etablissement'][$i]['name'] = $etab['nom'];
 			$name_array['etablissement'][$i]['id'] = $etab['id'];
-			$name_array['id'] = intval($view_id);
+			
 			$data['title'] = $etab['nom'];
 			$data['image'] = "../../assets/imgs/$etab.jpg";
 			$data['infos'] = array (
@@ -37,7 +37,7 @@ class Etablissement extends CI_Controller{
 		}
 		$datas['id'] = 'vignettes';
 		$datas['contends'] = $vignette;
-	
+		$name_array['id'] = intval($view_id);
 		$finalview .= $this->load->view('produits/header_produit',$name_array, true);
 		$finalview .= $this->load->view('modules/container',$datas,true);
 		

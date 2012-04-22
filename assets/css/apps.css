@@ -15,11 +15,16 @@
 	visibility:hidden;
 }
 #vignettes {
-	width:80%;
+	width:100%;
 	text-align:center;
+	margin:auto;
+}
+#vignette_contain {
+	display: inline-block;
+
 }
 #vignette {
-		display:inline;
+		
 		background-color: rgba(255,255,255,0.3);
 		-moz-border-radius: 20px;
 		border-radius: 10px;
@@ -27,19 +32,32 @@
 		border-style:solid;
 		border-color: rgb(255,220,150);
 		border-width:1px;
-		float:left;
-		width:200px;
+		width:250px;
 		margin:10px;
 		text-align:left;
 }
+
+#vignette h3 {
+
+	margin:0px;
+	padding:10px;
+	padding-left:30px;
+	
+}
+
 #vignette img {
 	float: left;
-	width: 50px;
-	height:50px;
+	width: 80px;
+	height:80px;
 	margin:10px;
-	margin-top:0px;
+	margin-top:30px;
+	background-color:#900;
 }
 
 #vignette ul {
 	list-style:none;
+}
+#vignette li {
+	list-style:none;
+	font-size:small;
 }
