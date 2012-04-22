@@ -91,7 +91,7 @@ $("#apps").css('visibility','hidden').fadeOut('fast');}); </script>
 
 <div id="apps">
 	<div id="profil"><a href="/index.php/users/view_profil">Profil</a></div>
-    <div id="visite_sandwicherie">Voir les differentes sandwicheries</div>
+    <div id="visite_sandwicherie"><a href="/index.php/etablissement/view"> Voir les differentes sandwicheries</a></div>
     <div id="news">News</div> <!-- peut etre pas necessaire -->
     <div id="mes_commandes">Mes commandes</div> <!-- peut etre pas necessaire -->
     <div id="ajout_produit">Ajouter un produit</div> <!-- caché par défaut -->
