@@ -46,7 +46,7 @@ class Pages extends CI_Controller{
 			$data['categorie'] = $this->categorie_model->search(NULL,NULL,NULL,NULL,NULL); // Récupere toutes les catégorie
 			$this->load->view('modules/header',$data);
 			$this->load->view('produits/ajout');
-			$this->load->vieuw('modules/footer');
+			$this->load->view('modules/footer');
 		}
 		else{
 			$data['message'] = 'Vous n\'avez pas les droits';
