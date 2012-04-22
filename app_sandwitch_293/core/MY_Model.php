@@ -157,7 +157,7 @@ class MY_Model extends CI_Model
 	
 	function search($keylocks,$columns, $keywords,$sort, $limit) {	
 		/*"Write search conditions */
-		$this->logs->add_error("keylocks : $keylocks");
+		log_message("keylocks : $keylocks");
 		($keylocks != NULL) ? $keylocks = explode(' ',$keylocks): $keylocks = NULL;
 		($columns != NULL) ? $columns = explode(' ',$columns): $columns = NULL;
 		($keywords != NULL) ? $keywords = explode(' ',$keywords): $keywords = NULL;
