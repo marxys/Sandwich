@@ -223,7 +223,7 @@ class Users extends CI_Controller {
 			$confirmer_mdp = $this->input->post('confirmer_mdp');
 			$user_id = $this->session->userdata('user_id');
 			if($nv_mdp == $confirmer_mdp){ //on peut modifier le mot de passe
-				$user = $this->users_model->get($user_id); $user = $user->fetch();
+				$user = $this->users_model->get($user_id);
 				$password = md5('sand_key'.$ancien_mdp.$user['nom'].$user['prenom'].$user['login'].$user['email']); // mot de passe entré
 				if($password == $user['password']){
 					$this->users_model->update(array('password' => $nv_mdp),$user_id);
@@ -246,7 +246,7 @@ class Users extends CI_Controller {
 	}
 	public function view_profil() {
 		$user_id = $this->session->userdata('user_id');
-		$user = $this->users_model->get($user_id); $user = $user->fetch();
+		$user = $this->users_model->get($user_id);
 		$data['title'] = 'Profile de l\'utilisateur '.$user['prenom'].' '.$user['nom'];
 		$data['user'] = $user;
 		$data['type'] = $this->session->userdata('type');
