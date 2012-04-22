@@ -102,7 +102,11 @@ class MY_Model extends CI_Model
 	 */
 	public function get($id){
 		$query = "SELECT * FROM ".$this->table_name." WHERE id = ?";
-		return $this->mysql->qexec($this->table_name.'_get',$query,array(intval($id)));
+		$reponse = $this->mysql->qexec($this->table_name.'_get',$query,array(intval($id)));
+		if($reponse) {
+			return $reponse->fetchSingle();
+		}
+		return false;
 	}
 	
 	/**
