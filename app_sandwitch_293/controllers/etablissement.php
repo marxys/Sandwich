@@ -13,8 +13,10 @@ class Etablissement extends CI_Controller{
 	}
 	
 	function view($view_id = NULL) {
-		
-		foreach ($this->etab->search(NULL,NULL ,NULL, NULL, NULL) as $etab) {
+		$etablissements = $this->etab->search(NULL,NULL ,NULL, NULL, NULL);
+		$finalview = '';
+		foreach ($etablissements as $etab) {
+			$name_array['etablissement'][$i] = $etab['nom'];
 			$data['title'] = $etab['nom'];
 			$data['image'] = "../../assets/imgs/$etab.jpg";
 			$data['infos'] = array (
@@ -22,8 +24,10 @@ class Etablissement extends CI_Controller{
 								'adresse' 			=> $etab['adresse'],
 								'coordonnées'		=> $etab['gps']
 								);
-			$this->load->view('modules/vignette.php',$data);
+			$finalview .= $this->load->view('modules/vignette',$data,true);
 		}
+		$finalview = $this->load->view('produits/header_produit',$name_array, true).$finalview;
+		
 		if(!empty($view_id)) {
 			$view_id 				= intval($view_id);
 			$selected_etab 			= $this->etab->get($view_id);
@@ -31,8 +35,11 @@ class Etablissement extends CI_Controller{
 			$data['etablissement'] 	= $selected_etab;
 			$data['news'] 			= $news_etab;
 			$data['image'] 			= "../../assets/imgs/$etab.jpg";
+			$finalview .= $this->load->view('produits/info_etablissement',$data);
 			
 		}
+		
+		return $finalview;
 			
 	}
 }
