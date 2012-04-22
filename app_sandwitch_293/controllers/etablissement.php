@@ -1,7 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Etablissement extends CI_Controller{
-
+	protected $titre_defaut;
 	function __construc(){
 		parent::__construc();
 		$this->titre_defaut = 'iSandwich :: Nos établissements';
@@ -17,6 +17,7 @@ class Etablissement extends CI_Controller{
 		
 		$etablissements = $this->etab->search(NULL,NULL ,NULL, NULL, NULL);
 		$finalview = $this->load->view('modules/header',array('title' => $this->titre_defaut));
+		$i=0;
 		foreach ($etablissements as $etab) {
 			$name_array['etablissement'][$i] = $etab['nom'];
 			$data['title'] = $etab['nom'];
@@ -27,6 +28,7 @@ class Etablissement extends CI_Controller{
 								'coordonnées'		=> $etab['gps']
 								);
 			$finalview .= $this->load->view('modules/vignette',$data,true);
+			$i++;
 		}
 		$finalview = $this->load->view('produits/header_produit',$name_array, true).$finalview;
 		
