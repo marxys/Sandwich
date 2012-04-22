@@ -6,8 +6,8 @@
     	<ul>
         	 <?php if(isset($etablissement['nom']){?>
         	<li> Nom : <?php echo $etablissement['nom'] ?></li>
-            <?php if(isset($etablissement['addresse']){?>
-            <li> Addresse : <?php echo $etablissement['addresse'] ?> </li>
+            <?php if(isset($etablissement['adresse']){?>
+            <li> Addresse : <?php echo $etablissement['adresse'] ?> </li>
             <?php } ?>
             <?php if(isset($etablissement['slogan']){?>
             <li> Slogan : <?php echo $etablissement['slogan'] ?> </li>
