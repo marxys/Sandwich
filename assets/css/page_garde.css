@@ -115,8 +115,20 @@ form {
 	position:absolute;
 	height:280px;
 	width:440px;
-
+	background-color: rgba(255,255,255,0.3);
+	-moz-border-radius: 20px;
+	border-radius: 20px;
+	padding: 10px;
+	border-style:solid;
+	border-color: rgb(255,220,150);
+	border-width:1px;
+	margin: auto;
 	margin-top:20px;
 	margin-left: -460px;
 	right:50%;
+}
+#form_login {
+	background-color:transparent;
+	border:none;	
+	
 }
