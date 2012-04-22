@@ -7,6 +7,8 @@ class Pages extends CI_Controller{
 		$this->users_model->init();
 		$this->load->model('etablissement_model');
 		$this->etablissement_model->init();
+		$this->load->model('categorie_model');
+		$this->categorie_model->init();
 	}
 	// Chargé par défaut.
 	public function index(){
@@ -39,8 +41,9 @@ class Pages extends CI_Controller{
 	}
 	
 	public function ajouter_produit(){
-		if($this->session->useritem('type') == 2){
+		if($this->session->userdata('type') == 2){
 			$data['title'] = "Ajout d'un nouveau produit";
+			$data['categorie'] = $this->categorie_model->search(NULL,NULL,NULL,NULL,NULL); // Récupere toutes les catégorie
 			$this->load->view('modules/header',$data);
 			$this->load->view('produits/ajout');
 			$this->load->vieuw('modules/footer');

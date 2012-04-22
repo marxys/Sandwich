@@ -18,6 +18,7 @@
 <script>
 $(document).ready(function(){
 	$("#retour").button();
+	$("#info_sandwicherie:a").button();
 });
 </script>
 
