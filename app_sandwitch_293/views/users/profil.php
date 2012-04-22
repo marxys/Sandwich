@@ -16,14 +16,14 @@
                 <label for="email"> Adresse e-mail : </label>
                 <input id="email" type="text" name="email" value=<?php echo $user['email']?> size="50" class="ui-widget-content ui-corner-all"/><br/>
                 <?php if($type == 2){ ?>
-                    <label for="etablissement">Nom de l'établissement: </label>
-                    <input id="etablissement_nom" type="text" name="etablissement_nom" value="<?php echo $etablissement['nom'];?>"size="50" class="text ui-widget-content ui-corner-all" /><br/>
-                    <label for="prenom">Slogan : </label>
+                <label for="etablissement_nom">Nom de l'établissement: </label>
+                <input id="etablissement_nom" type="text" name="etablissement_nom" value="<?php echo $etablissement['nom'];?>"size="50" class="text ui-widget-content ui-corner-all" /><br/>
+                 <label for="slogan">Slogan : </label>
                 <input id="slogan" type="text" name="slogan" value="<?php echo $etablissement['slogan'];?>" size="50" class="text ui-widget-content ui-corner-all" /><br/>
                 <label for="adresse">Adresse de l'établissement : </label>
                 <input id="adresse" type="text" name="adresse" value="<?php echo $etablissement['adresse'];?>" size="50" class="text ui-widget-content ui-corner-all" /><br/>
-                <label for="addresse">Coordonnées GPS: </label>
-                <input id="gps" type="text" name="coordonnées gps" value="<?php echo $etablissement['gps'];?>" size="50" class="text ui-widget-content ui-corner-all" /><br/>
+                <label for="gps">Coordonnées GPS: </label>
+                <input id="gps" type="text" name="gps" value="<?php echo $etablissement['gps'];?>" size="50" class="text ui-widget-content ui-corner-all" /><br/>
                 <?php } ?>
                 <input type="submit" value="Envoyer" class="bouton"/>
             </form>

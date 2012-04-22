@@ -189,9 +189,9 @@ class Users extends CI_Controller {
 		else if($this->session->userdata('type') == 2){ // sandwicherie
 			$etablissement_nom = $this->input->post('etablissement_nom');
 			$slogan = $this->input->post('slogan');
-			$addresse = $this->input->post('addresse');
+			$adresse = $this->input->post('adresse');
 			$gps = $this->input->post('gps');
-			if( $prenom && $nom && $email && $username && $etablissement_nom && $slogan && $addresse && $gps ){
+			if( $prenom && $nom && $email && $username && $etablissement_nom && $slogan && $adresse && $gps ){
 				if($this->users_model->isThisMine('email',$email,$user_id)){
 					if($this->users_model->isThisMine('login',$username,$user_id)){
 						$etablissement = $this->etablissement_model->get_by_user_id($user_id);
@@ -199,11 +199,11 @@ class Users extends CI_Controller {
 							$this->users_model->update(array( 'prenom' => $prenom,
 													  'nom' => $nom,
 													  'email' => $email,
-													  'login' => $username));
+													  'login' => $username),$user_id);
 							$this->etablissement_model->update(array( 'nom' => $etablissement_nom,
-																	  'slogon' => $slogan,
-																	  'addresse' => $addresse,
-																	  'gps' => $gps));
+																	  'slogan' => $slogan,
+																	  'adresse' => $adresse,
+																	  'gps' => $gps),$etablissement['id']);
 						}
 						else{ // nom de l'etablissement déjà utilisé
 							$data['message'] = "Ce nom d'établissement est déjà utilisé par un autre client";
@@ -220,7 +220,10 @@ class Users extends CI_Controller {
 					$this->load->view('error',$data);
 				}
 			}
-		}else{ // il manque des données
+			else{ // il manque des données
+				$data['message'] = "Vous devez remplir tous les formulaires";
+				$this->load->view('error',$data);
+			}
 		}
 		
 		$this->view_profil();

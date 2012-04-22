@@ -48,7 +48,7 @@ class MY_Model extends CI_Model
 		else return true;
 	}
 	public function howMany($field,$value){
-		$rep = $this->mysql->qexec('user_'.$field.'_isFree','SELECT COUNT(*) FROM user WHERE '.$field.' = ? ',array($value));
+		$rep = $this->mysql->qexec('user_'.$field.'_isFree','SELECT COUNT(*) FROM'.$this->table_name.' WHERE '.$field.' = ? ',array($value));
 		$nbr = $rep->fetch();
 		
 		return $nbr[0];
