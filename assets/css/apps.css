@@ -14,7 +14,10 @@
 #ajouter_news{
 	visibility:hidden;
 }
-
+#vignettes {
+	width:80%;
+	text-align:center;
+}
 #vignette {
 		display:inline;
 		background-color: rgba(255,255,255,0.3);
@@ -24,7 +27,7 @@
 		border-style:solid;
 		border-color: rgb(255,220,150);
 		border-width:1px;
-		float:right;
+		float:left;
 		width:200px;
 		margin:10px;
 		text-align:left;

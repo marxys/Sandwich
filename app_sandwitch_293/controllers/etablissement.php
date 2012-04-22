@@ -20,6 +20,7 @@ class Etablissement extends CI_Controller{
 			print_r($etablissements );
 			echo '</pre>';
 		$finalview = $this->load->view('modules/header',array('title' => $this->titre_defaut),true);
+		$vignette = '';
 		$i=0;
 		foreach ($etablissements as $etab) {
 			$name_array['etablissement'][$i]['name'] = $etab['nom'];
@@ -31,10 +32,13 @@ class Etablissement extends CI_Controller{
 								'adresse' 			=> $etab['adresse'],
 								'coordonnées'		=> $etab['gps']
 								);
-			$finalview .= $this->load->view('modules/vignette',$data,true);
+			$vignette .= $this->load->view('modules/vignette',$data,true);
 			$i++;
 			
 		}
+		$data['id'] = 'vignettes';
+		$data['contends'] = $vignette;
+		$finalview .= $this->view('modules/container',$data,true);
 		$finalview = $this->load->view('produits/header_produit',$name_array, true).$finalview;
 		
 		if(!empty($view_id)) {
