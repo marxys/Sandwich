@@ -6,7 +6,6 @@ class Etablissement extends CI_Controller{
 		parent::__construc();
 		$this->titre_defaut = 'iSandwich :: Nos établissements';
 		$this->load->library('input');
-	
 	}
 	
 	function view($view_id = NULL) {
