@@ -1,4 +1,9 @@
 @charset "UTF-8";
+
+
+body {
+	background: -moz-linear-gradient(top left, rgb(253,251,241), rgb(247,236,159));
+}
 #page_garde {
 	background: -moz-linear-gradient(top left, rgb(253,251,241), rgb(247,236,159));
 	position: absolute;
@@ -58,6 +63,13 @@ label {
 	float: left;
 }
 
+#info_user label {
+	width:200px;	
+}
+#edit_mdp label {
+	width:200px;	
+}
+
 input, select {
 	height: 18px;
 	padding: 2px;
@@ -87,10 +99,8 @@ td, tr, table {
 	width:100px;	
 	
 }
-#inscription {
-	position:absolute;
-	height:280px;
-	width:440px;
+
+form {
 	background-color: rgba(255,255,255,0.3);
 	-moz-border-radius: 20px;
 	border-radius: 20px;
@@ -98,11 +108,15 @@ td, tr, table {
 	border-style:solid;
 	border-color: rgb(255,220,150);
 	border-width:1px;
+	margin: auto;
+	
+}
+#inscription {
+	position:absolute;
+	height:280px;
+	width:440px;
+
 	margin-top:20px;
 	margin-left: -460px;
 	right:50%;
-	
-	
-	
-	
 }
