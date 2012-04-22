@@ -53,4 +53,16 @@ class Pages extends CI_Controller{
 			$this->load->view('error',$data);
 		}
 	}
+	public function ajouter_news(){
+		if($this->session->userdata('type') == 2){
+			$data['title'] = "Ajout d'une nouvelle news";
+			$this->load->view('modules/header',$data);
+			$this->load->view('etablissement/ajout_news');
+			$this->load->view('modules/footer');
+		}
+		else{
+			$data['message'] = 'Vous n\'avez pas les droits';
+			$this->load->view('error', $data);
+		}
+	}
 }

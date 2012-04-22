@@ -11,6 +11,7 @@ class News extends CI_Controller{
 		$this->load->library('input');
 		$this->load->model('etablissement_model');
 		$this->etablissement_model->init();
+		$this->load->helper('url');
 	}
 	/*
 	Ajoute un élément News à la base de données, les variables sont passée par POST
@@ -18,26 +19,23 @@ class News extends CI_Controller{
 	function add(){
 		$titre = $this->input->post('titre');
 		$description = $this->input->post('description');
-		$user_id = $this->input->post('user_id');
+		$user_id = $this->session->userdata('user_id');
 		// ajouter la date de creation.
 		if($titre && $description && $user_id){
 			$etablissement = $this->etablissement_model->get_by_user_id($user_id);
-			$etablissement = $etablissement->fetch();
 			if($etblissement){ // si l'etablissement associé a ce user_id existe
-				if($this->session->userdata('user_id') == $user_id){ // Verifier si la personne connectée est la bonne
 					if($this->news_model->insert(array(
 								'titre'=> $titre,
 								'description' => $description,
 								'etablissement_id' => $etablissement))){
-						
+ 						redirect('/index.php/pages/ajout_news', 'location');	
 					}			
 					else{
 						// Recharger la page en indiquant qu'il y eut une erreur lors de l'ajout.
 					}
 				}
-				else{
+			else{
 					// Renvoyer qu'il manque les droits.
-				}
 			}
 		}
 		else{
