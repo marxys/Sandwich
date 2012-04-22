@@ -170,6 +170,7 @@ class Users extends CI_Controller {
 													  'nom' => $nom,
 													  'email' => $email,
 													  'login' => $username),$this->session->userdata('user_id'));
+						$this->view_profil();
 					}
 					else{ // erreur login déjà utilisé par un autre membre
 						$data['message'] = "Ce login est déjà utilisé par un autre utilisateur";
@@ -201,9 +202,9 @@ class Users extends CI_Controller {
 													  'email' => $email,
 													  'login' => $username),$user_id);
 							$this->etablissement_model->update(array( 'nom' => $etablissement_nom,
-																	  'slogan' => $slogan,
 																	  'adresse' => $adresse,
-																	  'gps' => $gps),$etablissement['id']);
+																	  'slogan' => $slogan,												  																	  'gps' => $gps),$etablissement['id']);
+							$this->view_profil();
 						}
 						else{ // nom de l'etablissement déjà utilisé
 							$data['message'] = "Ce nom d'établissement est déjà utilisé par un autre client";
@@ -225,9 +226,6 @@ class Users extends CI_Controller {
 				$this->load->view('error',$data);
 			}
 		}
-		
-		$this->view_profil();
-
 	}
 	public function edit_password(){
 		if($this->session->userdata('type') > 0){
