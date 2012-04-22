@@ -7,6 +7,16 @@
 	right : auto;
 	left : auto;
 }
+#vignette_contain a {
+	color:#000;
+	text-decoration:none;
+
+}
+#vignette_contain a:hover {
+	
+	color:#990000;
+	text-decoration:none;
+}
 
 #ajout_produit{
 	visibility:hidden;
@@ -29,6 +39,7 @@
 		-moz-border-radius: 20px;
 		border-radius: 10px;
 		padding: 10px;
+		padding-top:0px;
 		border-style:solid;
 		border-color: rgb(255,220,150);
 		border-width:1px;
@@ -37,6 +48,10 @@
 		text-align:left;
 }
 
+#vignette:hover {
+
+	background-color: rgba(255,255,255,0.7);
+}
 #vignette h3 {
 
 	margin:0px;
@@ -48,9 +63,9 @@
 #vignette img {
 	float: left;
 	width: 80px;
-	height:80px;
+	height:100px;
 	margin:10px;
-	margin-top:30px;
+	margin-top:25px;
 	background-color:#900;
 }
 
