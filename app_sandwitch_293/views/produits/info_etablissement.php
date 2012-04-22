@@ -17,9 +17,20 @@
     </div>
     
     <div id"news">
+    	<?php 
+		foreach($news as $element){
+			?>
+           	<div id="<?php echo 'news_'.$element['id'] ?>">
+            	<p class="titre_news"> <?php echo $element['titre'] ?></p>
+            	<p class="date_creation_news"> <?php echo $element['date_creation'] ?> </p>
+                <p class="description_news"> <?php echo $element['description'] ?> </p>
+            </div> 
+   <?php
+		} ?>
     </div>
     
  	<div id="contact">
+    	<p><?php echo $etablissement['contact'] ?></p>
     </div>
     
 </div>
