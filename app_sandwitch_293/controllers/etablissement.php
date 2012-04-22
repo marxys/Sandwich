@@ -16,15 +16,14 @@ class Etablissement extends CI_Controller{
 		$this->news->init();
 		
 		$etablissements = $this->etab->search(NULL,NULL ,NULL, NULL, NULL);
-		echo '<pre>';
-			print_r($etablissements );
-			echo '</pre>';
+		
 		$finalview = $this->load->view('modules/header',array('title' => $this->titre_defaut),true);
 		$vignette = '';
 		$i=0;
 		foreach ($etablissements as $etab) {
 			$name_array['etablissement'][$i]['name'] = $etab['nom'];
 			$name_array['etablissement'][$i]['id'] = $etab['id'];
+			$name_array['id'] = intval($view_id);
 			$data['title'] = $etab['nom'];
 			$data['image'] = "../../assets/imgs/$etab.jpg";
 			$data['infos'] = array (
@@ -40,7 +39,7 @@ class Etablissement extends CI_Controller{
 		$datas['contends'] = $vignette;
 	
 		$finalview .= $this->load->view('produits/header_produit',$name_array, true);
-		$finalview .= $this->load->view('modules/view',$datas,true);
+		$finalview .= $this->load->view('modules/container',$datas,true);
 		
 		if(!empty($view_id)) {
 			$view_id 				= intval($view_id);

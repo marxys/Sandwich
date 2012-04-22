@@ -5,8 +5,8 @@
 
 <title><?php echo $title ?></title>
 <link href="../../../assets/jquery-ui-1.8.18.custom/css/custom-theme/jquery-ui-1.8.19.custom.css" rel="stylesheet" type="text/css" />
-<link href="../../assets/css/page_garde.css" rel="stylesheet" type="text/css" />
-<link href="../../assets/css/apps.css" rel="stylesheet" type="text/css" />
+<link href="../../../assets/css/page_garde.css" rel="stylesheet" type="text/css" />
+<link href="../../../assets/css/apps.css" rel="stylesheet" type="text/css" />
 <script src="../../../assets/js/jquery-1.7.2.min.js" type="text/javascript"></script>
 <script src="../../../assets/jquery-ui-1.8.18.custom/js/jquery-ui-1.8.19.custom.min.js" type="text/javascript"></script>
 <script src="../../../assets/js/utilitaires.js" tyoe="text/javascript"></script>
