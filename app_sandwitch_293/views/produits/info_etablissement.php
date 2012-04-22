@@ -12,6 +12,7 @@
             <?php if(isset($etablissement['slogan']){?>
             <li> Slogan : <?php echo $etablissement['slogan'] ?> </li>
             <?php }?>
+            <li><a href="/index.php/produits/view"> Voir les produits proposés </a></li>
             <!-- Data d'ajout ? -->
         </ul>
     </div>
