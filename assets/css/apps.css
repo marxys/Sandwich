@@ -25,7 +25,6 @@
 	visibility:hidden;
 }
 #vignettes {
-	width:100%;
 	text-align:center;
 	margin:auto;
 }
@@ -39,12 +38,13 @@
 		-moz-border-radius: 20px;
 		border-radius: 10px;
 		padding: 10px;
-		padding-top:0px;
+		padding-top:10px;
 		border-style:solid;
 		border-color: rgb(255,220,150);
 		border-width:1px;
-		width:250px;
+		width:300px;
 		margin:10px;
+		
 		text-align:left;
 }
 
@@ -65,7 +65,7 @@
 	width: 80px;
 	height:100px;
 	margin:10px;
-	margin-top:25px;
+	margin-top:15px;
 	background-color:#900;
 }
 
@@ -75,4 +75,21 @@
 #vignette li {
 	list-style:none;
 	font-size:small;
+}
+#info_sandwicherie {
+	
+		min-height:400px;
+		height:80%;
+		margin:20px;
+		background-color: rgba(255,255,255,0.3);
+		-moz-border-radius: 20px;
+		border-radius: 10px;
+		padding: 10px;
+		padding-top:0px;
+		border-style:solid;
+		border-color: rgb(255,220,150);
+		border-width:1px;
+		text-align:left;
+		float:right;
+		width:40%;
 }
