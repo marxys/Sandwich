@@ -35,7 +35,7 @@ class Etablissement extends CI_Controller{
 			$data['etablissement'] 	= $selected_etab;
 			$data['news'] 			= $news_etab;
 			$data['image'] 			= "../../assets/imgs/$etab.jpg";
-			$finalview .= $this->load->view('produits/info_etablissement',$data);
+			$finalview .= $this->load->view('produits/info_etablissement',$data,true);
 			
 		}
 		
