@@ -95,7 +95,7 @@ $("#apps").css('visibility','hidden').fadeOut('fast');}); </script>
     <div id="news">News</div> <!-- peut etre pas necessaire -->
     <div id="mes_commandes">Mes commandes</div> <!-- peut etre pas necessaire -->
     <div id="ajout_produit"><a href="/index.php/pages/ajouter_produit">Ajouter un produit</a></div> <!-- caché par défaut -->
-    <div id="ajouter_news"><a href="/index.php/pages/ajout_news">Ajourter une news</a></div> <!-- caché par défaut -->
+    <div id="ajouter_news"><a href="/index.php/pages/ajouter_news">Ajourter une news</a></div> <!-- caché par défaut -->
     <div id="deconnexion"><a href="/index.php/users/logout"> Deconnexion</a></div>
 </div>
 <?php 
