@@ -104,7 +104,8 @@ class MY_Model extends CI_Model
 		$query = "SELECT * FROM ".$this->table_name." WHERE id = ?";
 		$reponse = $this->mysql->qexec($this->table_name.'_get',$query,array(intval($id)));
 		if($reponse) {
-			return $reponse->fetchSingle();
+			$rep = $reponse->fetchAll();
+			return $rep[0];
 		}
 		return false;
 	}

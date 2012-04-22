@@ -16,6 +16,9 @@ class Etablissement extends CI_Controller{
 		$this->news->init();
 		
 		$etablissements = $this->etab->search(NULL,NULL ,NULL, NULL, NULL);
+		echo '<pre>';
+			print_r($etablissements );
+			echo '</pre>';
 		$finalview = $this->load->view('modules/header',array('title' => $this->titre_defaut),true);
 		$i=0;
 		foreach ($etablissements as $etab) {
@@ -29,6 +32,7 @@ class Etablissement extends CI_Controller{
 								);
 			$finalview .= $this->load->view('modules/vignette',$data,true);
 			$i++;
+			
 		}
 		$finalview = $this->load->view('produits/header_produit',$name_array, true).$finalview;
 		
@@ -43,7 +47,8 @@ class Etablissement extends CI_Controller{
 			
 		}
 		$finalview .= $this->load->view('modules/footer','',true);
-		$this->load->view('modules/view',$finalview);
+		$data['view'] = $finalview;
+		$this->load->view('modules/view',$data);
 			
 	}
 }
