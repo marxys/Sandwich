@@ -14,7 +14,7 @@ class Etablissement extends CI_Controller{
 	
 	function view($view_id = NULL) {
 		$etablissements = $this->etab->search(NULL,NULL ,NULL, NULL, NULL);
-		$finalview = '';
+		$finalview = $this->load->view('modules/header',array('title' => $this->titre_defaut));
 		foreach ($etablissements as $etab) {
 			$name_array['etablissement'][$i] = $etab['nom'];
 			$data['title'] = $etab['nom'];
@@ -38,7 +38,7 @@ class Etablissement extends CI_Controller{
 			$finalview .= $this->load->view('produits/info_etablissement',$data,true);
 			
 		}
-		
+		$finalview .= $this->load->view('modules/footer','',true);
 		return $finalview;
 			
 	}
