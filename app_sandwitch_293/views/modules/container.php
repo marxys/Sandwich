@@ -1,3 +1,1 @@
-<?php 
-
-	echo "<div id='$id'>$contends</div>"; 
+<div id="<?php echo $id; ?>"><?php echo $contends; ?></div> 

@@ -36,10 +36,11 @@ class Etablissement extends CI_Controller{
 			$i++;
 			
 		}
-		$data['id'] = 'vignettes';
-		$data['contends'] = $vignette;
-		$finalview .= $this->view('modules/container',$data,true);
-		$finalview = $this->load->view('produits/header_produit',$name_array, true).$finalview;
+		$datas['id'] = 'vignettes';
+		$datas['contends'] = $vignette;
+	
+		$finalview .= $this->load->view('produits/header_produit',$name_array, true);
+		$finalview .= $this->load->view('modules/view',$datas,true);
 		
 		if(!empty($view_id)) {
 			$view_id 				= intval($view_id);
