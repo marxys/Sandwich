@@ -152,7 +152,8 @@ class Users extends CI_Controller {
 		//$this->session->sess_destroy();
 		// + redirigé acceuil;
 		$this->session->set_userdata('type',0);
-		$this->load->view('modules/header'); 
+		$data['message'] = "iSandwich";
+		$this->load->view('modules/header',$data); 
 		$this->load->view('acceuil');
 		$this->load->view('modules/footer'); 
 	}
