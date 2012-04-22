@@ -13,7 +13,7 @@ class Produits extends CI_Controller{
 	public function voir_commentaires($id_product){
 	
 		$id_product = intval($id_product);
-		$produit = $this->produits_model->get($id_product); $produit = $produit->fetch();
+		$produit = $this->produits_model->get($id_product);
 		$com_array = $this->commentaires->get_commentaires($id_product);
 		$data['title'] = 'Commentaires du produit '.$produit['nom'];
 		$data['id_produit'] = $id_product;
@@ -32,11 +32,13 @@ class Produits extends CI_Controller{
 				$this->voir_commentaires($id_product); // chargement de la vue
 			}
 			else{
-				$this->load->view(''); // erreur de droit
+				$data['message'] = "Vous n'avez pas les droits requis";
+				$this->load->view('error',$data); // erreur de droit
 			}
 		}
 		else{
-			$this->load->view(''); // Erreur forumulaire incomplet
+			$data['message'] = "Veuillez remplir tous les formulaires";
+			$this->load->view('error',$data); // Erreur forumulaire incomplet
 		}
 	}
 }

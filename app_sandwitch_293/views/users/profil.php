@@ -5,7 +5,7 @@
 		<p>Vous pouvez ici modifier vos informations utilisateur</p>
 		</div>
         <div id="info_user">
-        	<form method="post" action="edit_profil">
+        	<form method="post" action="/index.php/users/edit_profil">
                  <label for="prenom">Prénom : </label>
                 <input id="prenom" type="text" name="prenom" value="<?php echo $user['prenom']?>" size="50" class="text ui-widget-content ui-corner-all" /><br/>
                 <label for="nom">Nom : </label>
@@ -30,7 +30,7 @@
         </div>    
         <div id="edit_mdp">
         	<p>Vous pouvez ici modifier votre mot de passe </p>
-        	<form method="post" action="edit_password">
+        	<form method="post" action="/index.php/users/edit_password">
             	<label for="ancien_mdp"> Ancien mot de passe </label>
             	<input id="ancien_mdp" type="password" name="ancien_mdp"class="text ui-widget-content ui-corner-all"/><br/>
                 <label for="nouveau_mdp"> Nouveau mot de passe </label>
