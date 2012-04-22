@@ -13,11 +13,11 @@
 	
 	<?php } ?>
     </select>
-    <a href="/index.php"> Retour à l'acceuil</a>
+    <a id="retour" href="/index.php"> Retour à l'acceuil</a>
 </div>
 <script>
 $(document).ready(function(){
-	$("a").button();
+	$("#retour").button();
 });
 </script>
 
