@@ -254,7 +254,7 @@ class Users extends CI_Controller {
 			$etablissement = $this->etablissement_model->get_by_user_id($user_id);
 			$data['etablissement'] = $etablissement;
 		}
-		$this->load->view('modules/header');
+		$this->load->view('modules/header',$data);
 		$this->load->view('users/profil',$data);
 		$this->load->view('modules/footer');			
 	}

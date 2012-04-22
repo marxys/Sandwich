@@ -8,7 +8,8 @@ class Pages extends CI_Controller{
 	public function index(){
 		if(sizeof($this->session->all_userdata()) != 7)
 			$this->session->set_userdata(array(  'user_id' => 0, 'type'=>0));
-		$this->load->view('modules/header'); 
+		$data['title'] = 'iSandwich';
+		$this->load->view('modules/header',$data); 
 		$this->load->view('acceuil');
 	//	print_r($this->session->all_userdata());
 		$this->load->view('modules/footer'); 

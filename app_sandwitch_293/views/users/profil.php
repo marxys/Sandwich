@@ -25,7 +25,7 @@
                 <label for="addresse">Coordonnées GPS: </label>
                 <input id="gps" type="text" name="coordonnées gps" value="<?php echo $etablissement['gps'];?>" size="50" class="text ui-widget-content ui-corner-all" /><br/>
                 <?php } ?>
-                <input type="submit" value="Envoyer"/>
+                <input type="submit" value="Envoyer" class="bouton"/>
             </form>
         </div>    
         <div id="edit_mdp">
@@ -37,8 +37,13 @@
                 <input id="nouveau_mdp" type="password" name="nouveau_mdp" class="text ui-widget-content ui-corner-all" /><br/>
                 <label for="confirmer_mdp"> Confirmer mot de passe </label>
                 <input id="confirmer_mdp" type="password" name="confirmer_mdp" class="text ui-widget-content ui-corner-all"/><br/><br/>
-                <input type="submit" value="Envoyer"/>
+                <input type="submit" value="Envoyer" class="bouton"/>
             </form>
         </div>
 <?php }?>
 
+<script> 
+$(document).ready(function(){
+	$(":submit").button();
+});
+</script>
