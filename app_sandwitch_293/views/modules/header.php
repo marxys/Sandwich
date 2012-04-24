@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
-<title><?php echo $title ?></title>
+<title><?php echo $title; ?></title>
 <link href="../../../assets/jquery-ui-1.8.18.custom/css/custom-theme/jquery-ui-1.8.19.custom.css" rel="stylesheet" type="text/css" />
 <link href="../../../assets/css/page_garde.css" rel="stylesheet" type="text/css" />
 <link href="../../../assets/css/apps.css" rel="stylesheet" type="text/css" />

@@ -95,7 +95,7 @@ $(document).ready(function(){
 								}
 							}
 						})
-						.addClass( "ui-widget ui-widget-content ui-corner-left" );
+						.addClass( "ui-widget ui-corner-left" );
 	
 					input.data( "autocomplete" )._renderItem = function( ul, item ) {
 						return $( "<li></li>" )
@@ -115,7 +115,7 @@ $(document).ready(function(){
 							text: false
 						})
 						.removeClass( "ui-corner-all" )
-						.addClass( "ui-corner-right ui-button-icon" )
+						.addClass( "ui-corner-right ui-button-icon ui-button-combo" )
 						.click(function() {
 							// close if already visible
 							if ( input.autocomplete( "widget" ).is( ":visible" ) ) {
