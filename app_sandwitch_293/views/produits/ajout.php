@@ -6,21 +6,22 @@
           <textarea id="description" name="description" size="50" class="text ui-widget-content ui-corner-all"></textarea><br/>
           <label for="prix">Prix : </label>
           <input id="prix" type="text" name="prix" size="50" class="text ui-widget-content ui-corner-all" /><br/>
-          <label>Selectionnez ou créez une catégorie</label>
-          <select id="categorie">
-          	<option value="">Select one...</option>
+          <label>Selectionnez une catégorie</label>
+          <select id="categorie" name="categorie">
           		<?php foreach($categorie as $element){
 					?>
-                    	<option><?php echo $element['nom'];?></option>
+                    	<option value="<?php echo $element['nom'];?>"><?php echo $element['nom'];?></option>
 				<?php } ?>
-          </select><br/><br/>
+          </select> <br/>
+          <label> ou creez en une : </label>
+          <input type="text" name="categorie_new" size="50" class="text ui-widget-content ui-corner-all" /><br/>
           <label for="photo">Photo du produit</label>
           <input id="photo" name="photo" type="file"class="ui-widget-content ui-corner-all" /> <br/><br/>
           <input type="submit" role="button"/><br/>
     </form>
 </div>
 <a id="retour" href="/index.php">Retour</a>
-<style>
+<!--<style>
 	.ui-combobox {
 		position: relative;
 		display: inline-block;
@@ -39,13 +40,12 @@
 		margin: 0;
 		padding: 0.3em;
 	}
- </style>
+ </style>-->
 <script>
 
 
 $(document).ready(function(){
 	$(":submit").button();
 	$("#retour").button();
-	$("#categorie").combobox();
 });
 </script>

@@ -2,12 +2,56 @@
 
 class Produits extends CI_Controller{
 
-	function __construc(){
-		parent::__construc();
+	function __construct(){
+		parent::__construct();
 		$this->load->model('produits_model');
 		$this->load->model('commentaires');
+		$this->load->model('categorie_model');
+		$this->load->model('etablissement_model');
 		$this->produits_model->init();
 		$this->commentaires->init();
+		$this->categorie_model->init();
+		$this->etablissement_model->init();
+	}
+	/*
+		Ajoute un nouveau produit à la base de donnée pour l'établissement associé à $this->session->userdata('user_id')
+		Ajoute une nouvelle catégorie, si la catégorie envoyer n'existe pas.
+	*/
+	public function add(){
+		if($this->session->userdata('type') > 1){
+			$nom = $this->input->post('nom');
+			$prix = $this->input->post('prix');
+			$description = $this->input->post('description');
+			$categorie = $this->input->post('categorie');
+			if(!$categorie)
+				$categorie = $this->input->post('categorie_new');
+			if($nom && $prix && $description && $categorie){
+				$result = $this->categorie_model->get_by_name($categorie);
+				if(!$result){ // si la catégorie n'existe pas, on la crée
+					$this->categorie_model->insert(array('nom'=>$categorie));
+					$result = $this->categorie_model->get_by_name($categorie);
+				}
+				$etablissement = $this->etablissement_model->get_by_user_id($this->session->userdata('user_id'));
+				if($this->produits_model->insert( array ( 'nom' => $nom,
+													   'description' => $description,
+													   'prix' => $prix,
+													   'categorie_id' => $result['id'],
+													   'etablissement_id' => $etablissement['id'] )))
+					redirect('/index.php/pages/ajouter_produit','location');
+				else{
+					$data['message'] = $this->mysql->error;
+					$this->load->view('error',$data);
+				}
+			}
+			else{
+				$data['message'] = 'Veuillez remplir tous les formulaires';
+				$this->load->view('error',$data);
+			}
+		}
+		else{
+			$data['message'] = 'Vous n\'avez pas les droits pour ajouter un produit';
+			$this->load->view('error',$data);
+		}
 	}
 	
 	public function voir_commentaires($id_product){
