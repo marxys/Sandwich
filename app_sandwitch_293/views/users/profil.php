@@ -26,6 +26,8 @@
                 <input id="gps" type="text" name="gps" value="<?php echo $etablissement['gps'];?>" size="50" class="text ui-widget-content ui-corner-all" /><br/>
                 <label for="avatar">Avatar qui représentara votre etablissement </label>
                 <input id="avatar" name="avatar" type="file"class="ui-widget-content ui-corner-all" /> <br/><br/>
+                <label>infos horaire : </label> 
+                <textarea id="horaire" name="horaire" class="text ui-widget-content ui-corner-all"><?php echo  $etablissement['horaire']; ?></textarea><br/>
                 <?php } ?>
                 <input type="submit" value="Envoyer" class="bouton"/>
             </form>

@@ -194,7 +194,8 @@ class Users extends CI_Controller {
 			$slogan = $this->input->post('slogan');
 			$adresse = $this->input->post('adresse');
 			$gps = $this->input->post('gps');
-			if( $prenom && $nom && $email && $username && $etablissement_nom && $slogan && $adresse && $gps ){
+			$horaire = $this->input->post('horaire');
+			if( $horaire && $prenom && $nom && $email && $username && $etablissement_nom && $slogan && $adresse && $gps ){
 				if($this->users_model->isThisMine('email',$email,$user_id)){
 					if($this->users_model->isThisMine('login',$username,$user_id)){
 						$etablissement = $this->etablissement_model->get_by_user_id($user_id);
@@ -205,7 +206,9 @@ class Users extends CI_Controller {
 													  'login' => $username),$user_id);
 							$this->etablissement_model->update(array( 'nom' => $etablissement_nom,
 																	  'adresse' => $adresse,
-																	  'slogan' => $slogan,												  																	  'gps' => $gps),$etablissement['id']);
+																	  'slogan' => $slogan,												  													
+																	  'gps' => $gps,
+																	  'horaire' => $horaire),$etablissement['id']);
  							redirect('/index.php/pages/view_profil', 'location');	
 						}				
 						else{ // nom de l'etablissement déjà utilisé
