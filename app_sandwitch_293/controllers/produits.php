@@ -8,10 +8,12 @@ class Produits extends CI_Controller{
 		$this->load->model('commentaires');
 		$this->load->model('categorie_model');
 		$this->load->model('etablissement_model');
+		$this->load->model('news_model','news');
 		$this->produits_model->init();
 		$this->commentaires->init();
 		$this->categorie_model->init();
 		$this->etablissement_model->init();
+		$this->news->init();
 	}
 	/*
 		Ajoute un nouveau produit à la base de donnée pour l'établissement associé à $this->session->userdata('user_id')
@@ -91,20 +93,29 @@ class Produits extends CI_Controller{
 			
 			$etablissements = $this->etablissement_model->search(NULL,NULL ,NULL, NULL, NULL);
 		
-			$this->load->view('modules/header',array('title' => "iSandwich :: Nos établissements");
-			
-			$this->load->view('produits/header_produit',$etablissement);
+			$this->load->view('modules/header',array('title' => "iSandwich :: Nos établissements"));
+			$i = 0;
+			foreach ($etablissements as $etab) {
+				$name_array['etablissement'][$i]['name'] = $etab['nom'];
+				$name_array['etablissement'][$i]['id'] = $etab['id'];
+				
+				$i++;
+			}
+			$name_array['id'] = intval($etab_id);
+			$this->load->view('produits/header_produit',$name_array);
 			
 			$view_id 				= intval($etab_id);
 			$selected_etab 			= $this->etablissement_model->get($view_id);
 			$news_etab 				= $this->news->search("etablissement_id = $view_id",NULL, NULL, 'date_creation DESC',NULL);
 			$data['etablissement'] 	= $selected_etab;
 			$data['news'] 			= $news_etab;
-			$data['image'] 			= "../../assets/imgs/$etab.jpg";
+			$data['image'] 			= "../../assets/imgs/panier.jpg";
 			$this->load->view('produits/info_etablissement',$data);
-			
-			$produits = $this->prduits_model->get_products_from($view_id);
-			$dataProduit['produis'] = $produits;
+			if($filtre == NULL)
+				$produits = $this->produits_model->get_products_from($view_id);
+			else{ // requete de recherche
+			}
+			$dataProduit['produits'] = $produits;
 			$this->load->view('produits/tableau',$dataProduit);
 		}
 		else

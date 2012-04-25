@@ -11,7 +11,8 @@
 				if(isset($etablissement['adresse'])){
                  echo '<em>'.$etablissement['adresse'].'</em><br />';
           		}
-				echo '<a href="/index.php/produits/view"> Voir les produits proposés </a><br /></p>';
+				$etab_id = $etablissement['id'];
+				echo "<a href='/index.php/produits/view/$etab_id'> Voir les produits proposés </a><br /></p>";
 				
 			?>
 	<div id="photo">
