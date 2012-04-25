@@ -1,12 +1,19 @@
 <div id = "info_sandwicherie">
+
+<?php 
+			 	if(isset($etablissement['nom'])){
+        			echo '<h2>'.$etablissement['nom'].'</h2>'; 
+            	}
+			?>
 	<div id="photo">
+    	<img src="<?php echo $image; ?>" />
     </div>
     
     <div id="data">
+    
+    
     	<ul>
-        	 <?php if(isset($etablissement['nom'])){?>
-        	<li> Nom : <?php echo $etablissement['nom']; ?></li>
-            <?php }?>
+        	 
             <?php if(isset($etablissement['adresse'])){?>
             <li> Adresse : <?php echo $etablissement['adresse']; ?> </li>
             <?php } ?>
@@ -22,7 +29,7 @@
     	<?php 
 		foreach($news as $element){
 			?>
-           	<div id="<?php echo 'news_'.$element['id']; ?>">
+           	<div id="<?php echo 'news_'.$element['id']; ?>" class="news">
             	<p class="titre_news"> <?php echo $element['titre']; ?></p>
             	<p class="date_creation_news"> <?php echo $element['date_creation']; ?> </p>
                 <p class="description_news"> <?php echo $element['description']; ?> </p>
