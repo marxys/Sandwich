@@ -11,6 +11,9 @@
 				if(isset($etablissement['adresse'])){
                  echo '<em>'.$etablissement['adresse'].'</em><br />';
           		}
+				if(isset($etablissement['horaire'])){
+					echo '<h4>Horaire : </h4> '.nl2br($etablissement['horaire'].'<br/><br/>');
+				}
 				$etab_id = $etablissement['id'];
 				echo "<a href='/index.php/produits/view/$etab_id'> Voir les produits proposés </a><br /></p>";
 				
