@@ -93,3 +93,41 @@
 		float:right;
 		width:40%;
 }
+
+.news {
+	
+	background-color: rgba(255,255,255,0.3);
+		-moz-border-radius: 10px;
+		border-radius: 10px;
+		border-style:solid;
+		border-color: rgb(255,220,150);
+		border-width:1px;
+		padding:0px;
+		margin:10px;
+		width:100%;
+	
+}
+
+#news  p {
+	margin:3px;
+	padding:0px;
+	margin-left:10px;
+	font-size:small;
+}
+#news  h4 {
+	width:100%;
+	margin:0px;
+	margin-left:10px;
+	font-variant:small-caps;
+}
+
+h4 .date {
+	width:100%;
+	text-align:right;
+	font-size:small;
+	font-variant:small-caps;
+	margin-left:10px;
+	text-indent:10px;
+	font-style:italic;
+	
+}

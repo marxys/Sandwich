@@ -4,35 +4,28 @@
 			 	if(isset($etablissement['nom'])){
         			echo '<h2>'.$etablissement['nom'].'</h2>'; 
             	}
+				echo '<p class="info_etab">';
+				if(isset($etablissement['slogan'])){
+             		 echo '<strong>'.$etablissement['slogan'].'</strong><br />';
+			 	}
+				if(isset($etablissement['adresse'])){
+                 echo '<em>'.$etablissement['adresse'].'</em><br />';
+          		}
+				echo '</p><a href="/index.php/produits/view"> Voir les produits proposés </a><br />';
+				
 			?>
 	<div id="photo">
     	<img src="<?php echo $image; ?>" />
     </div>
     
-    <div id="data">
     
-    
-    	<ul>
-        	 
-            <?php if(isset($etablissement['adresse'])){?>
-            <li> Adresse : <?php echo $etablissement['adresse']; ?> </li>
-            <?php } ?>
-            <?php if(isset($etablissement['slogan'])){?>
-            <li> Slogan : <?php echo $etablissement['slogan']; ?> </li>
-            <?php }?>
-            <li><a href="/index.php/produits/view"> Voir les produits proposés </a></li>
-            <!-- Data d'ajout ? -->
-        </ul>
-    </div>
-    
-    <div id"news">
+    <div id="news">
     	<?php 
 		foreach($news as $element){
 			?>
            	<div id="<?php echo 'news_'.$element['id']; ?>" class="news">
-            	<p class="titre_news"> <?php echo $element['titre']; ?></p>
-            	<p class="date_creation_news"> <?php echo $element['date_creation']; ?> </p>
-                <p class="description_news"> <?php echo $element['description']; ?> </p>
+            	<h4> <?php echo $element['titre']; ?><span class="date"> <?php echo $element['date_creation']; ?> </span></h4>
+                <p> <?php echo $element['description']; ?> </p>           
             </div> 
    <?php
 		} ?>

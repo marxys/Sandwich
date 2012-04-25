@@ -2,17 +2,15 @@
 
 class Etablissement extends CI_Controller{
 	protected $titre_defaut;
-	function __construc(){
-		parent::__construc();
+	function __construct(){
+		parent::__construct();
 		$this->titre_defaut = 'iSandwich :: Nos établissements';
 		$this->load->library('input');
-<<<<<<< HEAD
-=======
+
 		$this->load->model('news_model','news');
 		$this->news->init();
 		$this->load->model('etablissement_model','etab');
 		$this->etab->init();	
->>>>>>> fa05e846ee6059709c15efcbf5c21c44ea0f2019
 	}
 	
 	function view($view_id = NULL) {
@@ -20,7 +18,7 @@ class Etablissement extends CI_Controller{
 
 		$etablissements = $this->etab->search(NULL,NULL ,NULL, NULL, NULL);
 		
-		$finalview = $this->load->view('modules/header',array('title' => $this->titre_defaut),true);
+		$finalview = $this->load->view('modules/header',array(	'title' => $this->titre_defaut ),true);
 		
 		$vignette = '';
 		$i=0;
@@ -40,6 +38,7 @@ class Etablissement extends CI_Controller{
 			$i++;
 			
 		}
+		$name_array['id'] = intval($view_id);
 		$finalview .= $this->load->view('produits/header_produit',$name_array, true);
 		if(!empty($view_id)) {
 			$view_id 				= intval($view_id);
