@@ -25,7 +25,7 @@
         </ul>
     </div>
     
-    <div id"news">
+    <div id="news">
     	<?php 
 		foreach($news as $element){
 			?>

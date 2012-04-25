@@ -9,6 +9,7 @@ class Pages extends CI_Controller{
 		$this->etablissement_model->init();
 		$this->load->model('categorie_model');
 		$this->categorie_model->init();
+		
 	}
 	// Chargé par défaut.
 	public function index(){
@@ -22,7 +23,6 @@ class Pages extends CI_Controller{
 	
 	public function contact(){
 		$this->load->view('contact');
-		
 	}
 	
 	public function view_profil() {
@@ -63,6 +63,27 @@ class Pages extends CI_Controller{
 		else{
 			$data['message'] = 'Vous n\'avez pas les droits';
 			$this->load->view('error', $data);
+			
 		}
+	}
+	/*
+	Charge la fiche du produit $id
+	$link permettra de charger la page précedante avec un bouton retour sur /index.php/produits/view/$link
+	*/
+	
+	public function voir_produit($id,$link){
+		if($this->session->userdata('type') > 0){
+			$this->load->model('produits_model');
+			$this->produits_model->init();
+			$produit = $this->produits_model->get($id);
+			$data['produit'] = $produit;
+			$data['type'] = $this->session->userdata('type');
+			$dataHeader['title'] = "Fiche du produit ".$produit['nom'];
+			$this->load->view('modules/header',$dataHeader);
+			$this->load->view('produit/fiche',$data);
+			$this->load->view('modules/footer');
+		}
+		else
+			redirect('/index.php','location');
 	}
 }

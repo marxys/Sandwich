@@ -2,17 +2,14 @@
 
 class Etablissement extends CI_Controller{
 	protected $titre_defaut;
-	function __construc(){
-		parent::__construc();
+	function __construct(){
+		parent::__construct();
 		$this->titre_defaut = 'iSandwich :: Nos établissements';
 		$this->load->library('input');
-<<<<<<< HEAD
-=======
 		$this->load->model('news_model','news');
 		$this->news->init();
 		$this->load->model('etablissement_model','etab');
-		$this->etab->init();	
->>>>>>> fa05e846ee6059709c15efcbf5c21c44ea0f2019
+		$this->etab->init();
 	}
 	
 	function view($view_id = NULL) {

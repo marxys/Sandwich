@@ -85,4 +85,13 @@ class Produits extends CI_Controller{
 			$this->load->view('error',$data); // Erreur forumulaire incomplet
 		}
 	}
+	public function view($etab_id,$filtre = NULL){
+		if($this->session->userdata('type') > 0){
+			$produits = $this->prduits_model->get_products_from($etab_id);
+			$data['produis'] = $produits;
+			$this->load->view('produits/tableau');
+		}
+		else
+			redirect('/index.php','location');
+	}
 }
