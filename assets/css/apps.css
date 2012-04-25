@@ -46,6 +46,9 @@
 		margin:10px;
 		
 		text-align:left;
+			box-shadow: 0 0 9px #000000;
+ 	 	-moz-box-shadow: 0 0 9px #000000;  
+  		-webkit-box-shadow: 0 0 9px #000000; 
 }
 
 #vignette:hover {
@@ -179,3 +182,41 @@ h3,h2 {
 	font-size:medium;
 	
 }
+#apps {
+	position:absolute;
+	width:92%;
+	top:20px;
+	left:10%;
+}
+#apps  .bouton_app{
+	height:150px;
+	width:25%;
+	float:left;
+	background-color: rgba(255,255,255,0.3);
+		-moz-border-radius: 20px;
+		border-radius: 10px;
+		padding: 1%;
+		border-style:solid;
+		border-color: rgb(255,220,150);
+		border-width:1px;
+		text-align:center;
+		margin:1%;
+		
+		background: -moz-linear-gradient(to top, rgba(150,1,1,0.1), rgba(255,255,255,0.5));
+		box-shadow: 0 0 9px #000000;
+ 	 	-moz-box-shadow: 0 0 9px #000000;  
+  		-webkit-box-shadow: 0 0 9px #000000; 
+}
+
+#apps  .bouton_app:hover{
+	border-color: rgb(0,0,0);
+		border-width:1px;
+		background: -moz-linear-gradient(to bottom, rgba(150,1,1,0.1), rgba(255,255,255,0.5));
+}
+	
+#apps a {
+	font-size: large;
+	text-transform:capitalize;
+	text-shadow:#000;
+}
+	

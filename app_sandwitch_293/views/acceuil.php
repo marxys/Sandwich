@@ -90,13 +90,12 @@ $("#apps").css('visibility','hidden').fadeOut('fast');}); </script>
 } // div affiché uniquement quand l'utilisateur n'est pas connecté?>
 
 <div id="apps">
-	<div id="profil"><a href="/index.php/pages/view_profil">Profil</a></div>
-    <div id="visite_sandwicherie"><a href="/index.php/etablissement/view">Voir les differentes sandwicheries</a></div>
-    <div id="news">News</div> <!-- peut etre pas necessaire -->
-    <div id="mes_commandes">Mes commandes</div> <!-- peut etre pas necessaire -->
-    <div id="ajout_produit"><a href="/index.php/pages/ajouter_produit">Ajouter un produit</a></div> <!-- caché par défaut -->
-    <div id="ajouter_news"><a href="/index.php/pages/ajouter_news">Ajourter une news</a></div> <!-- caché par défaut -->
-    <div id="deconnexion"><a href="/index.php/users/logout"> Deconnexion</a></div>
+	<div class='bouton_app' id="profil"><a href="/index.php/pages/view_profil"><img src="../../assets/imgs/profile.png" /><br />Profil</a></div>
+    <div class='bouton_app' id="visite_sandwicherie"><a href="/index.php/etablissement/view"><img src="../../assets/imgs/etab.png" /><br />Voir les differentes sandwicheries</a></div>
+    <div class='bouton_app' id="mes_commandes"><img src="../../assets/imgs/profile.png" /><br />Mes commandes</div> <!-- peut etre pas necessaire -->
+    <div class='bouton_app' id="ajout_produit"><a href="/index.php/pages/ajouter_produit"><img src="../../assets/imgs/add_product.png" /><br />Ajouter un produit</a></div> <!-- caché par défaut -->
+    <div class='bouton_app' id="ajouter_news"><a href="/index.php/pages/ajouter_news"><img src="../../assets/imgs/news.png" /><br />Ajourter une news</a></div> <!-- caché par défaut -->
+    <div class='bouton_app' id="deconnexion"><a href="/index.php/users/logout"><img src="../../assets/imgs/exit.png" /><br />Deconnexion</a></div>
 </div>
 <?php 
 if($this->session->userdata('type') == 2){ ?>
