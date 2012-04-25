@@ -1,4 +1,4 @@
-<div id="vignette_contain">
+
 <a href="<?php echo "/index.php/etablissement/view/$id"; ?>">
 <div id='vignette'>
 	
@@ -16,4 +16,4 @@
 
 </div>
 </a>
-</div>
+

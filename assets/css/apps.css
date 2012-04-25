@@ -26,29 +26,34 @@
 }
 #vignettes {
 	text-align:center;
-	margin:auto;
+	width:58%;
 }
-#vignette_contain {
-	display: inline-block;
 
-}
 #vignette {
 		
+		text-align:left;
+		height:120px;
+		overflow:hidden;
+		
+		
+		color:#333344;
+		
+		width:40%;
+		float:left;
 		background-color: rgba(255,255,255,0.3);
 		-moz-border-radius: 20px;
 		border-radius: 10px;
-		padding: 10px;
-		padding-top:10px;
+		padding: 1%;
 		border-style:solid;
 		border-color: rgb(255,220,150);
 		border-width:1px;
-		width:300px;
-		margin:10px;
+		margin:1%;
 		
-		text-align:left;
-			box-shadow: 0 0 9px #000000;
- 	 	-moz-box-shadow: 0 0 9px #000000;  
-  		-webkit-box-shadow: 0 0 9px #000000; 
+		background: -moz-linear-gradient(to top, rgba(150,1,1,0.1), rgba(255,255,255,0.5));
+		box-shadow: 0 0 9px #555555;
+ 	 	-moz-box-shadow: 0 0 9px #555555;
+  		-webkit-box-shadow: 0 0 9px #555555;
+		float:left; 
 }
 
 #vignette:hover {
@@ -81,9 +86,8 @@
 }
 #info_sandwicherie {
 	
-		min-height:400px;
-		height:80%;
-		margin:20px;
+		min-height:100%;
+		margin-top:10px;
 		background-color: rgba(255,255,255,0.3);
 		-moz-border-radius: 20px;
 		border-radius: 10px;
@@ -94,7 +98,11 @@
 		border-width:1px;
 		text-align:left;
 		float:right;
-		width:40%;
+		width:45%;
+			background: -moz-linear-gradient(to top, rgba(255,255,255,0.1), rgba(255,255,255,0.5));
+		box-shadow: 0 0 9px #555555;
+ 	 	-moz-box-shadow: 0 0 9px #555555; 
+  		-webkit-box-shadow: 0 0 9px #555555;
 }
 
 .news {
@@ -203,9 +211,9 @@ h3,h2 {
 		margin:1%;
 		
 		background: -moz-linear-gradient(to top, rgba(150,1,1,0.1), rgba(255,255,255,0.5));
-		box-shadow: 0 0 9px #000000;
- 	 	-moz-box-shadow: 0 0 9px #000000;  
-  		-webkit-box-shadow: 0 0 9px #000000; 
+		box-shadow: 0 0 9px #555555;
+ 	 	-moz-box-shadow: 0 0 9px #555555;
+  		-webkit-box-shadow: 0 0 9px #555555;
 }
 
 #apps  .bouton_app:hover{
