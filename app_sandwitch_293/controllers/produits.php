@@ -87,6 +87,12 @@ class Produits extends CI_Controller{
 	}
 	public function view($etab_id,$filtre = NULL){
 		if($this->session->userdata('type') > 0){
+		
+			
+			$etablissements = $this->etablissement_model->search(NULL,NULL ,NULL, NULL, NULL);
+		
+			$finalview = $this->load->view('modules/header',array('title' => "iSandwich :: Nos établissements",true);
+		
 			$produits = $this->prduits_model->get_products_from($etab_id);
 			$data['produis'] = $produits;
 			$this->load->view('produits/tableau');

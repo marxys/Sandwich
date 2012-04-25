@@ -9,7 +9,7 @@ class Etablissement extends CI_Controller{
 		$this->load->model('news_model','news');
 		$this->news->init();
 		$this->load->model('etablissement_model','etab');
-		$this->etab->init();
+		$this->etab->init();	
 	}
 	
 	function view($view_id = NULL) {
@@ -17,7 +17,7 @@ class Etablissement extends CI_Controller{
 
 		$etablissements = $this->etab->search(NULL,NULL ,NULL, NULL, NULL);
 		
-		$finalview = $this->load->view('modules/header',array('title' => $this->titre_defaut),true);
+		$finalview = $this->load->view('modules/header',array(	'title' => $this->titre_defaut ),true);
 		
 		$vignette = '';
 		$i=0;
@@ -37,6 +37,7 @@ class Etablissement extends CI_Controller{
 			$i++;
 			
 		}
+		$name_array['id'] = intval($view_id);
 		$finalview .= $this->load->view('produits/header_produit',$name_array, true);
 		if(!empty($view_id)) {
 			$view_id 				= intval($view_id);
