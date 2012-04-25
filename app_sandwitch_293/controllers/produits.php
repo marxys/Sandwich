@@ -85,4 +85,29 @@ class Produits extends CI_Controller{
 			$this->load->view('error',$data); // Erreur forumulaire incomplet
 		}
 	}
+	public function view($etab_id,$filtre = NULL){
+		if($this->session->userdata('type') > 0){
+		
+			
+			$etablissements = $this->etablissement_model->search(NULL,NULL ,NULL, NULL, NULL);
+		
+			$this->load->view('modules/header',array('title' => "iSandwich :: Nos établissements");
+			
+			$this->load->view('produits/header_produit',$etablissement);
+			
+			$view_id 				= intval($etab_id);
+			$selected_etab 			= $this->etablissement_model->get($view_id);
+			$news_etab 				= $this->news->search("etablissement_id = $view_id",NULL, NULL, 'date_creation DESC',NULL);
+			$data['etablissement'] 	= $selected_etab;
+			$data['news'] 			= $news_etab;
+			$data['image'] 			= "../../assets/imgs/$etab.jpg";
+			$this->load->view('produits/info_etablissement',$data);
+			
+			$produits = $this->prduits_model->get_products_from($view_id);
+			$dataProduit['produis'] = $produits;
+			$this->load->view('produits/tableau',$dataProduit);
+		}
+		else
+			redirect('/index.php','location');
+	}
 }

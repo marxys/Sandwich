@@ -1,4 +1,4 @@
-
+<?php echo $id; ?>
 
 <div id="header_produit">
 	<select id="etablissement_name" class="text ui-widget-content ui-corner-all" onChange="location.replace('/index.php/etablissement/view/'+$('#etablissement_name').attr('value'))">

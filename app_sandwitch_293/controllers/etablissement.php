@@ -6,7 +6,6 @@ class Etablissement extends CI_Controller{
 		parent::__construct();
 		$this->titre_defaut = 'iSandwich :: Nos établissements';
 		$this->load->library('input');
-
 		$this->load->model('news_model','news');
 		$this->news->init();
 		$this->load->model('etablissement_model','etab');
