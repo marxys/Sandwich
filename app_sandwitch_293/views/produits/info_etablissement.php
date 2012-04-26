@@ -23,6 +23,7 @@
     </div>
     
     <div id="news">
+    	<h2>News : </h2>
     	<?php 
 		foreach($news as $element){
 			?>

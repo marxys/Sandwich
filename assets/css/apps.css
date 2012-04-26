@@ -238,7 +238,7 @@ h3,h2 {
 #page {
 	position: absolute;
 	top:40px;
-	width:100%;
+	width:98%;
 }
 
 #apps  .bouton_app{
@@ -287,6 +287,9 @@ table {
   		-webkit-box-shadow: 0 0 9px #555555;
 		border-collapse:collapse;
 		text-align:center;
+		width:50%;
+		margin-top:10px;
+		margin-left:15px;
 		
 	
 }
@@ -303,9 +306,10 @@ td {
 	background: rgba(255,255,255,0.5);
 	padding:10px;
 	margin:0px;
+	cursor:pointer;
 	
 }
 tr:hover {
-	background: rgba(180,0,0,0.7);
+	background: rgba(255,200,130,0.7);
 	
 }
