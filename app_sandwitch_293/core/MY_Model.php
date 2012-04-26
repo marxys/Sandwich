@@ -88,10 +88,14 @@ class MY_Model extends CI_Model
 		$query = "INSERT INTO ".$this->table_name."( $title ) VALUES( $mark )";
 		
 		//$this->logs->add_logs($query);
-		if($this->mysql->insert($this->table_name."_insert", $query,$value)) return true;
+		if($return_id = $this->mysql->insert($this->table_name."_insert", $query,$value)) return $return_id;
 		
 		else {
 			log_message('error',"Erreur dans la requête SQL :  impossible d'insérer une entrée<br />");
+			log_message('debug',"query : $query");
+			foreach($value as $title => $val) {
+				log_message('debug',"\t $title = $val");
+			}
 			log_message('error',$this->mysql->error);
 			return false;
 		}

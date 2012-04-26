@@ -206,7 +206,8 @@ h3,h2 {
 }
 #apps_mini {
 	position:absolute;
-	width:100%;
+	width:96%;
+	left:2%;
 	top:0px;
 	text-align:center;
 }
@@ -238,7 +239,8 @@ h3,h2 {
 #page {
 	position: absolute;
 	top:40px;
-	width:98%;
+	left:2%;
+	width:96%;
 }
 
 #apps  .bouton_app{
@@ -311,5 +313,13 @@ h3,h2 {
 }
 #tab_product tr:hover {
 	background: rgba(255,200,130,0.7);
+	
+}
+
+#tab_product input {
+	-moz-border-radius: 5px; 
+	width:50px;
+	height:20px;
+	text-align:center;
 	
 }

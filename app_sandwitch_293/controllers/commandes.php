@@ -5,14 +5,15 @@ class Commandes extends CI_Controller{
 	protected $titre_defaut;
 	function __construct(){
 		parent::__construct();
-		$this->titre_defaut = 'iSandwich :: Nos établissements';
+		$this->titre_defaut = 'iSandwich :: Vos commandes';
 		$this->load->library('input');
 		$this->load->model('commandes_model','cmd');
-		$this->news->init();
+		$this->cmd->init();
 		$this->load->model('etablissement_model','etab');
 		$this->etab->init();	
 		$this->load->model('produits_model','produit');
 		$this->produit->init();	
+		$this->load->library('json');
 	}
 	
 	function insert() {
@@ -24,9 +25,8 @@ class Commandes extends CI_Controller{
 			
 			if(!$this->session->userdata("cmd_$id_etab")){
 				
-				$id_cmd = $this->cmd->insert(array( 	'user_id' 			=> $this->session->userdata('id_user'),
+				$id_cmd = $this->cmd->insert(array( 	'user_id' 			=> $this->session->userdata('user_id'),
 														'etablissement_id' 	=> $id_etab ));
-														
 				$this->session->set_userdata("cmd_$id_etab",intval($id_cmd));
 												
 				if(!$id_cmd) {
@@ -35,6 +35,10 @@ class Commandes extends CI_Controller{
 						$this->json->call('error',array($this->json->getMessage()));
 						echo json_encode($this->json->get());	
 						return false;	
+					
+				}else {
+				
+					$this->json->call('notification',array('Commande',"une liste de commande à été créée"));	
 					
 				}
 			
@@ -45,7 +49,7 @@ class Commandes extends CI_Controller{
 			if($this->cmd->add_product($id_produit,$id_cmd,$qte)) {
 				$this->json->setMessage('Le produit à été ajouté au panier');
 				$selected_product = $this->produit->get($id_produit);
-				$this->json->call('add_product',array($this->cmd->count_product()));
+				$this->json->call('add_product',array($this->cmd->count_product($id_cmd)));
 				$this->json->call('notification',array('produit ajouté',$selected_product['nom']."<br /> Quantité : $qte"));
 				echo json_encode($this->json->get());	
 			}
@@ -57,5 +61,16 @@ class Commandes extends CI_Controller{
 			}
 			
 		}
+	}
+	
+	
+	function view($id_cmd = NULL) {
+		
+		$this->load->view('modules/header',array(	'title' => $this->titre_defaut ),true);
+		$commandes = $this->cmd->search(NULL,NULL,NULL,'date_commande DESC',NULL);
+		
+		
+		
+		
 	}
 }

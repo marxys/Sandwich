@@ -13,7 +13,9 @@ class Commandes_model extends MY_Model{
 		$rep = $this->produits->search("commandes_id = $id_cmd",NULL,NULL,NULL,NULL);
 		if($rep){
 			$nbr = 0;
-			while($value = $rep->fetch()) $nbr = $nbr + $value['quantite'];	
+			foreach($rep as $value) {
+				$nbr = $nbr + $value['quantite'];
+			}
 			return $nbr;			
 		}
 		else {
@@ -24,15 +26,11 @@ class Commandes_model extends MY_Model{
 	
 	function add_product($id_produit,$id_cmd,$qte) {
 		
-		$rep = $this->produits->insert(array(	'produits_id' 	=> intval($id_produit),
+		$this->produits->insert(array(			'produits_id' 	=> intval($id_produit),
 												'commandes_id' 	=> intval($id_cmd),
 												'quantite'		=> intval($qte)	));
-		if($rep) return true;
-		else {
-			log_message('error',$this->mysql->error);
-			return false;
-		}
 		
+		return true;
 	}
 
 	
