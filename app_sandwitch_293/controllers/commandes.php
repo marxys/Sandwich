@@ -19,12 +19,15 @@ class Commandes extends CI_Controller{
 		if($this->session->userdata('type') > 0)	{
 			
 			$id_produit = $this->input->post('id_produit');
-			$id_etab = $this->input->post('id_etab');
+			$id_etab 	= $this->input->post('id_etab');
+			$qte 		= $this->input->post('qte');
 			
 			if(!$this->session->userdata("cmd_$id_etab")){
-				$this->session->set_userdata("cmd_$id_etab",true);
+				
 				$id_cmd = $this->cmd->insert(array( 	'user_id' 			=> $this->session->userdata('id_user'),
 														'etablissement_id' 	=> $id_etab ));
+														
+				$this->session->set_userdata("cmd_$id_etab",intval($id_cmd));
 												
 				if(!$id_cmd) {
 						$this->json->setError(-1);
@@ -37,11 +40,13 @@ class Commandes extends CI_Controller{
 			
 			
 			}
+			else $id_cmd = $this->session->userdata("cmd_$id_etab");
 			
-			if($this->cmd->add_product($id_produit,$id_etab)) {
+			if($this->cmd->add_product($id_produit,$id_cmd,$qte)) {
 				$this->json->setMessage('Le produit à été ajouté au panier');
-				$this->produit->count_cmd($id_cmd);
-				$this->json->call('add_product',array($this->json->getMessage()));
+				$selected_product = $this->produit->get($id_produit);
+				$this->json->call('add_product',array($this->cmd->count_product()));
+				$this->json->call('notification',array('produit ajouté',$selected_product['nom']."<br /> Quantité : $qte"));
 				echo json_encode($this->json->get());	
 			}
 			else {
