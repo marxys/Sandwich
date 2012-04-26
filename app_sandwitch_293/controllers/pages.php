@@ -26,18 +26,22 @@ class Pages extends CI_Controller{
 	}
 	
 	public function view_profil() {
-		$user_id = $this->session->userdata('user_id');
-		$user = $this->users_model->get($user_id);
-		$data['title'] = 'Profile de l\'utilisateur '.$user['prenom'].' '.$user['nom'];
-		$data['user'] = $user;
-		$data['type'] = $this->session->userdata('type');
-		if($data['type'] == 2){
-			$etablissement = $this->etablissement_model->get_by_user_id($user_id);
-			$data['etablissement'] = $etablissement;
+		if($this->session->userdata('type') > 0){
+			$user_id = $this->session->userdata('user_id');
+			$user = $this->users_model->get($user_id);
+			$data['title'] = 'Profile de l\'utilisateur '.$user['prenom'].' '.$user['nom'];
+			$data['user'] = $user;
+			$data['type'] = $this->session->userdata('type');
+			if($data['type'] == 2){
+				$etablissement = $this->etablissement_model->get_by_user_id($user_id);
+				$data['etablissement'] = $etablissement;
+			}
+			$this->load->view('modules/header',$data);
+			$this->load->view('users/profil',$data);
+			$this->load->view('modules/footer');	
 		}
-		$this->load->view('modules/header',$data);
-		$this->load->view('users/profil',$data);
-		$this->load->view('modules/footer');			
+		else
+			redirect('/index.php','location');		
 	}
 	
 	public function ajouter_produit(){
