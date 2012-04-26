@@ -28,6 +28,10 @@
 	text-align:center;
 	width:58%;
 }
+#vignettes_large {
+	text-align:center;
+	width:100%;
+}
 
 #vignette {
 		
@@ -54,6 +58,11 @@
  	 	-moz-box-shadow: 0 0 9px #555555;
   		-webkit-box-shadow: 0 0 9px #555555;
 		float:left; 
+}
+#vignettes_large #vignette {
+	
+	width:20%;
+	
 }
 
 #vignette:hover {
@@ -162,7 +171,6 @@ h3,h2 {
  a:hover {
 	
 	font-size:small;
-	text-decoration: underline;
 	color:#334033;
 	text-shadow:#000;	
 	
@@ -196,6 +204,43 @@ h3,h2 {
 	top:20px;
 	left:10%;
 }
+#apps_mini {
+	position:absolute;
+	width:100%;
+	top:0px;
+	text-align:center;
+}
+#apps_mini img{
+	width:30px;
+	height:30px;
+}
+
+#apps_mini .bouton_app{
+	display:inline-block;
+	height:30px;
+	width:30px;
+	margin:20px;
+	background-color: rgba(255,255,255,0.3);
+		-moz-border-radius: 5px;
+		border-radius: 5px;
+		padding:0px;
+		border-style:solid;
+		border-color: rgb(255,220,150);
+		border-width:1px;
+		text-align:center;
+		margin:0px;
+		
+		background: -moz-linear-gradient(to top, rgba(150,1,1,0.1), rgba(255,255,255,0.5));
+		box-shadow: 0 0 4px #555555;
+ 	 	-moz-box-shadow: 0 0 4px #555555;
+  		-webkit-box-shadow: 0 0 4px #555555;
+}
+#page {
+	position: absolute;
+	top:40px;
+	width:100%;
+}
+
 #apps  .bouton_app{
 	height:150px;
 	width:25%;
@@ -221,10 +266,46 @@ h3,h2 {
 		border-width:1px;
 		background: -moz-linear-gradient(to bottom, rgba(150,1,1,0.1), rgba(255,255,255,0.5));
 }
+#apps_mini  .bouton_app:hover{
+	border-color: rgb(0,0,0);
+		border-width:1px;
+		background: -moz-linear-gradient(to bottom, rgba(150,1,1,0.1), rgba(255,255,255,0.5));
+}
 	
 #apps a {
 	font-size: large;
-	text-transform:capitalize;
+	font-variant:small-caps;
 	text-shadow:#000;
 }
+
+table {
+		-moz-border-radius: 10px 0px 20px 5px;
+		border-radius: 10px;
+		
+		box-shadow: 0 0 9px #555555;
+ 	 	-moz-box-shadow: 0 0 9px #555555;
+  		-webkit-box-shadow: 0 0 9px #555555;
+		border-collapse:collapse;
+		text-align:center;
+		
 	
+}
+th {
+	 color: #4C3000;
+	background: -moz-linear-gradient(to bottom, rgb(255,200,130), rgba(255,255,255,0.5));
+	padding:10px;
+	margin:0px;
+	border:0px;
+	text-align:center;
+
+}
+td {
+	background: rgba(255,255,255,0.5);
+	padding:10px;
+	margin:0px;
+	
+}
+tr:hover {
+	background: rgba(180,0,0,0.7);
+	
+}

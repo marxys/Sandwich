@@ -47,10 +47,11 @@ class Etablissement extends CI_Controller{
 			$data['news'] 			= $news_etab;
 			$data['image'] 			= "../../assets/imgs/$etab.jpg";
 			$finalview .= $this->load->view('produits/info_etablissement',$data,true);
-			
+			$datas['id'] = 'vignettes';
 		}
+		else $datas['id'] = 'vignettes_large';
 		
-		$datas['id'] = 'vignettes';
+		
 		$datas['contends'] = $vignette;
 		$name_array['id'] = intval($view_id);
 		

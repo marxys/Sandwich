@@ -4,7 +4,7 @@
         <th>Nom</th>
         <th>Description</th>
         <th>Prix</th>
-        <th>Ajouter</th>
+        <th></th>
         
         <?php
 		foreach($produits as $element){
@@ -14,7 +14,7 @@
 			<td><?php echo $element['nom'];?></td>
             <td><?php echo $element['description']; ?></td>
             <td><?php echo $element['prix']; ?> </td>
-            <td></td>
+       
             <td><img src="<?php echo base_url()?>assets/imgs/panier.png"></img></td> <!-- requete d'ajout en ajax -->
             </tr>	
 		<?php } ?>
