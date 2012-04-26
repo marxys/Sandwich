@@ -98,10 +98,11 @@ $("#apps").css('visibility','hidden').fadeOut('fast');}); </script>
     <div class='bouton_app' id="deconnexion"><a href="/index.php/users/logout"><img src="../../assets/imgs/exit.png" /><br />Déconnexion</a></div>
 </div>
 <?php 
-if($this->session->userdata('type') == 2){ ?>
+if($this->session->userdata('type') == 1){ ?>
 <script>$(document).ready(function(){
-	$("#ajout_produit").css('visibility','visible');
-	$("#ajouter_news").css('visibility','visible');
-	
+	$("#ajout_produit").css('display','none');
+	$("#ajouter_news").css('display','none');
+	$("#mini_product").css("display","none");
+	$("#mini_news").css("display","none");
 });</script>
 <?php }?>
