@@ -88,10 +88,14 @@ class MY_Model extends CI_Model
 		$query = "INSERT INTO ".$this->table_name."( $title ) VALUES( $mark )";
 		
 		//$this->logs->add_logs($query);
-		if($this->mysql->insert($this->table_name."_insert", $query,$value)) return true;
+		if($return_id = $this->mysql->insert($this->table_name."_insert", $query,$value)) return $return_id;
 		
 		else {
 			log_message('error',"Erreur dans la requête SQL :  impossible d'insérer une entrée<br />");
+			log_message('debug',"query : $query");
+			foreach($value as $title => $val) {
+				log_message('debug',"\t $title = $val");
+			}
 			log_message('error',$this->mysql->error);
 			return false;
 		}
@@ -151,9 +155,13 @@ class MY_Model extends CI_Model
 	/**
 	 *	Retourne le nombre de résultats.
 	 */
-	public function count()
+	public function count($args = NULL)
 	{
-		return $this->mysql->query("SELECT COUNT(*) FROM ".$this->table_name)->fetchColumn();	
+		if($args) 	$where = " WHERE $args ";
+		else 		$where = '';
+		$rep = $this->mysql->query("SELECT COUNT(*) FROM ".$this->table_name." $where");
+		$nbr = $rep->fetch();
+		return $nbr[0];
 	}
 	
 	function search($keylocks,$columns, $keywords,$sort, $limit) {	

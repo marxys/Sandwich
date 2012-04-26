@@ -12,7 +12,7 @@
                  echo '<em>'.$etablissement['adresse'].'</em><br />';
           		}
 				if(isset($etablissement['horaire'])){
-					echo '<h4>Horaire : </h4> '.nl2br($etablissement['horaire'].'<br/><br/>');
+					echo '<h3>Horaire : </h3> '.nl2br($etablissement['horaire'].'<br/><br/>');
 				}
 				$etab_id = $etablissement['id'];
 				echo "<a href='/index.php/produits/view/$etab_id'> Voir les produits proposés </a><br /></p>";
@@ -23,7 +23,7 @@
     </div>
     
     <div id="news">
-    	<h2>News : </h2>
+    	<h3>News : </h3>
     	<?php 
 		foreach($news as $element){
 			?>
