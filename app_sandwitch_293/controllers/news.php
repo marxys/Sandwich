@@ -31,15 +31,19 @@ class News extends CI_Controller{
  						redirect('/index.php/pages/ajouter_news', 'location');	
 					}			
 					else{
-						// Recharger la page en indiquant qu'il y eut une erreur lors de l'ajout.
+						$data['message'] = $this->mysql->error;
+						$this->load->view('error',$data);
 					}
 				}
 			else{
 					// Renvoyer qu'il manque les droits.
+				$data['message'] = "Vous n'avez pas les droits pour cette action";
+				$this->load->view('error',$data);
 			}
 		}
 		else{
-			// Renvoyer qu'il manque des éléments. => Recharger la page avec message d'erreur ?? 
+			$data['message'] = "Veuillez rempir tous les formulaires";
+			$this->load->view('error',$data);
 		}
 	}
 	public function del($id_news){
