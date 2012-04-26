@@ -18,12 +18,6 @@
 	text-decoration:none;
 }
 
-#ajout_produit{
-	visibility:hidden;
-}
-#ajouter_news{
-	visibility:hidden;
-}
 #vignettes {
 	text-align:center;
 	width:58%;

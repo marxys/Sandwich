@@ -16,12 +16,12 @@
         <textarea id='description' name="description" class="text ui-widget-content ui-corner-all" rows="25" cols="80"></textarea><br/>
         <input type="submit" />
     </form>
-    <a href="/index.php">Retour à l'acceuil</a>
+    <a id="retour" href="/index.php">Retour à l'acceuil</a>
 </div>
 
 <script>
 	$(document).ready(function(){
 		$(":submit").button();
-		$('a').button();
+		$('#retour').button();
 	});
 </script>

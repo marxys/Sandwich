@@ -151,7 +151,9 @@ class Users extends CI_Controller {
 	public function logout() {
 		//$this->session->sess_destroy();
 		// + redirigé acceuil;
-		$this->session->set_userdata('type',0);
+		$this->session->sess_destroy();
+		$this->session->userdata = array();
+		$this->session->set_userdata(array(  'user_id' => 0, 'type'=>0));
 		$data['title'] = "iSandwich";
 		$this->load->view('modules/header',$data); 
 		$this->load->view('acceuil');

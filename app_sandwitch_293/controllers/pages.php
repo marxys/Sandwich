@@ -13,7 +13,7 @@ class Pages extends CI_Controller{
 	}
 	// Chargé par défaut.
 	public function index(){
-		if(sizeof($this->session->all_userdata()) != 7)
+		if(sizeof($this->session->all_userdata()) < 6)
 			$this->session->set_userdata(array(  'user_id' => 0, 'type'=>0));
 		$data['title'] = 'iSandwich';
 		$this->load->view('modules/header',$data); 

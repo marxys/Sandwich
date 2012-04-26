@@ -17,12 +17,12 @@
 <body>
 
 <div id="apps_mini">
-	<div class='bouton_app'><a href="/"><img src="../../../assets/imgs/home.png" /></a></div>
+	<div class='bouton_app'><a href="/index.php"><img src="../../../assets/imgs/home.png" /></a></div>
     <div class='bouton_app'><a href="/index.php/pages/view_profil"><img src="../../../assets/imgs/profile.png" /></a></div>
     <div class='bouton_app'><a href="/index.php/etablissement/view"><img src="../../../assets/imgs/etab.png" /></a></div>
     <div class='bouton_app'><a href="" ><img src="../../../assets/imgs/cmd.png" /></a></div> <!-- peut etre pas necessaire -->
-    <div class='bouton_app'><a href="/index.php/pages/ajouter_produit"><img src="../../../assets/imgs/add_product.png" /></a></div> <!-- caché par défaut -->
-    <div class='bouton_app'><a href="/index.php/pages/ajouter_news"><img src="../../../assets/imgs/news.png" /></a></div> <!-- caché par défaut -->
+    <div id="mini_product" class='bouton_app'><a href="/index.php/pages/ajouter_produit"><img src="../../../assets/imgs/add_product.png" /></a></div> <!-- caché par défaut -->
+    <div id="mini_news" class='bouton_app'><a href="/index.php/pages/ajouter_news"><img src="../../../assets/imgs/news.png" /></a></div> <!-- caché par défaut -->
     <div class='bouton_app'><a href="/index.php/users/logout"><img src="../../../assets/imgs/exit.png" /></a></div>
 </div>
 <div id="page">

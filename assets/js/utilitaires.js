@@ -144,12 +144,13 @@ function notification(titre,message,duration){
 // TOUT CE QUI CONCERNE LES REQUETES AJAX //
 
 function login_success(type_user){
-	$("#conteneur_form").fadeOut(3000);
-	$("#apps").css("visibility","visible").fadeIn(3000);
-	if(type_user == 2){
-		// faire apparaitre les apps pour la sandwicherie
-		$("#ajout_produit").css("visibility","visible");
-		$("#ajouter_news").css("visibility","visible");
+	$("#conteneur_form").fadeOut(2000);
+	$("#apps").css("visibility","visible").fadeIn(2000);
+	if(type_user == 1){
+		$("#mini_product").css("display","none");
+		$("#mini_news").css("display","none");
+		$("#ajout_produit").css("display","none");
+		$("#ajouter_news").css("display","none");
 	}
 	notification('Connexion','Bienvenue !');
 	setTimeout(function(){
@@ -169,6 +170,12 @@ function inscription(error,message){
 		$('#prenom').val(''); $('#nom').val(''); $('#login_record').val(''); $('#password_record').val(''); $('#email').val('');
 	}
 
+}
+function add_product(count){
+	
+}
+function error(message){
+	notification('Erreur',message);
 }
 function ajax_request(param,url){
 	$.ajax({
