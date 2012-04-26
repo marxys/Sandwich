@@ -278,7 +278,7 @@ h3,h2 {
 	text-shadow:#000;
 }
 
-table {
+#tab_product table {
 		-moz-border-radius: 10px 0px 20px 5px;
 		border-radius: 10px;
 		
@@ -293,7 +293,7 @@ table {
 		
 	
 }
-th {
+#tab_product th {
 	 color: #4C3000;
 	background: -moz-linear-gradient(to bottom, rgb(255,200,130), rgba(255,255,255,0.5));
 	padding:10px;
@@ -302,14 +302,14 @@ th {
 	text-align:center;
 
 }
-td {
+#tab_product td {
 	background: rgba(255,255,255,0.5);
 	padding:10px;
 	margin:0px;
 	cursor:pointer;
 	
 }
-tr:hover {
+#tab_product tr:hover {
 	background: rgba(255,200,130,0.7);
 	
 }

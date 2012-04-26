@@ -151,9 +151,13 @@ class MY_Model extends CI_Model
 	/**
 	 *	Retourne le nombre de résultats.
 	 */
-	public function count()
+	public function count($args = NULL)
 	{
-		return $this->mysql->query("SELECT COUNT(*) FROM ".$this->table_name)->fetchColumn();	
+		if($args) 	$where = " WHERE $args ";
+		else 		$where = '';
+		$rep = $this->mysql->query("SELECT COUNT(*) FROM ".$this->table_name." $where");
+		$nbr = $rep->fetch();
+		return $nbr[0];
 	}
 	
 	function search($keylocks,$columns, $keywords,$sort, $limit) {	

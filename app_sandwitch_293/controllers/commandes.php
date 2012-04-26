@@ -11,6 +11,8 @@ class Commandes extends CI_Controller{
 		$this->news->init();
 		$this->load->model('etablissement_model','etab');
 		$this->etab->init();	
+		$this->load->model('produits_model','produit');
+		$this->produit->init();	
 	}
 	
 	function insert() {
@@ -21,11 +23,33 @@ class Commandes extends CI_Controller{
 			
 			if(!$this->session->userdata("cmd_$id_etab")){
 				$this->session->set_userdata("cmd_$id_etab",true);
-				$this->cmd->insert(array( 	'user_id' 			=> $this->session->userdata('id_user'),
-											'etablissement_id' 	=> $id_etab ));
+				$id_cmd = $this->cmd->insert(array( 	'user_id' 			=> $this->session->userdata('id_user'),
+														'etablissement_id' 	=> $id_etab ));
+												
+				if(!$id_cmd) {
+						$this->json->setError(-1);
+						$this->json->setMessage('Impossible de créer une commande');
+						$this->json->call('error',array($this->json->getMessage()));
+						echo json_encode($this->json->get());	
+						return false;	
+					
+				}
 			
-			$this->
 			
+			}
+			
+			if($this->cmd->add_product($id_produit,$id_etab)) {
+				$this->json->setMessage('Le produit à été ajouté au panier');
+				$this->produit->count_cmd($id_cmd);
+				$this->json->call('add_product',array($this->json->getMessage()));
+				echo json_encode($this->json->get());	
+			}
+			else {
+				$this->json->setError(-1);
+				$this->json->setMessage('Impossible d\'ajouter un produit à la commande');
+				$this->json->call('error',array($this->json->getMessage()));
+				echo json_encode($this->json->get());		
+			}
 			
 		}
 	}
