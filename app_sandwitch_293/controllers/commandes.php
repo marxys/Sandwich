@@ -68,7 +68,11 @@ class Commandes extends CI_Controller{
 		
 		$this->load->view('modules/header',array(	'title' => $this->titre_defaut ),true);
 		$commandes['list'] = $this->cmd->get_cmd_list($this->session->userdata('user_id'));
-		$this->load->view('commandes/cmd_list',array($commandes));
+		if(!$commandes['list']) echo 'erreur';
+		echo '<pre>';
+		print_r($commandes['list']);
+		echo '</pre>';
+		$this->load->view('commandes/cmd_list',$commandes);
 		$this->load->view('modules/footer'); 
 		
 		

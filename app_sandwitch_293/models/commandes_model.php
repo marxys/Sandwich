@@ -49,7 +49,7 @@ class Commandes_model extends MY_Model{
 					GROUP BY commandes_id
 					WHERE cmd.user_id= ? ";	
 					
-		$retour = $this->mysql->qexec('get_cmd_list',$query,intval($user_id));
+		$retour = $this->mysql->qexec('get_cmd_list',$query,array(intval($user_id)));
 		if($retour) return $retour->fetchAll();
 		else {
 			log_message('error',$this->mysql->error);

@@ -8,7 +8,7 @@
         <th></th>
         
         <?php
-		foreach($produits as $element){
+		foreach($list as $element){
 			?>
             <tr>
 			<td><?php echo $element['etablissement'];?></td>
