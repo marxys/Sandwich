@@ -13,4 +13,15 @@ class Produits_model extends MY_Model{
 		
 		return $result;
 	}
+	
+	public function isOwner($id_product){
+		$user_id = $this->session->userdata('user_id');
+		$query = "SELECT *,COUNT(*) AS 'is_present' FROM ".$this->table_name.",etablissement WHERE id = ? AND etablissement_id IN (SELECT id FROM etablissement WHERE user_id = $user_id)";
+		$result = $this->mysql->qexec($this->table_name.'_isOwner',$query,array($id_product));
+		$result = $result->fetch();
+		if(intval($result['is_present']) > 0){
+			return true
+		}
+		return false;  
+	}
 }
