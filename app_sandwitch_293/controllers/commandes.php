@@ -67,7 +67,10 @@ class Commandes extends CI_Controller{
 	function view($id_cmd = NULL) {
 		
 		$this->load->view('modules/header',array(	'title' => $this->titre_defaut ),true);
-		$commandes = $this->cmd->search(NULL,NULL,NULL,'date_commande DESC',NULL);
+		$commandes['list'] = $this->cmd->get_cmd_list($this->session->userdata('user_id'));
+		$this->load->view('commandes/cmd_list',array($commandes));
+		$this->load->view('modules/footer'); 
+		
 		
 		
 		
