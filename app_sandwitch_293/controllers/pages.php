@@ -78,10 +78,17 @@ class Pages extends CI_Controller{
 	public function voir_produit($id,$link){
 		if($this->session->userdata('type') > 0){
 			$this->load->model('produits_model');
+			$this->load->model('commentaires');
+			$this->load->model('promo');
+			$this->promo->init();
+			$this->commentaires->init();
 			$this->produits_model->init();
 			$produit = $this->produits_model->get($id);
+			$data['commentaires'] = $this->commentaires->get_by_id_product($id);
+			$data['promos'] = $this->promo->get_by_id_product($id);
 			$data['produit'] = $produit;
 			$data['type'] = $this->session->userdata('type');
+			$data['access'] = $this->produit_model->isOwner($id); // Vérifie que l'utilisateur connecté est le propriétaire du produit
 			$dataHeader['title'] = "Fiche du produit ".$produit['nom'];
 			$this->load->view('modules/header',$dataHeader);
 			$this->load->view('produit/fiche',$data);
