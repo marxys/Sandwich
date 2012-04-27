@@ -9,7 +9,8 @@
 ::webkit-selection{ background-color: #E13300; color: white; }
 
 body {
-	background-color: #fff;
+	background: -moz-linear-gradient(top left, rgb(253,251,241), rgb(247,236,159));
+	background-attachment: fixed;
 	margin: 40px;
 	font: 13px/20px normal Helvetica, Arial, sans-serif;
 	color: #4F5155;
