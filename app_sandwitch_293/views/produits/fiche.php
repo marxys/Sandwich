@@ -1,4 +1,4 @@
-<a id="retour" href="/index.php/produits/view/<?php echo $link ?>">Retour</a>
+<a id="retour_com" href="/index.php/produits/view/<?php echo $link ?>">Retour</a>
 <div id="commentaires"> <!-- Div placé sur la moitié de page gauche-->
 	<div id="inputCommentaire">
     	<form method="post" action="/index.php/produits/ajouter_commentaire">
@@ -31,31 +31,37 @@
 	<div id="promo">
     		<?php if(!empty($promos)){?>
     		<form method="post" action="">
+            <p>Les promos actuel sur le produit :</p>
 			<?php foreach($promos as $element){ 
 						switch($element['type']){
-							case 0 :?><label>Promo -50 % </label><input type="checkbox" name="del_0"/></form>  <?php break;
+							case 0 :?><label>Promo -50 % </label><input type="checkbox" name="del_0"/><br/></form>  <?php break;
 						}
             		?>
 			<?php }?>
             <input type="submit" value="Supprimer" />
              </form>
              <?php }?> <!-- End empty(promos) -->
+            
              <form method="post" action="">
-             	<label> Ajouter une promo : </label>
-                <select name="type">
-                	<option selected>-50%</option>
-                </select>
+              <p>Ajoutez un promo sur le produit <strong><?php echo $produit['nom'];?></strong>. Indiquez un chiffre de 1 à 99 référant le pourcentage de réduction sur son prix.</p>
+                <input type="text" name="id_product" style="display:none" value="<?php echo $produit['id']; ?>" />
+                <label>Pourcentage : </label>
+              	<input type="text" name="promo" class="text ui-widget-content ui-corner-all" /><br/>
+                <label>Début de promo :</label>
+                <input id="date_debut" type="text" name="date_debut" class="text ui-widget-content ui-corner-all" /><br/>
+                <label>Fin de promo : </label>
+                <input id="date_fin" type="text" name="date_fin" class="text ui-widget-content ui-corner-all" /><br/><br />
                 <input id="ajout_promo" type = "submit" name="ajout_promo" value="Envoyer"/>
              </form>		
 	</div>
     <div id="disponnibilite">
     	<form method="post" action="">
         	<?php if($produit['disponnibilite']){ ?>
-            <label> Le produit est actuellement disponnible.</label>
+            <label> Produit disponnible.</label> <br/>
             <input type="submit" value="Marquer comme indisponnible" /></form>
             <?php }
 			else{ ?>
-            <label> Le produit est actuellement indisponnible.</label>
+            <label> Le produit est actuellement indisponnible.</label> <br />
             <input type="submit" value="Marquer comme disponnible" />
             <?php }?>
         </form>
@@ -64,8 +70,10 @@
 </div>
 <script>
 $(document).ready(function(){
-	$("#retour").button();
+	$("#retour_com").button();
 	$(":submit").button();
+	$("#date_fin").datepicker();
+	$("#date_debut").datepicker();
 });
 </script>
 

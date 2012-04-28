@@ -9,6 +9,8 @@ class Produits extends CI_Controller{
 		$this->load->model('categorie_model');
 		$this->load->model('etablissement_model');
 		$this->load->model('news_model','news');
+		$this->load->model('promo');
+		$this->promo->init();
 		$this->produits_model->init();
 		$this->commentaires->init();
 		$this->categorie_model->init();
@@ -112,5 +114,35 @@ class Produits extends CI_Controller{
 		}
 		else
 			redirect('/index.php','location');
+	}
+	public function ajouter_promo(){
+		$promo = $this->input->post('promo');
+		$id_product = $this->input->post('id_product');
+		$date_debut = $thus->input->post('date_debut');
+		$date_fin = $this->input->post('date_fin');
+		if($type && $id_product && $date_fin)
+			if($this->produits_model->isOwner($id_product){
+				switch(type){
+					case '-50%' : $type = 0;
+				}
+				if($this->promo->insert( array('promo'=>$promo,
+											   'debut'=>$date_debut,
+											   'fin' =>$date_fin,
+											   'produit_id' => $id_product)))
+					redirect('/index.php/pages/voir_produit/'.$id_product,'location');
+				else{
+					$data['message'] = $this->mysql->error;
+					$this->load->view('error',$data);
+				}
+			}
+			else{
+				$data['message'] = "Vous n'avez pas les droits pour cette action";
+				$this->load->view('error',$data);		
+			}
+		}
+		else{
+			$data['message'] = "Veuillez remplir tous les formulaires";
+			$this->load->view('error',$data);			
+		}	
 	}
 }
