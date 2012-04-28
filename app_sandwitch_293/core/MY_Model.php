@@ -146,7 +146,7 @@ class MY_Model extends CI_Model
 	/**
 	 *	Supprime une ou plusieurs lignes de la base de données.
 	 */
-	public function delete()
+	public function delete($id)
 	{
 		$query = "DELETE FROM ".$this->table_name." WHERE id = ?";
 		return $this->mysql->qexec($this->table_name.'_del',$query,array(intval($id)));
