@@ -1,8 +1,7 @@
-<div id="cmd_list">
+<div id="tab_cmd">
 	<table>
     	<th>Etablissement</th>
         <th>Date de commande</th>
-        <th>Date de livraison</th>
         <th>Nombre d'articles</th>
         <th>Prix</th>
         <th></th>
@@ -14,10 +13,16 @@
 			<td><?php echo $element['etablissement'];?></td>
 			<td><?php echo $element['date'];?></td>
             <td><?php echo $element['quantite']; ?></td>
-            <td><?php echo $element['prix']; ?> </td>
+            <td><?php echo $element['prix']; ?> € </td>
             
-       
-            <td></td> <!-- requete d'ajout en ajax -->
+            <?php 
+			
+				if(empty($element['date_livraison'])) 	echo '<td><a href="">Commander</a></td>';
+				else 									echo '<td>Livré le '.$element['date_livraison'].'</td>';	
+			
+			?>
+           
+           
             </tr>	
 		<?php } ?>
     </table>

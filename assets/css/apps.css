@@ -274,7 +274,7 @@ h3,h2 {
 	text-shadow:#000;
 }
 
-#tab_product table {
+#tab_cmd table,#tab_product table {
 		-moz-border-radius: 10px 0px 20px 5px;
 		border-radius: 10px;
 		
@@ -289,7 +289,7 @@ h3,h2 {
 		
 	
 }
-#tab_product th {
+#tab_cmd th,#tab_product th {
 	 color: #4C3000;
 	background: -moz-linear-gradient(to bottom, rgb(255,200,130), rgba(255,255,255,0.5));
 	padding:10px;
@@ -298,14 +298,14 @@ h3,h2 {
 	text-align:center;
 
 }
-#tab_product td {
+#tab_cmd td, #tab_product td {
 	background: rgba(255,255,255,0.5);
 	padding:10px;
 	margin:0px;
 	cursor:pointer;
 	
 }
-#tab_product tr:hover {
+#tab_cmd tr:hover,#tab_product tr:hover {
 	background: rgba(255,200,130,0.7);
 	
 }

@@ -66,18 +66,19 @@ class Commandes extends CI_Controller{
 	
 	function view($id_cmd = NULL) {
 		
-		$this->load->view('modules/header',array(	'title' => $this->titre_defaut ),true);
-		$commandes['list'] = $this->cmd->get_cmd_list($this->session->userdata('user_id'));
-		if(!$commandes['list']) echo 'erreur';
-		echo '<pre>';
-		print_r($commandes['list']);
-		echo '</pre>';
-		$this->load->view('commandes/cmd_list',$commandes);
-		$this->load->view('modules/footer'); 
+		$this->load->view('modules/header',array(	'title' => $this->titre_defaut ));
+		
+		if(!empty($id_cmd)) {
+			$commandes['list'] = $this->cmd->get_cmd(intval($id_cmd));
+			$this->load->view('commandes/cmd_view',$commandes);
+		}
+		else {
+			$commandes['list'] = $this->cmd->get_cmd_list($this->session->userdata('user_id'));
+			$this->load->view('commandes/cmd_list',$commandes);
+		}
 		
 		
-		
-		
+		$this->load->view('modules/footer'); 	
 		
 	}
 }

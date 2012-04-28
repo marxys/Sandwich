@@ -35,19 +35,21 @@ class Commandes_model extends MY_Model{
 	
 	function get_cmd_list($user_id) {
 		
-		$query = "	SELECT 
+		$query = '	SELECT 
 							etab.nom AS etablissement, 
 							date_commande AS date, 
 							SUM(quantite) AS quantite, 
-							SUM(quantite*prix) AS prix 
+							SUM(quantite*prix) AS prix,
+							date_livraison
 					FROM commandes cmd 
 						
 						LEFT JOIN produits_has_commandes phc 	ON cmd.id = phc.commandes_id 
 						LEFT JOIN produits 						ON produits.id = phc.produits_id 
 						LEFT JOIN etablissement etab 			ON cmd.etablissement_id = etab.id  
 					
+					WHERE cmd.user_id = ? 
 					GROUP BY commandes_id
-					WHERE cmd.user_id= ? ";	
+					';	
 					
 		$retour = $this->mysql->qexec('get_cmd_list',$query,array(intval($user_id)));
 		if($retour) return $retour->fetchAll();
@@ -55,6 +57,30 @@ class Commandes_model extends MY_Model{
 			log_message('error',$this->mysql->error);
 			return false;
 		}
+	}
+	
+	function get_cmd($cmd_id) {
+		$query = ' SELECT 
+						etab.nom AS etablissement_nom
+						date_commande
+						date_livraison
+						adresse_livraison
+						prix
+						quantite
+						prix*quantite AS prix_total
+					FROM commandes cmd 
+						LEFT JOIN produits_has_commandes phc 	ON cmd.id = phc.commandes_id
+						LEFT JOIN produits 						ON produits.id = phc.produits_id 
+						LEFT JOIN etablissement etab 			ON cmd.etablissement_id = etab.id  
+					WHERE cmd.id = ? ';
+					
+		$retour = $this->mysql->qexec('get_cmd',$query,array(intval($cmd_id)));
+		if($retour) return $retour->fetchAll();
+		else {
+			log_message('error',$this->mysql->error);
+			return false;
+		}
+		
 	}
 	
 	
