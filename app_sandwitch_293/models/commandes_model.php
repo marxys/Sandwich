@@ -36,6 +36,7 @@ class Commandes_model extends MY_Model{
 	function get_cmd_list($user_id) {
 		
 		$query = '	SELECT 
+							cmd.id,
 							etab.nom AS etablissement, 
 							date_commande AS date, 
 							SUM(quantite) AS quantite, 
@@ -60,22 +61,33 @@ class Commandes_model extends MY_Model{
 	}
 	
 	function get_cmd($cmd_id) {
-		$query = ' SELECT 
-						etab.nom AS etablissement_nom
-						date_commande
-						date_livraison
+		$query_cmd ='SELECT 
+						etab.nom AS etablissement_nom,
+						date_commande,
+						date_livraison,
 						adresse_livraison
-						prix
-						quantite
-						prix*quantite AS prix_total
 					FROM commandes cmd 
 						LEFT JOIN produits_has_commandes phc 	ON cmd.id = phc.commandes_id
-						LEFT JOIN produits 						ON produits.id = phc.produits_id 
 						LEFT JOIN etablissement etab 			ON cmd.etablissement_id = etab.id  
 					WHERE cmd.id = ? ';
 					
-		$retour = $this->mysql->qexec('get_cmd',$query,array(intval($cmd_id)));
-		if($retour) return $retour->fetchAll();
+		$product_query = ' 	SELECT  
+								nom,
+								description,
+								prix,
+								quantite,
+								(prix*quantite) AS prix_total
+							FROM produits p
+								LEFT JOIN produits_has_commandes phc 	ON p.id = phc.produits_id
+							WHERE phc.commandes_id = ? ';
+					
+		$retour_cmd = $this->mysql->qexec('get_cmd',$query_cmd,array(intval($cmd_id)));
+		$product_retour = $this->mysql->qexec('get_cmd_produits',$product_query,array(intval($cmd_id)));
+		if($retour_cmd && $product_retour) {
+			$retour =  $retour_cmd->fetchAll();
+			$retour[0]['produits'] = $product_retour->fetchAll();
+			return $retour[0];
+		}
 		else {
 			log_message('error',$this->mysql->error);
 			return false;

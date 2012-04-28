@@ -42,21 +42,25 @@
                 <th>Quantité</th>
                 <th>Prix total</th>
              </tr>
-             <tr>
+            
 	<?php 
+		$prix_total = 0;
 		foreach( $produits as $produit ) {
-			
+			echo '<tr>';
 			echo '<td>photo her</td>';
 			echo '<td>'.$produit['nom'].'</td>';
 			echo '<td>'.$produit['description'].'</td>';
-			echo '<td>'.$produit['prix'].'</td>';
+			echo '<td>'.$produit['prix'].' €</td>';
 			echo '<td>'.$produit['quantite'].'</td>';
-			echo '<td>'.$produit['prix_total'].'</td>';
-			
+			echo '<td>'.$produit['prix_total'].' €</td>';
+			echo '</tr>';
+			$prix_total += $produit['prix_total'];
 		}
-		
+		echo "<tr>
+					<td colspan='5'><strong>Total : </strong></td>
+					<td>$prix_total €</td>
+				</tr>";
 		?>
-        	</tr>
      	</table>
  	</div>
 </div>

@@ -69,7 +69,7 @@ class Commandes extends CI_Controller{
 		$this->load->view('modules/header',array(	'title' => $this->titre_defaut ));
 		
 		if(!empty($id_cmd)) {
-			$commandes['list'] = $this->cmd->get_cmd(intval($id_cmd));
+			$commandes = $this->cmd->get_cmd(intval($id_cmd));
 			$this->load->view('commandes/cmd_view',$commandes);
 		}
 		else {

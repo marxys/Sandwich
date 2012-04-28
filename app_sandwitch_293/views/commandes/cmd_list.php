@@ -17,7 +17,7 @@
             
             <?php 
 			
-				if(empty($element['date_livraison'])) 	echo '<td><a href="">Commander</a></td>';
+				if(empty($element['date_livraison'])) 	echo '<td><a href="/index.php/commandes/view/'.$element['id'].'">Commander</a></td>';
 				else 									echo '<td>Livré le '.$element['date_livraison'].'</td>';	
 			
 			?>
