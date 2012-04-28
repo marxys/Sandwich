@@ -30,19 +30,21 @@
     <p> Ce qui figure ci-dessous n'est visible qu'au propriétaire du produit.</p>
 	<div id="promo">
     		<?php if(!empty($promos)){?>
-    		<form method="post" action="">
-            <p>Les promos actuel sur le produit :</p>
-			<?php foreach($promos as $element){ 
-						switch($element['type']){
-							case 0 :?><label>Promo -50 % </label><input type="checkbox" name="del_0"/><br/></form>  <?php break;
-						}
-            		?>
-			<?php }?>
-            <input type="submit" value="Supprimer" />
+    		<form method="post" action="/index.php/produits/del_promo">
+                <p>Les promos actuel sur le produit :</p>
+                <input type="text" style="display:none" name="id_product" value="<?php echo $produit['id'];?>"/>
+                <?php
+                $i = 0; 
+                foreach($promos as $element){ 
+                            
+                        ?><tr><td> -<?php echo $element['promo'];?> % </td><td>Date début : <?php echo $element['debut'].' ';?></td><td> Date fin : <?php echo $element['fin'];?></td><td><input type="checkbox" name="del_<?php echo $i; ?>"/><input type="text" name="del_<?php echo $i; ?>_id" style="display:none" value="<?php echo $element['id'];?>" /></td> <br/>  
+                <?php $i++;}?>
+                <input type="text" style="display:none" name="nbr_promo" value="<?php echo $i;?>"/>
+                <input type="submit" value="Supprimer" />
              </form>
              <?php }?> <!-- End empty(promos) -->
             
-             <form method="post" action="">
+             <form method="post" action="/index.php/produits/ajouter_promo">
               <p>Ajoutez un promo sur le produit <strong><?php echo $produit['nom'];?></strong>. Indiquez un chiffre de 1 à 99 référant le pourcentage de réduction sur son prix.</p>
                 <input type="text" name="id_product" style="display:none" value="<?php echo $produit['id']; ?>" />
                 <label>Pourcentage : </label>
@@ -72,8 +74,8 @@
 $(document).ready(function(){
 	$("#retour_com").button();
 	$(":submit").button();
-	$("#date_fin").datepicker();
-	$("#date_debut").datepicker();
+	$("#date_fin").datepicker({ dateFormat: "dd-mm-yy" });
+	$("#date_debut").datepicker({ dateFormat: "dd-mm-yy" });
 });
 </script>
 

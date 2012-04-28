@@ -118,17 +118,14 @@ class Produits extends CI_Controller{
 	public function ajouter_promo(){
 		$promo = $this->input->post('promo');
 		$id_product = $this->input->post('id_product');
-		$date_debut = $thus->input->post('date_debut');
+		$date_debut = $this->input->post('date_debut');
 		$date_fin = $this->input->post('date_fin');
-		if($type && $id_product && $date_fin)
-			if($this->produits_model->isOwner($id_product){
-				switch(type){
-					case '-50%' : $type = 0;
-				}
+		if($promo && $id_product && $date_fin){
+			if($this->produits_model->isOwner($id_product)){
 				if($this->promo->insert( array('promo'=>$promo,
 											   'debut'=>$date_debut,
 											   'fin' =>$date_fin,
-											   'produit_id' => $id_product)))
+											   'produits_id' => $id_product)))
 					redirect('/index.php/pages/voir_produit/'.$id_product,'location');
 				else{
 					$data['message'] = $this->mysql->error;
@@ -144,5 +141,21 @@ class Produits extends CI_Controller{
 			$data['message'] = "Veuillez remplir tous les formulaires";
 			$this->load->view('error',$data);			
 		}	
+	}
+	public function del_promo(){
+		if($this->produits_model->isOwner($this->input->post('id_product'))){
+			$nbr_promo = $this->input->post('nbr_promo');
+			for($i = 0; $i<$nbr_promo;$i++){
+				$del = $this->input->post('del_'.$i);
+				$del_id = $this->input->post('del_'.$i.'_id');
+				if($del){
+					$this->promo->delete($del_id);
+				}
+			}
+		}
+		else{
+			$data['message'] = "Vous n'avez pas les droits pour cette action";
+			$this->load->view('error',$data);
+		}
 	}
 }
