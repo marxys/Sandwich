@@ -13,7 +13,7 @@
 			?>
             <tr>
 			<td></td>
-			<td><?php echo $element['nom'];?></td>
+			<td onclick="location.replace('/index.php/pages/voir_produit/<?php echo $element['id']?>')"><?php echo $element['nom'];?></td>
             <td><?php echo $element['description']; ?></td>
             <td><?php echo $element['prix']; ?> </td>
        		<td><input id="<?php echo $element['id'].'_panier_form'?>" type="text" size="2" value="1"/></td>	

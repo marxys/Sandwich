@@ -56,36 +56,28 @@ class Produits extends CI_Controller{
 		}
 	}
 	
-	public function voir_commentaires($id_product){
-	
-		$id_product = intval($id_product);
-		$produit = $this->produits_model->get($id_product);
-		$com_array = $this->commentaires->get_commentaires($id_product);
-		$data['title'] = 'Commentaires du produit '.$produit['nom'];
-		$data['id_produit'] = $id_product;
-		$data['commentaires'] = $com_array;
-		$data['description_produit'] = $produit['description'];
-		
-		$this->load->view('produit/commentaires_view',$data);
-	}
 	
 	public function ajouter_commentaire(){
-		$id_product = $this->input->post('id_product'); // dans un input hidden
-		$texte = $this->input->post('texte');
-		if($id_product && $texte){
-			if($session->userdata('type') >= 1){
-				$this->commentaire->add($id_product, $texte);
-				$this->voir_commentaires($id_product); // chargement de la vue
+		if($this->session->userdata('type') > 0){
+			$id_product = $this->input->post('id_product'); // dans un input hidden
+			$texte = $this->input->post('texte');
+			if($id_product && $texte){
+					if($this->commentaires->insert(array( 'texte'=>nl2br($texte), 
+													  'produits_id' => $id_product,
+													  'user_id' => $this->session->userdata('user_id'))))
+						redirect('/index.php/pages/voir_produit/'.$id_product,'location');
+					else{
+						$data['message'] = $this->mysql->error;
+						$this->load->view('error',$data);
+					}	
 			}
 			else{
-				$data['message'] = "Vous n'avez pas les droits requis";
-				$this->load->view('error',$data); // erreur de droit
+				$data['message'] = "Veuillez remplir tous les formulaires";
+				$this->load->view('error',$data); // Erreur forumulaire incomplet
 			}
 		}
-		else{
-			$data['message'] = "Veuillez remplir tous les formulaires";
-			$this->load->view('error',$data); // Erreur forumulaire incomplet
-		}
+		else
+			redirect('/index.php','location');	
 	}
 	public function view($etab_id,$filtre = NULL){
 		if($this->session->userdata('type') > 0){

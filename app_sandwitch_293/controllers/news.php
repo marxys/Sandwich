@@ -26,7 +26,7 @@ class News extends CI_Controller{
 			if($etablissement){ // si l'etablissement associé a ce user_id existe
 					if($this->news_model->insert(array(
 								'titre'=> $titre,
-								'description' => $description,
+								'description' => nl2br($description),
 								'etablissement_id' => $etablissement['id']))){
  						redirect('/index.php/pages/ajouter_news', 'location');	
 					}			

@@ -30,7 +30,7 @@
            	<div id="<?php echo 'news_'.$element['id']; ?>" class="news">
             	<h4> <?php echo $element['titre']; ?></h4>
                 <div class="date"> <?php echo $element['date_creation']; ?> </div>
-                <p> <?php echo $element['description']; ?> </p>           
+                <p> <?php echo nl2br($element['description']); ?> </p>           
             </div> 
    <?php
 		} ?>

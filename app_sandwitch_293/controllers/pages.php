@@ -75,7 +75,7 @@ class Pages extends CI_Controller{
 	$link permettra de charger la page précedante avec un bouton retour sur /index.php/produits/view/$link
 	*/
 	
-	public function voir_produit($id,$link){
+	public function voir_produit($id){
 		if($this->session->userdata('type') > 0){
 			$this->load->model('produits_model');
 			$this->load->model('commentaires');
@@ -88,10 +88,11 @@ class Pages extends CI_Controller{
 			$data['promos'] = $this->promo->get_by_id_product($id);
 			$data['produit'] = $produit;
 			$data['type'] = $this->session->userdata('type');
-			$data['access'] = $this->produit_model->isOwner($id); // Vérifie que l'utilisateur connecté est le propriétaire du produit
+			$data['access'] = $this->produits_model->isOwner($id); // Vérifie que l'utilisateur connecté est le propriétaire du produit
+			$data['link'] = $produit['etablissement_id'];
 			$dataHeader['title'] = "Fiche du produit ".$produit['nom'];
 			$this->load->view('modules/header',$dataHeader);
-			$this->load->view('produit/fiche',$data);
+			$this->load->view('produits/fiche',$data);
 			$this->load->view('modules/footer');
 		}
 		else
