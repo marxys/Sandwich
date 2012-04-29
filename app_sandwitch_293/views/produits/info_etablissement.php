@@ -19,7 +19,7 @@
 				
 			?>
 	<div id="photo">
-    	<img src="<?php echo $image; ?>" />
+    	<img src="<?php echo "../../../assets/upload/etablissement/etab_".$etablissement['id']; ?>" />
     </div>
     
     <div id="news">
