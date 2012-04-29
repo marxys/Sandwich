@@ -16,7 +16,7 @@
 </head>
 
 <body>
-
+<div id="background"></div>
 <div id="apps_mini">
 	<div class='bouton_app'><a href="/index.php"><img src="../../../assets/imgs/home.png" /></a></div>
     <div class='bouton_app'><a href="/index.php/pages/view_profil"><img src="../../../assets/imgs/profile.png" /></a></div>

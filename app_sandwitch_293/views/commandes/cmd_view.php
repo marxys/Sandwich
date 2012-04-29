@@ -45,6 +45,7 @@
             
 	<?php 
 		$prix_total = 0;
+		$qte = 0;
 		foreach( $produits as $produit ) {
 			echo '<tr>';
 			echo '<td>photo her</td>';
@@ -55,10 +56,12 @@
 			echo '<td>'.$produit['prix_total'].' €</td>';
 			echo '</tr>';
 			$prix_total += $produit['prix_total'];
+			$qte += $produit['quantite'];
 		}
 		echo "<tr>
-					<td colspan='5'><strong>Total : </strong></td>
-					<td>$prix_total €</td>
+					<td colspan='5' class='tb_total_label'><strong>Total : </strong></td>
+					<td class='tb_total'>$qte</td>
+					<td class='tb_total'>$prix_total €</td>
 				</tr>";
 		?>
      	</table>
