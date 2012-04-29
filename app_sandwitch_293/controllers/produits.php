@@ -78,8 +78,12 @@ class Produits extends CI_Controller{
 	
 	public function delete($id,$etab_id){
 		if($this->produits_model->isOwner($id)){
-			$this->produits_model->delete($id);
-			$this->view($etab_id);
+			if($this->produits_model->delete($id))
+				$this->view($etab_id,NULL);
+			else{
+				$data['message'] = $this->mysql->error;
+				$this->load->view('error',$data);
+			}	
 		}
 		else{
 			$data['message'] = "Vous n'avez pas les droits pour cette action";
@@ -138,6 +142,8 @@ class Produits extends CI_Controller{
 			$dataProduit['produits'] = $produits;
 			if(!empty($produits))
 				$dataProduit['owner'] = $this->produits_model->isOwner($produits[0]['id']);
+			else
+				$dataProduit['owner'] = false;
 			$this->load->view('produits/tableau',$dataProduit);
 		}
 		else

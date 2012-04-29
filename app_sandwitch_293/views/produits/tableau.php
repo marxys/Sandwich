@@ -8,7 +8,7 @@
         <th>Disponibilité</th>
         <th>Quantité</th>
         <th></th>
-        <th></th>
+        <?php if($owner){?><th></th><?php } ?>
         
         <?php
 		foreach($produits as $element){
@@ -21,7 +21,7 @@
             <td onclick="location.replace('/index.php/pages/voir_produit/<?php echo $element['id']?>')"><?php if($element['disponnibilite']) echo "Oui"; else echo "Non";?> </td>
        		<td><?php if($element['disponnibilite']){?><input id="<?php echo $element['id'].'_panier_form'?>" type="text" size="2" value="1"/><?php }?></td>	
             <td id="<?php echo $element['id'].'_panier';?>" class="panier" ><?php if($element['disponnibilite']){?><span id="element" value="<?php echo $element['id']; ?>"><img src="<?php echo base_url()?>assets/imgs/panier.png"></img></span><?php }?></td> <!-- requete d'ajout en ajax -->
-            <?php if($owner){?><td onclick="location.replace('/index.php/produits/delete/<?php echo $element['id']?>/<?php  echo $produits[0]['etablissement_id'] ?>')"><img src="../../../assets/imgs/del.png"> </img></td><?php }?>
+            <?php if($owner){?><td onclick="location.replace('/index.php/produits/delete/<?php echo $element['id']?>/<?php  echo $produits[0]['etablissement_id'] ?>')"><img src="<?php echo base_url()?>assets/imgs/del.png"> </img></td><?php }?>
             </tr>	
 		<?php } ?>
     </table>
