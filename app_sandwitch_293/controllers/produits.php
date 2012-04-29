@@ -152,8 +152,24 @@ class Produits extends CI_Controller{
 					$this->promo->delete($del_id);
 				}
 			}
+			redirect('/index.php/pages/voir_produit/'.$this->input->post('id_product'),'location');
 		}
 		else{
+			$data['message'] = "Vous n'avez pas les droits pour cette action";
+			$this->load->view('error',$data);
+		}
+	}
+	public function disponnibilite(){
+		$id_product = $this->input->post('id_product');
+		if($this->produits_model->isOwner($id_product)){
+			$disponnible = $this->input->post('disponnible');
+			if($disponnible == 1){
+				$this->produits_model->update(array('disponnibilite' => false),$id_product);
+			}else{
+				$this->produits_model->update(array('disponnibilite' => true),$id_product);
+			}
+			redirect('/index.php/pages/voir_produit/'.$id_product,'location');
+		}else{
 			$data['message'] = "Vous n'avez pas les droits pour cette action";
 			$this->load->view('error',$data);
 		}
