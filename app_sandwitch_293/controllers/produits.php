@@ -76,7 +76,16 @@ class Produits extends CI_Controller{
 		}
 	}
 	
-	
+	public function delete($id,$etab_id){
+		if($this->produits_model->isOwner($id)){
+			$this->produits_model->delete($id);
+			$this->view($etab_id);
+		}
+		else{
+			$data['message'] = "Vous n'avez pas les droits pour cette action";
+			$this->load->view('error',$data);
+		}
+	}
 	public function ajouter_commentaire(){
 		if($this->session->userdata('type') > 0){
 			$id_product = $this->input->post('id_product'); // dans un input hidden
@@ -127,6 +136,8 @@ class Produits extends CI_Controller{
 			else{ // requete de recherche
 			}
 			$dataProduit['produits'] = $produits;
+			if(!empty($produits))
+				$dataProduit['owner'] = $this->produits_model->isOwner($produits[0]['id']);
 			$this->load->view('produits/tableau',$dataProduit);
 		}
 		else
