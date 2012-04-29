@@ -171,9 +171,9 @@ class Users extends CI_Controller {
 				if($this->users_model->isThisMine('email',$email,$user_id)){
 					if($this->users_model->isThisMine('login',$username,$user_id)){
 						$this->users_model->update(array( 'prenom' => $prenom,
-													  'nom' => $nom,
-													  'email' => $email,
-													  'login' => $username),$this->session->userdata('user_id'));
+													  	  'nom' => $nom,
+													  	  'email' => $email,
+													      'login' => $username),$this->session->userdata('user_id'));
  						redirect('/index.php/pages/view_profil', 'location');	
 					}
 					else{ // erreur login déjà utilisé par un autre membre
@@ -211,7 +211,23 @@ class Users extends CI_Controller {
 																	  'slogan' => $slogan,												  													
 																	  'gps' => $gps,
 																	  'horaire' => $horaire),$etablissement['id']);
- 							redirect('/index.php/pages/view_profil', 'location');	
+							if(!empty($_FILES)){				  
+								$config['upload_path'] = './assets/upload/etablissement';
+								$config['allowed_types'] = 'jpg';
+								$config['max_size']	= '512';
+								$config['max_width']  = '200';
+								$config['max_height']  = '200';
+								$config['file_name'] = "etab_".$etablissement['id'];
+	
+								$this->load->library('upload', $config);
+	
+								if ( ! $this->upload->do_upload("avatar")){		
+									$data['message'] = $this->upload->display_errors();
+									$this->load->view('error',$data);
+									return;
+								}
+							}
+							redirect('/index.php/pages/view_profil', 'location');	
 						}				
 						else{ // nom de l'etablissement déjà utilisé
 							$data['message'] = "Ce nom d'établissement est déjà utilisé par un autre client";

@@ -5,7 +5,7 @@
 		<p>Vous pouvez ici modifier vos informations utilisateur</p>
 		</div>
         <div id="info_user">
-        	<form method="post" action="/index.php/users/edit_profil">
+        	<form method="post" action="/index.php/users/edit_profil" enctype="multipart/form-data">
                  <label for="prenom">Prénom : </label>
                 <input id="prenom" type="text" name="prenom" value="<?php echo $user['prenom']?>" size="50" class="text ui-widget-content ui-corner-all" /><br/>
                 <label for="nom">Nom : </label>
@@ -25,7 +25,7 @@
                 <label for="gps">Coordonnées GPS: </label>
                 <input id="gps" type="text" name="gps" value="<?php echo $etablissement['gps'];?>" size="50" class="text ui-widget-content ui-corner-all" /><br/>
                 <label for="avatar">Avatar qui représentara votre etablissement </label>
-                <input id="avatar" name="avatar" type="file"class="ui-widget-content ui-corner-all" /> <br/><br/>
+                <input type="file" id="avatar" name="avatar" class="" /> <br/><br/>
                 <label>infos horaire : </label> 
                 <textarea id="horaire" name="horaire" class="text ui-widget-content ui-corner-all"><?php echo  $etablissement['horaire']; ?></textarea><br/>
                 <?php } ?>
