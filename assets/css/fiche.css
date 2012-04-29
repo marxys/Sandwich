@@ -1,0 +1,97 @@
+@charset "UTF-8";
+/* CSS Document */
+
+#right_produit{
+	position : absolute;
+	top:70px;
+	right : 0px;
+	width : 48%;
+}
+#left_produit{
+	position : absolute;
+	top:70px;
+	left : 0px;
+	width : 48%;
+}
+#commentaires{
+	min-height:100%;
+	margin-top:20px;
+	background-color: rgba(255,255,255,0.3);
+	-moz-border-radius: 20px;
+	border-radius: 10px;
+	padding-bottom: 10px;
+	padding-top:0px;
+	border-style:solid;
+	border-color: rgb(255,220,150);
+	border-width:1px;
+	text-align:left;
+	width:95%;
+	background: -moz-linear-gradient(to top, rgba(255,255,255,0.1), rgba(255,255,255,0.5));
+	box-shadow: 0 0 9px #555555;
+	-moz-box-shadow: 0 0 9px #555555; 
+	-webkit-box-shadow: 0 0 9px #555555;
+}
+#details{
+	min-height:100%;
+	margin-top:20px;
+	background-color: rgba(255,255,255,0.3);
+	-moz-border-radius: 20px;
+	border-radius: 10px;
+	padding-top:0px;
+	border-style:solid;
+	border-color: rgb(255,220,150);
+	border-width:1px;
+	text-align:left;
+	width:95%;
+	background: -moz-linear-gradient(to top, rgba(255,255,255,0.1), rgba(255,255,255,0.5));
+	box-shadow: 0 0 9px #555555;
+	-moz-box-shadow: 0 0 9px #555555; 
+	-webkit-box-shadow: 0 0 9px #555555;
+}
+
+#inputCommentaire{
+	margin-top : 17px;
+	width : 95%;
+}
+.commentaire{
+	background-color: rgba(255,255,255,0.3);
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	border-style:solid;
+	border-color: rgb(255,220,150);
+	border-width:1px;
+	padding:0px;
+	margin:auto;
+	margin-top:10px;
+	width:95%;
+}
+.contenu_com{
+	margin:3px;
+	padding:0px;
+	margin-left:10px;
+	font-size:small;
+}
+.auteur_com{
+	margin-left:10px;
+}
+.checkbox_produit{
+	width : 20px;
+}
+#retour_com{
+	position : absolute;
+	left : 0px;
+}
+#promo{
+	padding-bottom : 15px;
+	width : 95%;
+}
+#promo form{
+	margin-top : 15px;
+}
+#disponnibilite{
+	margin-top:15px ;
+	width : 95%;
+}
+#disponnibilite form{
+	margin-top : 15px;
+}
