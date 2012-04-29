@@ -5,6 +5,7 @@
         <th>Nom</th>
         <th>Description</th>
         <th>Prix</th>
+        <th>Disponibilité</th>
         <th>Quantité</th>
         <th></th>
         
@@ -12,12 +13,13 @@
 		foreach($produits as $element){
 			?>
             <tr>
-			<td></td>
+			<td onclick="location.replace('/index.php/pages/voir_produit/<?php echo $element['id']?>')"><img src="../../../assets/upload/produit/produit_<?php echo $element['id']; ?>"></img></td>
 			<td onclick="location.replace('/index.php/pages/voir_produit/<?php echo $element['id']?>')"><?php echo $element['nom'];?></td>
-            <td><?php echo $element['description']; ?></td>
-            <td><?php echo $element['prix']; ?> </td>
-       		<td><input id="<?php echo $element['id'].'_panier_form'?>" type="text" size="2" value="1"/></td>	
-            <td id="<?php echo $element['id'].'_panier';?>" class="panier" ><span id="element" value="<?php echo $element['id']; ?>"><img src="<?php echo base_url()?>assets/imgs/panier.png"></img></span></td> <!-- requete d'ajout en ajax -->
+            <td onclick="location.replace('/index.php/pages/voir_produit/<?php echo $element['id']?>')"><?php echo $element['description']; ?></td>
+            <td onclick="location.replace('/index.php/pages/voir_produit/<?php echo $element['id']?>')"><?php echo $element['prix']; ?> </td>
+            <td onclick="location.replace('/index.php/pages/voir_produit/<?php echo $element['id']?>')"><?php if($element['disponnibilite']) echo "Oui"; else echo "Non";?> </td>
+       		<td><?php if($element['disponnibilite']){?><input id="<?php echo $element['id'].'_panier_form'?>" type="text" size="2" value="1"/><?php }?></td>	
+            <td id="<?php echo $element['id'].'_panier';?>" class="panier" ><?php if($element['disponnibilite']){?><span id="element" value="<?php echo $element['id']; ?>"><img src="<?php echo base_url()?>assets/imgs/panier.png"></img></span><?php }?></td> <!-- requete d'ajout en ajax -->
             </tr>	
 		<?php } ?>
     </table>

@@ -27,7 +27,7 @@ class Produits extends CI_Controller{
 			$prix = $this->input->post('prix');
 			$description = $this->input->post('description');
 			$categorie = $this->input->post('categorie');
-			if(!$categorie)
+			if($categorie =="Select one...")
 				$categorie = $this->input->post('categorie_new');
 			if($nom && $prix && $description && $categorie){
 				$result = $this->categorie_model->get_by_name($categorie);
@@ -36,12 +36,30 @@ class Produits extends CI_Controller{
 					$result = $this->categorie_model->get_by_name($categorie);
 				}
 				$etablissement = $this->etablissement_model->get_by_user_id($this->session->userdata('user_id'));
-				if($this->produits_model->insert( array ( 'nom' => $nom,
+				if($id_produit = $this->produits_model->insert( array ( 'nom' => $nom,
 													   'description' => $description,
 													   'prix' => $prix,
 													   'categorie_id' => $result['id'],
-													   'etablissement_id' => $etablissement['id'] )))
+													   'etablissement_id' => $etablissement['id'] ))){
+					if(!empty($_FILES)){
+						
+						$config['upload_path'] = './assets/upload/produit';
+						$config['allowed_types'] = 'jpg';
+						$config['max_size']	= '512';
+						$config['max_width']  = '1000';
+						$config['max_height']  = '1000';
+						$config['file_name'] = "produit_".$id_produit;
+
+						$this->load->library('upload', $config);
+
+						if ( ! $this->upload->do_upload("photo")){		
+							$data['message'] = $this->upload->display_errors();
+							$this->load->view('error',$data);
+							return;
+						}
+					}
 					redirect('/index.php/pages/ajouter_produit','location');
+				}
 				else{
 					$data['message'] = $this->mysql->error;
 					$this->load->view('error',$data);
@@ -103,7 +121,6 @@ class Produits extends CI_Controller{
 			$news_etab 				= $this->news->search("etablissement_id = $view_id",NULL, NULL, 'date_creation DESC',NULL);
 			$data['etablissement'] 	= $selected_etab;
 			$data['news'] 			= $news_etab;
-			$data['image'] 			= "../../assets/imgs/panier.jpg";
 			$this->load->view('produits/info_etablissement',$data);
 			if($filtre == NULL)
 				$produits = $this->produits_model->get_products_from($view_id);

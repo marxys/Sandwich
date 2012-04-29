@@ -1,5 +1,5 @@
 <div id="form_ajout">
-	<form method="post" action="/index.php/produits/add">
+	<form method="post" action="/index.php/produits/add" enctype="multipart/form-data">
     	  <label for="prenom">Nom du produit : </label>
           <input id="nom" type="text" name="nom" size="50" class="text ui-widget-content ui-corner-all" /><br/>
           <label for="description">Description : </label>
@@ -8,6 +8,7 @@
           <input id="prix" type="text" name="prix" size="50" class="text ui-widget-content ui-corner-all" /><br/>
           <label>Selectionnez une catégorie</label>
           <select id="categorie" name="categorie">
+          		<option>Select one...</option>
           		<?php foreach($categorie as $element){
 					?>
                     	<option value="<?php echo $element['nom'];?>"><?php echo $element['nom'];?></option>
@@ -16,7 +17,7 @@
           <label> ou creez en une : </label>
           <input type="text" name="categorie_new" size="50" class="text ui-widget-content ui-corner-all" /><br/>
           <label for="photo">Photo du produit</label>
-          <input id="photo" name="photo" type="file"class="ui-widget-content ui-corner-all" /> <br/><br/>
+          <input id="photo" name="photo" type="file"class="" /> <br/><br/>
           <input type="submit" role="button"/><br/>
     </form>
 </div>
