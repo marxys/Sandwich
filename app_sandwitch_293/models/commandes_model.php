@@ -62,6 +62,8 @@ class Commandes_model extends MY_Model{
 	
 	function get_cmd($cmd_id) {
 		$query_cmd ='SELECT 
+						etab.adresse AS adresse_etab,
+						slogan,
 						etab.nom AS etablissement_nom,
 						date_commande,
 						date_livraison,
@@ -72,6 +74,7 @@ class Commandes_model extends MY_Model{
 					WHERE cmd.id = ? ';
 					
 		$product_query = ' 	SELECT  
+								id,
 								nom,
 								description,
 								prix,

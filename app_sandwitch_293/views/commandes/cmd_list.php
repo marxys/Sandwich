@@ -1,4 +1,5 @@
 <div id="tab_cmd">
+	<h2>Liste des commandes</h2>
 	<table>
     	<th>Etablissement</th>
         <th>Date de commande</th>

@@ -1,37 +1,66 @@
+<h1> Formulaire de commande </h1>
 <div id='fiche_commande'>
-	<h2><?php echo $etablissement_nom; ?> </h2>
-    
+		<div id='infos_etab_cmd'>
+        <h2><?php echo $etablissement_nom; ?> </h2>
+    	<p class='info_etab'>
+        	
+			<strong><?php echo $slogan; ?></strong><br />
+			<em><?php echo $adresse_etab; ?></em>
+        </p>
+        </div>
     <?php
     if(!empty($adresse_livraison) && !empty($date_livraison)) {	
 	?>
-	
-	<span class="adresse"><?php echo $adresse_livraison; ?> </span>
-	<span class='date'>
-    	<strong>Date de commande : </strong><?php echo $date_commande; ?> <br />
-    	<strong>Date de livraison : </strong><?php echo $date_livraison; ?>
-    </span>
+	<table class="tb_form">
+    		<tr>
+        		<td class='adresse_title'>Adresse de livraison : </td>
+                <td class='adresse'><?php echo $adresse_livraison; ?> </td>
+            </tr>
+            <tr>
+            	<td class='cmd_title'>Date de livraison : </td>
+				<td class='date_cmd'><?php echo $date_livraison; ?></td>
+            </tr>
+            <tr>
+            	<td class='cmd_title'>Date de commande : </td>
+				<td class='date_cmd'><?php echo $date_commande; ?> </td>
+            </tr>
+    </table>
+
     
     <? }else{ ?>
     
-	
-
-    <form id="finalize_cmd" action="/index.php/commandes/validate" method="post">
-    <span class="adresse"><textarea id="adresse" name="adresse">Entrez l'adresse de livraison ici</textarea></span>
-	<span class='date'>
-    	<strong>Date de commande : </strong><?php echo $date_commande; ?> <br />
-    	<strong>Date de livraison : </strong><input type="text" id="date" name="date" value="" />
-    </span>
+     <form id="finalize_cmd" action="/index.php/commandes/validate" method="post">
+		<table class="tb_form">
+    		<tr>
+        		<td class='adresse_title'>Adresse : </td>
+                <td><textarea id="adresse" name="adresse" class="cmd_adresse">Entrez l'adresse de livraison ici</textarea></td>
+        	</tr>
+            <tr>
+        		<td class='cmd_title'>Date de livraison : </td>
+                <td><input type="text" id="date" name="date" value="" class="date_cmd" /></td>
+        	</tr>
+			  <tr>
+        		<td class='cmd_title'>Date de commande : </td>
+                <td class="date_cmd"><?php echo $date_commande; ?></td>
+        	</tr> 
+            <tr>
+            	<td colspan='2'><input type="submit" id="finaliser" name="finaliser" value="Finaliser la commande" /></td>
+            </tr>           
+        </table>
     </form>
     
     <script>
 	$(function() {
 		$( "#date" ).datepicker();
+		$("#finaliser").button();
 	});
 	</script>
     
     <? } ?>
 	
-	<div id="tab_product">
+	<div id="tab_cmd">
+    
+    <h3>Liste des produits à commander</h3>
     	<table>
         	<tr>
                 <th>Photo</th>
@@ -52,14 +81,14 @@
 			echo '<td>'.$produit['nom'].'</td>';
 			echo '<td>'.$produit['description'].'</td>';
 			echo '<td>'.$produit['prix'].' €</td>';
-			echo '<td>'.$produit['quantite'].'</td>';
+			echo '<td><input id="'.$produit['id'].'_panier_form" type="text" size="2" value="'.$produit['quantite'].'" onblur="edit_qte(this.id, this.value);"/></td>';
 			echo '<td>'.$produit['prix_total'].' €</td>';
 			echo '</tr>';
 			$prix_total += $produit['prix_total'];
 			$qte += $produit['quantite'];
 		}
 		echo "<tr>
-					<td colspan='5' class='tb_total_label'><strong>Total : </strong></td>
+					<td colspan='4' class='tb_total_label'><strong>Total : </strong></td>
 					<td class='tb_total'>$qte</td>
 					<td class='tb_total'>$prix_total €</td>
 				</tr>";
