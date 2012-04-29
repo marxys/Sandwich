@@ -81,16 +81,16 @@
 			echo '<td>'.$produit['nom'].'</td>';
 			echo '<td>'.$produit['description'].'</td>';
 			echo '<td>'.$produit['prix'].' €</td>';
-			echo '<td><input id="'.$produit['id'].'_panier_form" type="text" size="2" value="'.$produit['quantite'].'" onblur="edit_qte(this.id, this.value);"/></td>';
-			echo '<td>'.$produit['prix_total'].' €</td>';
+			echo '<td><input id="'.$produit['id'].'" type="text" size="2" value="'.$produit['quantite'].'" onchange="edit_qte(this.id, this.value,\''.$cmd_id.'\');"/></td>';
+			echo '<td><span id="prix_'.$produit['id'].'"> '.$produit['prix_total'].'</span> €</td>';
 			echo '</tr>';
 			$prix_total += $produit['prix_total'];
 			$qte += $produit['quantite'];
 		}
 		echo "<tr>
 					<td colspan='4' class='tb_total_label'><strong>Total : </strong></td>
-					<td class='tb_total'>$qte</td>
-					<td class='tb_total'>$prix_total €</td>
+					<td class='tb_total'><span id='qte_total'>$qte</span></td>
+					<td class='tb_total'><span id='prix_total'>$prix_total</span> €</td>
 				</tr>";
 		?>
      	</table>

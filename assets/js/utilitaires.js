@@ -1,5 +1,11 @@
 // JavaScript Document
-
+function edit_product_tb(id,prix,qte_total,prix_total) {
+	
+	$('#prix_'+id).html(prix);
+	$('#prix_total').html(prix_total);
+	$('#qte_total').html(qte_total);
+	
+}
 function checkEmptyForm(array){
 	
 	for (i in array){
@@ -193,6 +199,7 @@ function ajax_request(param,url){
 					case 1 : window[''+data['functions'][i]['name']](array_args[0]); break;
 					case 2 : window[''+data['functions'][i]['name']](array_args[0],array_args[1]); break;
 					case 3 : window[''+data['functions'][i]['name']](array_args[0],array_args[1],array_args[2]); break;
+					case 4 : window[''+data['functions'][i]['name']](array_args[0],array_args[1],array_args[2],array_args[3]); break;
 				}
 			}
 		},
@@ -200,4 +207,10 @@ function ajax_request(param,url){
 			alert('Ajax error occured');
 		}
 	});
+}
+
+function edit_qte(id, qte, cmd_id) {
+	
+	ajax_request('id='+id+'&qte='+qte+'&cmd_id='+cmd_id,'/index.php/commandes/edit_qte');	
+	
 }

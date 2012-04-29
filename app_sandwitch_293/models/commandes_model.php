@@ -59,9 +59,34 @@ class Commandes_model extends MY_Model{
 			return false;
 		}
 	}
-	
+	function get_product($cmd_id) {
+						
+		$product_query = ' 	SELECT  
+								p.id AS id,
+								nom,
+								description,
+								prix,
+								quantite,
+								(prix*quantite) AS prix_total
+							FROM produits p
+								LEFT JOIN produits_has_commandes phc 	ON p.id = phc.produits_id
+							WHERE phc.commandes_id = ? ';
+							
+		$product_retour = $this->mysql->qexec('get_cmd_produits',$product_query,array(intval($cmd_id)));
+		
+		
+		if($product_retour) {
+			return $product_retour->fetchAll();
+		}
+		else {
+			log_message('error',$this->mysql->error);
+			return false;
+		}
+		
+	}
 	function get_cmd($cmd_id) {
-		$query_cmd ='SELECT 
+		$query_cmd ='SELECT
+						cmd.id AS cmd_id,
 						etab.adresse AS adresse_etab,
 						slogan,
 						etab.nom AS etablissement_nom,
@@ -73,22 +98,13 @@ class Commandes_model extends MY_Model{
 						LEFT JOIN etablissement etab 			ON cmd.etablissement_id = etab.id  
 					WHERE cmd.id = ? ';
 					
-		$product_query = ' 	SELECT  
-								id,
-								nom,
-								description,
-								prix,
-								quantite,
-								(prix*quantite) AS prix_total
-							FROM produits p
-								LEFT JOIN produits_has_commandes phc 	ON p.id = phc.produits_id
-							WHERE phc.commandes_id = ? ';
+	
 					
 		$retour_cmd = $this->mysql->qexec('get_cmd',$query_cmd,array(intval($cmd_id)));
-		$product_retour = $this->mysql->qexec('get_cmd_produits',$product_query,array(intval($cmd_id)));
-		if($retour_cmd && $product_retour) {
+		
+		if($retour_cmd) {
 			$retour =  $retour_cmd->fetchAll();
-			$retour[0]['produits'] = $product_retour->fetchAll();
+			$retour[0]['produits'] = $this->get_product($cmd_id);
 			return $retour[0];
 		}
 		else {
@@ -98,7 +114,13 @@ class Commandes_model extends MY_Model{
 		
 	}
 	
-	
-
-	
+	function edit_qte($id,$qte) {
+		$query = 'UPDATE produits_has_commandes SET quantite = ? WHERE produits_id = ?';
+		$request_rep = $this->mysql->qexec('edit_qte',$query,array($qte,$id));
+		if($request_rep) return true;
+		else {
+			log_message('error',$this->mysql->error);
+			return false;
+		}
+	}
 }

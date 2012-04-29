@@ -81,4 +81,45 @@ class Commandes extends CI_Controller{
 		$this->load->view('modules/footer'); 	
 		
 	}
+	
+	function edit_qte() {
+			$id_produit = $this->input->post('id');
+			$qte 		= $this->input->post('qte');
+			$id_cmd		= $this->input->post('cmd_id');
+			if($this->cmd->edit_qte($id_produit,$qte)) {
+					
+					$produits = $this->cmd->get_product(intval($id_cmd));
+					
+					if($produits) {
+						$qte_total = 0;
+						$prix_total = 0;
+						$prix = 0;
+						foreach ($produits as $produit) {
+							
+							if($produit['id'] == $id_produit) $prix = $produit['prix_total'];
+							
+							$prix_total += $produit['prix_total'];
+							$qte_total  += $produit['quantite'];
+							
+						}
+						$this->json->setError(0);
+						$this->json->call('edit_product_tb',array($id_produit,$prix,$qte_total,$prix_total));
+					
+					}
+					else {
+						$this->json->setError(-1);
+						$this->json->setMessage('Impossible de recharger la liste des commandes, veuillez actualiser la page manuellement.');
+						$this->json->call('error',array($this->json->getMessage()));
+					}
+			}
+			else {
+					$this->json->setError(-1);
+					$this->json->setMessage('Impossible de modifier la quantité');
+					$this->json->call('error',array($this->json->getMessage()));
+			}
+			
+						
+			echo json_encode($this->json->get());
+			
+	}
 }
