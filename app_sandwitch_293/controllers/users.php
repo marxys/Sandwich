@@ -197,7 +197,8 @@ class Users extends CI_Controller {
 			$adresse = $this->input->post('adresse');
 			$gps = $this->input->post('gps');
 			$horaire = $this->input->post('horaire');
-			if( $horaire && $prenom && $nom && $email && $username && $etablissement_nom && $slogan && $adresse && $gps ){
+			$contact = $this->input->post('contact');
+			if( $horaire && $prenom && $nom && $email && $username && $etablissement_nom && $slogan && $adresse && $gps && $contact ){
 				if($this->users_model->isThisMine('email',$email,$user_id)){
 					if($this->users_model->isThisMine('login',$username,$user_id)){
 						$etablissement = $this->etablissement_model->get_by_user_id($user_id);
@@ -210,8 +211,10 @@ class Users extends CI_Controller {
 																	  'adresse' => $adresse,
 																	  'slogan' => $slogan,												  													
 																	  'gps' => $gps,
-																	  'horaire' => $horaire),$etablissement['id']);
-							if(!empty($_FILES)){				  
+																	  'horaire' => $horaire,
+																	  'contact' => nl2br($contact)),$etablissement['id']);
+							
+							if(!empty($_FILES['avatar']['name'])){				  
 								$config['upload_path'] = './assets/upload/etablissement';
 								$config['allowed_types'] = 'jpg';
 								$config['max_size']	= '512';

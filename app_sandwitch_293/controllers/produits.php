@@ -78,7 +78,7 @@ class Produits extends CI_Controller{
 	
 	public function delete($id,$etab_id){
 		if($this->produits_model->isOwner($id)){
-			if($this->produits_model->delete($id))
+			if($this->produits_model->update(array('deleted'=>true),$id))
 				$this->view($etab_id,NULL);
 			else{
 				$data['message'] = $this->mysql->error;

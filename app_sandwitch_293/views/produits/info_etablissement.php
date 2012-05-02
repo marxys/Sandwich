@@ -19,25 +19,28 @@
 				
 			?>
 	<div id="photo">
-    	<img src="<?php echo "../../../assets/upload/etablissement/etab_".$etablissement['id']; ?>" />
+    	<img src="<?php echo base_url()."assets/upload/etablissement/etab_".$etablissement['id']; ?>" />
     </div>
     
     <div id="news">
     	<h3>News : </h3>
     	<?php 
-		foreach($news as $element){
-			?>
-           	<div id="<?php echo 'news_'.$element['id']; ?>" class="news">
-            	<h4> <?php echo $element['titre']; ?></h4>
-                <div class="date"> <?php echo $element['date_creation']; ?> </div>
-                <p> <?php echo nl2br($element['description']); ?> </p>           
-            </div> 
-   <?php
-		} ?>
+		if(!empty($news)){
+			foreach($news as $element){
+				?>
+				<div id="<?php echo 'news_'.$element['id']; ?>" class="news">
+					<h4> <?php echo $element['titre']; ?></h4>
+					<div class="date"> <?php echo $element['date_creation']; ?> </div>
+					<p> <?php echo nl2br($element['description']); ?> </p>           
+				</div> 
+	   <?php
+			} 
+		}else echo "<span>Aucunes news écritent par ".$etablissement['nom']."<span>"?>
     </div>
     
  	<div id="contact">
-    	<!--<p><?php //echo $etablissement['contact']; ?></p> -->
+    	<h3>Informations de contact : </h3>
+    	<p><?php if(!empty($etablissement['contact']))echo $etablissement['contact']; else echo "Pas d'informations encore disponnibles" ?></p> 
     </div>
     
 </div>

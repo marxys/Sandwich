@@ -23,14 +23,16 @@
 </div>
 <div id="right_produit">
 	<div id="details"> <!-- Div placé sur la moitié de page droite -->
-        
+        <img class="panier" src="<?php echo base_url()?>assets/upload/produit/produit_<?php echo $produit['id']?>"></img>
         <ul>
             <li><strong> Nom du produit : </strong><?php echo $produit['nom'];?> </li>
             <li><strong> Description : </strong><?php echo $produit['description'];?> </li>
             <li><strong> Prix : </strong><?php echo $produit['prix']. '€';?> </li>
             <li><strong> Disponibilité : </strong><?php if($produit['disponnibilite']) echo "Oui"; else echo "Non"; ?></li>
-                    
+            <li><strong>Commander :</strong> <input id="qte" type="text" value="1" class="text ui-widget-content ui-corner-all"/>&nbsp;&nbsp;&nbsp;<img class="panier" src="<?php echo base_url()?>assets/imgs/panier.png"></img></li>    
         </ul>
+        <input id="product_id" type="text" style="display:none" value="<?php echo $produit['id']?>" />
+        <input id="etablissement_id" type="text" style="display:none" value="<?php echo $produit['etablissement_id']?>" />
         
     </div>
     
@@ -88,9 +90,16 @@ $(document).ready(function(){
 	$(":submit").button();
 	$("#date_fin").datepicker({ dateFormat: "dd-mm-yy" });
 	$("#date_debut").datepicker({ dateFormat: "dd-mm-yy" });
+	
+	$(".panier").click(function(){
+		//id produit et etablissement
+		var bool = confirm("Commander ce produit ?")
+		if(bool){
+			var idProduct = $('#product_id').attr("value");
+			var etab_id = $("#etablissement_id").attr("value");
+			var qte = $("#qte").val();
+			ajax_request("id_produit="+idProduct+"&id_etab="+etab_id+"&qte="+qte,"/index.php/commandes/insert");
+		}
+	});
 });
 </script>
-
-<style>
-
-</style>

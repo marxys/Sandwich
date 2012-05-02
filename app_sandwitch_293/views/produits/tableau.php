@@ -14,7 +14,7 @@
 		foreach($produits as $element){
 			?>
             <tr>
-			<td onclick="location.replace('/index.php/pages/voir_produit/<?php echo $element['id']?>')"><img src="../../../assets/upload/produit/produit_<?php echo $element['id']; ?>"></img></td>
+			<td onclick="location.replace('/index.php/pages/voir_produit/<?php echo $element['id']?>')"><img src="<?php echo base_url()?>assets/upload/produit/produit_<?php echo $element['id']; ?>"></img></td>
 			<td onclick="location.replace('/index.php/pages/voir_produit/<?php echo $element['id']?>')"><?php echo $element['nom'];?></td>
             <td onclick="location.replace('/index.php/pages/voir_produit/<?php echo $element['id']?>')"><?php echo $element['description']; ?></td>
             <td onclick="location.replace('/index.php/pages/voir_produit/<?php echo $element['id']?>')"><?php echo $element['prix']; ?> </td>

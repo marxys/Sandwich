@@ -95,3 +95,13 @@
 #disponnibilite form{
 	margin-top : 15px;
 }
+.panier{
+	cursor:pointer;
+}
+#details input{
+	width:25px;
+}
+#details image{
+	width:150px;
+	height:150px;
+}

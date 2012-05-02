@@ -28,6 +28,8 @@
                 <input type="file" id="avatar" name="avatar" class="" /> <br/><br/>
                 <label>infos horaire : </label> 
                 <textarea id="horaire" name="horaire" class="text ui-widget-content ui-corner-all"><?php echo  $etablissement['horaire']; ?></textarea><br/>
+                <label>Informations de contact </label>
+              	<textarea id="contact" name="contact" class="text ui-widget-content ui-corner-all"><?php echo  str_replace('<br />','',$etablissement['contact']); ?></textarea><br/>  
                 <?php } ?>
                 <input type="submit" value="Envoyer" class="bouton"/>
             </form>
