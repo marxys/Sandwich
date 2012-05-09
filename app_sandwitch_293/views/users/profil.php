@@ -27,9 +27,9 @@
                 <label for="avatar">Avatar qui représentara votre etablissement </label>
                 <input type="file" id="avatar" name="avatar" class="" /> <br/><br/>
                 <label>infos horaire : </label> 
-                <textarea id="horaire" name="horaire" class="text ui-widget-content ui-corner-all"><?php echo  $etablissement['horaire']; ?></textarea><br/>
+                <textarea id="horaire" name="horaire" class="text ui-widget-content ui-corner-all" cols="30" rows="10"><?php echo  $etablissement['horaire']; ?></textarea><br/>
                 <label>Informations de contact </label>
-              	<textarea id="contact" name="contact" class="text ui-widget-content ui-corner-all"><?php echo  str_replace('<br />','',$etablissement['contact']); ?></textarea><br/>  
+              	<textarea id="contact" name="contact" class="text ui-widget-content ui-corner-all" cols="30" rows="10"><?php echo  str_replace('<br />','',$etablissement['contact']); ?></textarea><br/>  
                 <?php } ?>
                 <input type="submit" value="Envoyer" class="bouton"/>
             </form>

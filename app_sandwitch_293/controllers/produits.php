@@ -144,6 +144,8 @@ class Produits extends CI_Controller{
 				$dataProduit['owner'] = $this->produits_model->isOwner($produits[0]['id']);
 			else
 				$dataProduit['owner'] = false;
+			$categorie = $this->categorie_model->search(NULL,NULL,NULL,NULL,NULL);
+			$dataProduit['categorie'] = $categorie;
 			$this->load->view('produits/tableau',$dataProduit);
 		}
 		else

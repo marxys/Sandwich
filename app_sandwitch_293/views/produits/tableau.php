@@ -9,7 +9,19 @@
         <th>Quantité</th>
         <th></th>
         <?php if($owner){?><th></th><?php } ?>
-        
+        	
+            <td> Filtrage : </td>
+            <td> Par catégorie :</td>
+            <td><select>
+            		<option selected>Select one ...</option>
+					<?php 
+					foreach($categorie as $element){
+						?>
+                        	<option><?php echo $element['nom'] ?></option>
+                        <?php
+					}
+					?>
+            	</select> </td>
         <?php
 		foreach($produits as $element){
 			?>
