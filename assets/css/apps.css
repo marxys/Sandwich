@@ -331,6 +331,12 @@ h3,h2 {
 	cursor:pointer;
 	
 }
+#filtrage{
+	width : 50%;
+	margin-left:15px;
+	margin-top : 8px;
+
+}
 #tab_cmd tr:hover,#tab_product tr:hover {
 	background: rgba(255,200,130,0.7);
 	

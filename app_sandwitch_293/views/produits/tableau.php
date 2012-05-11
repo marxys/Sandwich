@@ -1,5 +1,25 @@
+<div id="filtrage">
+	<form method="post" action="/index.php/produits/view/<?php echo $etablissement_id?>/filtre">
+		<h2>Filtrage :</h2><br/>
+        <label>Catégorie: </label>
+    	<select name="categorie">
+            		<option selected>Toutes</option>
+					<?php 
+					foreach($categorie as $element){
+						?>
+                        	<option><?php echo $element['nom'] ?></option>
+                        <?php
+					}
+					?>
+        </select><br/>
+        <label>Ou/avec mots clef :</label>
+        <input id="search" name="search" class="text ui-widget-content ui-corner-all" /> 
+        <input type="submit" value="Filtrer" />
+	</form>
+</div>
+
 <div id="tab_product">
-	<span id="etablissement_id" value="<?php if(!empty($produits)) echo $produits[0]['etablissement_id']; ?>"></span>
+	<span id="etablissement_id" value="<?php  echo $etablissement_id; ?>"></span>
 	<table>
     	<th>Photo</th>
         <th>Nom</th>
@@ -9,19 +29,6 @@
         <th>Quantité</th>
         <th></th>
         <?php if($owner){?><th></th><?php } ?>
-        	
-            <td> Filtrage : </td>
-            <td> Par catégorie :</td>
-            <td><select>
-            		<option selected>Select one ...</option>
-					<?php 
-					foreach($categorie as $element){
-						?>
-                        	<option><?php echo $element['nom'] ?></option>
-                        <?php
-					}
-					?>
-            	</select> </td>
         <?php
 		foreach($produits as $element){
 			?>
@@ -51,5 +58,6 @@ $(document).ready(function(){
 			ajax_request("id_produit="+idProduct+"&id_etab="+etab_id+"&qte="+qte,"/index.php/commandes/insert");
 		}
 	});
+	$(":submit").button();
 });
 </script>

@@ -138,6 +138,17 @@ class Produits extends CI_Controller{
 			if($filtre == NULL)
 				$produits = $this->produits_model->get_products_from($view_id);
 			else{ // requete de recherche
+				$search_categorie = $this->input->post('categorie');
+				$search = $this->input->post('search');
+				if($search){
+					$produits = $this->produits_model->filtrage($view_id,$search,$search_categorie);
+				}
+				else{
+					if($search_categorie != "Toutes")
+						$produits = $this->produits_model->get_from_categorie($view_id,$search_categorie);
+					else
+						$produits = $this->produits_model->get_products_from($view_id);					
+				}
 			}
 			$dataProduit['produits'] = $produits;
 			if(!empty($produits))
@@ -146,7 +157,10 @@ class Produits extends CI_Controller{
 				$dataProduit['owner'] = false;
 			$categorie = $this->categorie_model->search(NULL,NULL,NULL,NULL,NULL);
 			$dataProduit['categorie'] = $categorie;
+			$dataProduit['etablissement_id'] = $view_id;
 			$this->load->view('produits/tableau',$dataProduit);
+			
+			$this->load->view('modules/footer');
 		}
 		else
 			redirect('/index.php','location');
