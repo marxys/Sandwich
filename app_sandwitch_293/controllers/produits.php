@@ -224,4 +224,32 @@ class Produits extends CI_Controller{
 			$this->load->view('error',$data);
 		}
 	}
+	public function changeOrCreateScore(){
+		$this->load->model('score');
+		$this->score->init();
+		$score = $this->input->post('score');
+		$produit_id = $this->input->post('produit_id');
+		$this->load->library('json');
+		if($score && $produit_id){
+			if($score_id = $this->score->scoreAlreadySet()){ // on change le score (update)
+				if(!$this->score->update( array('score'=>$score), $score_id)){
+					$this->load->view('error',array('message'=>$this->mysql->error));
+					return;	
+				}
+				$this->json->setError(0);
+				$this->json->call('notification',array("Modification du score réussie"));
+			}
+			else{ // on crée le score (insert)
+				if(!$this->score->insert(array( 'user_id'	 =>$this->session->userdata('user_id'),
+											'produit_id' => $produit_id,
+											'score'      => $score ))){
+					$this->load->view('error',array('message'=>$this->mysql->error));
+					return;
+				 }
+				$this->json->setError(0);
+				$this->json->call('notification',array("Ajout de votre score réussi"));
+			}
+			echo $this->json->get();
+		}
+	}
 }

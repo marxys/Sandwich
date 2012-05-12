@@ -29,6 +29,15 @@
             <li><strong> Description : </strong><?php echo $produit['description'];?> </li>
             <li><strong> Prix : </strong><?php echo $produit['prix']. '€';?> </li>
             <li><strong> Disponibilité : </strong><?php if($produit['disponnibilite']) echo "Oui"; else echo "Non"; ?></li>
+            <li><strong> Score : </strong>
+            <div id="radio">
+				<input type="radio" id="radio1" name="radio" value="1" /><label for="radio1">1</label>
+				<input type="radio" id="radio2" name="radio" value="2" /><label for="radio2">2</label>
+				<input type="radio" id="radio3" name="radio" value="3" /><label for="radio3">3</label>
+                <input type="radio" id="radio4" name="radio" value="4" /><label for="radio4">4</label>
+                <input type="radio" id="radio5" name="radio" value="5" /><label for="radio5">5</label><br/><br/>
+			</div>
+            </li>
             <li><strong>Commander :</strong> <input id="qte" type="text" value="1" class="text ui-widget-content ui-corner-all"/>&nbsp;&nbsp;&nbsp;<img class="panier" src="<?php echo base_url()?>assets/imgs/panier.png"></img></li>    
         </ul>
         <input id="product_id" type="text" style="display:none" value="<?php echo $produit['id']?>" />
@@ -100,6 +109,12 @@ $(document).ready(function(){
 			var qte = $("#qte").val();
 			ajax_request("id_produit="+idProduct+"&id_etab="+etab_id+"&qte="+qte,"/index.php/commandes/insert");
 		}
+	});
+	$("#radio").buttonset();
+	$(":radio").each(function(){
+		$(this).click(function(){
+			ajax_request('score='+$(this).val()+'&produit_id='+$("#product_id").val(),'/index.php/produits/changeOrCreateScore');
+		});
 	});
 });
 </script>
