@@ -249,7 +249,7 @@ class Produits extends CI_Controller{
 				$this->json->setError(0);
 				$this->json->call('notification',array("Ajout de votre score réussi"));
 			}
-			echo $this->json->get();
+			echo json_encode($this->json->get());
 		}
 	}
 }

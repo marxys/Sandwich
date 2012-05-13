@@ -80,6 +80,8 @@ class Pages extends CI_Controller{
 			$this->load->model('produits_model');
 			$this->load->model('commentaires');
 			$this->load->model('promo');
+			$this->load->model('score');
+			$this->score->init();
 			$this->promo->init();
 			$this->commentaires->init();
 			$this->produits_model->init();
@@ -90,6 +92,7 @@ class Pages extends CI_Controller{
 			$data['type'] = $this->session->userdata('type');
 			$data['access'] = $this->produits_model->isOwner($id); // Vérifie que l'utilisateur connecté est le propriétaire du produit
 			$data['link'] = $produit['etablissement_id'];
+			$data['score'] = $this->score->get_average($id);
 			$dataHeader['title'] = "Fiche du produit ".$produit['nom'];
 			$this->load->view('modules/header',$dataHeader);
 			$this->load->view('produits/fiche',$data);

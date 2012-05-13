@@ -109,3 +109,6 @@
 	min-width : 50px;
 	width : 50px;
 }
+#details li{
+	width : 50%;
+}
