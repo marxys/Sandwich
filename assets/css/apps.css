@@ -89,6 +89,15 @@
 	margin-top:15px;
 	background-color:#900;
 }
+.produit_img {
+	float: left;
+	width: 70px;
+	height:70px;
+	margin:10px;
+	margin-top:15px;
+	background-color:#900;
+}
+
 
 #vignette ul {
 	list-style:none;

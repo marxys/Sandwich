@@ -1,4 +1,5 @@
 <h1> Formulaire de commande </h1>
+<?php  echo "<h4><strong>$message</strong></h4>"; ?>
 <div id='fiche_commande'>
 		<div id='infos_etab_cmd'>
         <h2><?php echo $etablissement_nom; ?> </h2>
@@ -29,7 +30,7 @@
     
     <? }else{ ?>
     
-     <form id="finalize_cmd" action="/index.php/commandes/validate" method="post">
+     <form id="finalize_cmd" action="/index.php/commandes/validate/<?php echo $cmd_id; ?>" method="post">
 		<table class="tb_form">
     		<tr>
         		<td class='adresse_title'>Adresse : </td>
@@ -51,7 +52,7 @@
     
     <script>
 	$(function() {
-		$( "#date" ).datepicker();
+		$( "#date" ).datepicker({ dateFormat:"yy/mm/dd"});
 		$("#finaliser").button();
 	});
 	</script>
@@ -77,7 +78,7 @@
 		$qte = 0;
 		foreach( $produits as $produit ) {
 			echo '<tr>';
-			echo '<td>photo her</td>';
+			echo '<td><img class="produit_img" src="../../../assets/upload/produit/produit_'.$produit['id'].'.jpg" /></td>';
 			echo '<td>'.$produit['nom'].'</td>';
 			echo '<td>'.$produit['description'].'</td>';
 			echo '<td>'.$produit['prix'].' €</td>';

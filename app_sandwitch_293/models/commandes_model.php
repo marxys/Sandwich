@@ -40,13 +40,14 @@ class Commandes_model extends MY_Model{
 							etab.nom AS etablissement, 
 							date_commande AS date, 
 							SUM(quantite) AS quantite, 
-							SUM(quantite*prix) AS prix,
+							IF(promo IS NULL, SUM(quantite*prix), SUM(quantite*prix*promo)) AS prix,
 							date_livraison
 					FROM commandes cmd 
 						
 						LEFT JOIN produits_has_commandes phc 	ON cmd.id = phc.commandes_id 
 						LEFT JOIN produits 						ON produits.id = phc.produits_id 
-						LEFT JOIN etablissement etab 			ON cmd.etablissement_id = etab.id  
+						LEFT JOIN etablissement etab 			ON cmd.etablissement_id = etab.id
+						LEFT JOIN promo 						ON promo.produits_id = produits.id AND (NOW() BETWEEN promo.debut AND promo.fin)  
 					
 					WHERE cmd.user_id = ? 
 					GROUP BY commandes_id
@@ -60,16 +61,18 @@ class Commandes_model extends MY_Model{
 		}
 	}
 	function get_product($cmd_id) {
-						
+				
 		$product_query = ' 	SELECT  
 								p.id AS id,
 								nom,
 								description,
-								prix,
+								IF(promo IS NULL,prix,(promo * prix)) AS prix,
 								quantite,
-								(prix*quantite) AS prix_total
+								promo,
+								IF(promo IS NULL, (prix * quantite),(promo * prix * quantite)) AS prix_total
 							FROM produits p
 								LEFT JOIN produits_has_commandes phc 	ON p.id = phc.produits_id
+								LEFT JOIN promo 						ON promo.produits_id = p.id AND (NOW() BETWEEN promo.debut AND promo.fin)
 							WHERE phc.commandes_id = ? ';
 							
 		$product_retour = $this->mysql->qexec('get_cmd_produits',$product_query,array(intval($cmd_id)));
@@ -95,7 +98,7 @@ class Commandes_model extends MY_Model{
 						adresse_livraison
 					FROM commandes cmd 
 						LEFT JOIN produits_has_commandes phc 	ON cmd.id = phc.commandes_id
-						LEFT JOIN etablissement etab 			ON cmd.etablissement_id = etab.id  
+						LEFT JOIN etablissement etab 			ON cmd.etablissement_id = etab.id 
 					WHERE cmd.id = ? ';
 					
 	
@@ -123,4 +126,16 @@ class Commandes_model extends MY_Model{
 			return false;
 		}
 	}
+	function validate($id,$date,$adresse) {
+		
+		$query = 'UPDATE commandes SET date_livraison = ?, adresse_livraison = ? WHERE id = ?';
+		$request_rep = $this->mysql->qexec('validate_cmd',$query,array($date,$adresse,$id));
+		if($request_rep) return true;
+		else {
+			log_message('error',$this->mysql->error);
+			return false;
+		}
+		
+	}
+
 }

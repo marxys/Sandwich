@@ -64,16 +64,18 @@ class Commandes extends CI_Controller{
 	}
 	
 	
-	function view($id_cmd = NULL) {
+	function view($id_cmd = NULL, $message = '') {
 		
 		$this->load->view('modules/header',array(	'title' => $this->titre_defaut ));
 		
 		if(!empty($id_cmd)) {
 			$commandes = $this->cmd->get_cmd(intval($id_cmd));
+			$commandes['message'] = $message;
 			$this->load->view('commandes/cmd_view',$commandes);
 		}
 		else {
 			$commandes['list'] = $this->cmd->get_cmd_list($this->session->userdata('user_id'));
+			$commandes['message'] = $message;
 			$this->load->view('commandes/cmd_list',$commandes);
 		}
 		
@@ -121,5 +123,14 @@ class Commandes extends CI_Controller{
 						
 			echo json_encode($this->json->get());
 			
+	}
+	
+		
+	function validate($id) {
+		$date 		= $this->input->post('date');
+		$adresse 	= $this->input->post('adresse');
+		
+		if($this->cmd->validate($id,$date,$adresse)) 	$this->view($id,'Votre commande a bien été validée');		
+		else  											$this->view($id,'Votre commande n\'a pas été validée, veuillez recommencer');
 	}
 }

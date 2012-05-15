@@ -217,9 +217,6 @@ class Users extends CI_Controller {
 							if(!empty($_FILES['avatar']['name'])){				  
 								$config['upload_path'] = './assets/upload/etablissement';
 								$config['allowed_types'] = 'jpg';
-								$config['max_size']	= '512';
-								$config['max_width']  = '200';
-								$config['max_height']  = '200';
 								$config['file_name'] = "etab_".$etablissement['id'];
 	
 								$this->load->library('upload', $config);

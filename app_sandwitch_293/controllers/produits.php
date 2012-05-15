@@ -45,9 +45,6 @@ class Produits extends CI_Controller{
 						
 						$config['upload_path'] = './assets/upload/produit';
 						$config['allowed_types'] = 'jpg';
-						$config['max_size']	= '512';
-						$config['max_width']  = '1000';
-						$config['max_height']  = '1000';
 						$config['file_name'] = "produit_".$id_produit;
 
 						$this->load->library('upload', $config);
