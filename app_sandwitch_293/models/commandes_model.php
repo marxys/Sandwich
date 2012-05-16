@@ -35,13 +35,12 @@ class Commandes_model extends MY_Model{
 	
 	function get_cmd_list($user_id) {
 		
-		$query = '	SELECT 
+		$query = '	SELECT  
 							cmd.id,
 							etab.nom AS etablissement, 
-							date_commande AS date, 
-							SUM(quantite) AS quantite,
-							promo, 
-							IF(promo IS NULL, SUM(quantite*prix), SUM(quantite*prix*promo)) AS prix,
+							date_commande AS date,
+							SUM(quantite) AS quantite, 
+							SUM(quantite*prix*(IF(promo IS NULL,1,promo))) AS prix,
 							date_livraison
 					FROM commandes cmd 
 						
@@ -62,7 +61,8 @@ class Commandes_model extends MY_Model{
 		}
 	}
 	function get_product($cmd_id) {
-				
+	
+							
 		$product_query = ' 	SELECT  
 								p.id AS id,
 								nom,
@@ -71,11 +71,10 @@ class Commandes_model extends MY_Model{
 								quantite,
 								promo,
 								IF(promo IS NULL, (prix * quantite),(promo * prix * quantite)) AS prix_total
-							FROM produits p
-								LEFT JOIN produits_has_commandes phc 	ON p.id = phc.produits_id
+							FROM produits_has_commandes phc
+								LEFT JOIN produits p 					ON p.id = phc.produits_id
 								LEFT JOIN promo 						ON promo.produits_id = p.id AND (NOW() BETWEEN promo.debut AND promo.fin)
-							WHERE phc.commandes_id = ? ';
-							
+							WHERE phc.commandes_id = ? ';				
 		$product_retour = $this->mysql->qexec('get_cmd_produits',$product_query,array(intval($cmd_id)));
 		
 		
