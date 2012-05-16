@@ -6,7 +6,7 @@ class Produits_model extends MY_Model{
 		$this->table_name = 'produits';
 	}
 	
-
+	
 	public function isOwner($id_product){
 		$user_id = $this->session->userdata('user_id');
 		$query = "SELECT *,COUNT(*) AS 'is_present' FROM ".$this->table_name." WHERE id = ? AND etablissement_id IN (SELECT id FROM etablissement WHERE user_id = $user_id)";

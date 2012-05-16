@@ -10,9 +10,14 @@
         </p>
         </div>
     <?php
+	
+			
     if(!empty($adresse_livraison) && !empty($date_livraison)) {	
+	
+	$qte_edit = 0;
 	?>
 	<table class="tb_form">
+    		
     		<tr>
         		<td class='adresse_title'>Adresse de livraison : </td>
                 <td class='adresse'><?php echo $adresse_livraison; ?> </td>
@@ -28,11 +33,23 @@
     </table>
 
     
-    <? }else{ ?>
+    <? }else{ 
+		$qte_edit=1;?>
     
      <form id="finalize_cmd" action="/index.php/commandes/validate/<?php echo $cmd_id; ?>" method="post">
 		<table class="tb_form">
-    		<tr>
+        	<tr id="is_home_delivery">
+        		<td class='ldomicile_title'>Livraison à domicile : </td>
+                <td class='ldomicile'> 
+                	<select id="ldomicile"  name="ldomicile"> 
+                    	<option selected="selected" value="0" onclick="$('#adresse_livraison').hide();
+                        											   $('#adresse').html('Sur place');"> Non</option>
+                        <option value="1" onclick="$('#adresse_livraison').show();
+                        						   $('#adresse').html('Entrez l\'adresse de livraison ici');">Oui</option>
+                    </select>
+                </td>
+            </tr>
+    		<tr id="adresse_livraison" style="display:none;">
         		<td class='adresse_title'>Adresse : </td>
                 <td><textarea id="adresse" name="adresse" class="cmd_adresse">Entrez l'adresse de livraison ici</textarea></td>
         	</tr>
@@ -82,7 +99,10 @@
 			echo '<td>'.$produit['nom'].'</td>';
 			echo '<td>'.$produit['description'].'</td>';
 			echo '<td>'.$produit['prix'].' €</td>';
-			echo '<td><input id="'.$produit['id'].'" type="text" size="2" value="'.$produit['quantite'].'" onchange="edit_qte(this.id, this.value,\''.$cmd_id.'\');"/></td>';
+			
+			if($qte_edit) echo '<td><input id="'.$produit['id'].'" type="text" size="2" value="'.$produit['quantite'].'" onchange="edit_qte(this.id, this.value,\''.$cmd_id.'\');"/></td>';
+			else echo  '<td>'.$produit['quantite'].'</td>';
+			
 			echo '<td><span id="prix_'.$produit['id'].'"> '.$produit['prix_total'].'</span> €</td>';
 			echo '</tr>';
 			$prix_total += $produit['prix_total'];
