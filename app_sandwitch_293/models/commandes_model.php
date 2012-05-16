@@ -39,7 +39,8 @@ class Commandes_model extends MY_Model{
 							cmd.id,
 							etab.nom AS etablissement, 
 							date_commande AS date, 
-							SUM(quantite) AS quantite, 
+							SUM(quantite) AS quantite,
+							promo, 
 							IF(promo IS NULL, SUM(quantite*prix), SUM(quantite*prix*promo)) AS prix,
 							date_livraison
 					FROM commandes cmd 

@@ -132,21 +132,15 @@ class Produits extends CI_Controller{
 			$data['etablissement'] 	= $selected_etab;
 			$data['news'] 			= $news_etab;
 			$this->load->view('produits/info_etablissement',$data);
-			if($filtre == NULL)
-				$produits = $this->produits_model->get_products_from($view_id);
-			else{ // requete de recherche
-				$search_categorie = $this->input->post('categorie');
-				$search = $this->input->post('search');
-				if($search){
-					$produits = $this->produits_model->filtrage($view_id,$search,$search_categorie);
-				}
-				else{
-					if($search_categorie != "Toutes")
-						$produits = $this->produits_model->get_from_categorie($view_id,$search_categorie);
-					else
-						$produits = $this->produits_model->get_products_from($view_id);					
-				}
-			}
+		
+			$search_categorie = $this->input->post('categorie');
+			$search = $this->input->post('search');
+			if(empty($search)) $search = NULL;
+			if($search_categorie == 0)$search_categorie = NULL;
+			
+				
+			$produits = $this->produits_model->get_product_list($view_id,$search_categorie, $search);
+	
 			$dataProduit['produits'] = $produits;
 			if(!empty($produits))
 				$dataProduit['owner'] = $this->produits_model->isOwner($produits[0]['id']);
@@ -169,7 +163,14 @@ class Produits extends CI_Controller{
 		$date_fin = $this->input->post('date_fin');
 		if($promo && $id_product && $date_fin){
 			if($this->produits_model->isOwner($id_product)){
-				if($this->promo->insert( array('promo'=>$promo,
+				
+				if($this->promo->dateUsed($id_product,$date_debut,$date_fin)) {
+					$data['message'] = "Vous ne pouvez pas ajouter une promotion qui chavauche une autre.";
+					$this->load->view('error',$data);	
+					return;
+				}	
+					
+				if($this->promo->insert( array('promo'=> ((100 - $promo) /100),
 											   'debut'=>$date_debut,
 											   'fin' =>$date_fin,
 											   'produits_id' => $id_product)))
@@ -228,7 +229,7 @@ class Produits extends CI_Controller{
 		$produit_id = $this->input->post('produit_id');
 		$this->load->library('json');
 		if($score && $produit_id){
-			if($score_id = $this->score->scoreAlreadySet()){ // on change le score (update)
+			if($score_id = $this->score->scoreAlreadySet($produit_id)){ // on change le score (update)
 				if(!$this->score->update( array('score'=>$score), $score_id)){
 					$this->load->view('error',array('message'=>$this->mysql->error));
 					return;	

@@ -23,13 +23,26 @@
 </div>
 <div id="right_produit">
 	<div id="details"> <!-- Div placé sur la moitié de page droite -->
-        <img class="panier" src="<?php echo base_url()?>assets/upload/produit/produit_<?php echo $produit['id']?>"></img>
+        <img class="photo_produit" src="<?php echo base_url()?>assets/upload/produit/produit_<?php echo $produit['id']?>"></img>
         <ul>
             <li><strong> Nom du produit : </strong><?php echo $produit['nom'];?> </li>
             <li><strong> Description : </strong><?php echo $produit['description'];?> </li>
-            <li><strong> Prix : </strong><?php echo $produit['prix']. '€';?> </li>
+            <?php 
+			if(!empty($produit['promo'])) {
+				?>
+				<li><strong> Prix : </strong>
+                <span class="promo"><?php echo $produit['prix']. '€';?></span> 
+                <span class="old_price"><?php echo $produit['old_prix']. '€';?></span> 
+                </li>
+			<?php	
+			}else{
+			?>
+            	<li><strong> Prix : </strong><?php echo $produit['prix']. '€';?></li>
+            <?php
+			}
+			?>
             <li><strong> Disponibilité : </strong><?php if($produit['disponnibilite']) echo "Oui"; else echo "Non"; ?></li>
-            <li><strong> Score actuel : </strong><?php echo $score ?> </li>
+            <li><strong> Score actuel : </strong><?php if(!$score) echo "Produit non évalué"; else echo $score; ?> </li>
             <li><strong> Donner un score : </strong></li>
             <div id="radio" style="display:inline">
 				<input type="radio" id="radio1" name="radio" value="1" /><label for="radio1">1</label>
@@ -52,17 +65,24 @@
                 <form method="post" action="/index.php/produits/del_promo">
                     <p>Les promos actuel sur le produit :</p>
                     <input type="text" style="display:none" name="id_product" value="<?php echo $produit['id'];?>"/>
+                    <table>
                     <?php
                     $i = 0; 
                     foreach($promos as $element){ 
-                                
-                            ?><tr><td> -<?php echo $element['promo'];?> % </td><td>Date début : <?php echo $element['debut'].' ';?></td><td> Date fin : <?php echo $element['fin'];?></td><td><input type="checkbox" class="checkbox_produit" name="del_<?php echo $i; ?>"/><input type="text" name="del_<?php echo $i; ?>_id" style="display:none" value="<?php echo $element['id'];?>" /></td> <br/>  
+                    ?>
+                    <tr>
+                    	<td> -<?php echo (100-100*$element['promo']);?> % </td>
+                        <td>Date début : <?php echo $element['debut'].' ';?></td>
+                        <td> Date fin : <?php echo $element['fin'];?></td>
+                        <td><input type="checkbox" class="checkbox_produit" name="del_<?php echo $i; ?>"/><input type="text" name="del_<?php echo $i; ?>_id" style="display:none" value="<?php echo $element['id'];?>" /></td> 
+                        </tr> 
                     <?php $i++;}?>
+                    </table>
                     <input type="text" style="display:none" name="nbr_promo" value="<?php echo $i;?>"/>
                     <input type="submit" value="Supprimer" />
                  </form>
                  <?php }?> <!-- End empty(promos) -->
-                
+                 
                  <form method="post" action="/index.php/produits/ajouter_promo">
                   <p>Ajoutez un promo sur le produit <strong><?php echo $produit['nom'];?></strong>. Indiquez un chiffre de 1 à 99 référant le pourcentage de réduction sur son prix.</p>
                     <input type="text" name="id_product" style="display:none" value="<?php echo $produit['id']; ?>" />
@@ -97,8 +117,8 @@
 $(document).ready(function(){
 	$("#retour_com").button();
 	$(":submit").button();
-	$("#date_fin").datepicker({ dateFormat: "dd-mm-yy" });
-	$("#date_debut").datepicker({ dateFormat: "dd-mm-yy" });
+	$("#date_fin").datepicker({ dateFormat: "yy-mm-dd" });
+	$("#date_debut").datepicker({ dateFormat: "yy-mm-dd" });
 	
 	$(".panier").click(function(){
 		//id produit et etablissement

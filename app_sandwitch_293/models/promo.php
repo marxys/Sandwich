@@ -12,4 +12,14 @@ class Promo extends MY_Model{
 		$result = $result->fetchAll();
 		return $result;
 	}
+	
+	public function dateUsed($id, $date1, $date2) {
+		$rep = $this->mysql->qexec(	'pormo_isFrees',
+									"SELECT COUNT(*) FROM promo WHERE (( debut BETWEEN '$date1' AND '$date2' ) OR ( fin BETWEEN '$date1' AND '$date2' )) AND produits_id = ? ",
+									array($id));
+		$nbr = $rep->fetch();
+		
+		if($nbr[0] > 0) return true;
+		else return false;	
+	}
 }

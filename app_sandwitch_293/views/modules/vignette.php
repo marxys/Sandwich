@@ -2,7 +2,7 @@
 <a href="<?php echo "/index.php/etablissement/view/$id"; ?>">
 <div id='vignette'>
 	
-	<img src="<?php echo $image; ?>" alt="<?php echo $title; ?>" />
+	<img src="../<?php echo $image; ?>" alt="<?php echo $title; ?>" />
     <ul>
     	<li><h3><?php echo $title; ?></h3></li>
     <?php

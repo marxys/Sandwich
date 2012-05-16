@@ -97,6 +97,31 @@
 	margin-top:15px;
 	background-color:#900;
 }
+.panier {
+	position:relative;
+	top:10px;	
+}
+.photo_produit, #photo img {
+	max-height:200px;
+	max-width:200px;
+	float: right;	
+	margin:10px;
+	
+}
+.promo {
+	color:#F00;
+	font-weight:bold;
+	text-decoration:blink;
+	padding:4px;
+	padding-left: 20px;
+	background-image:url(../imgs/sale.png);
+	background-repeat:no-repeat;
+}
+
+.old_price {
+	
+	text-decoration:line-through;
+}
 
 
 #vignette ul {
@@ -268,8 +293,8 @@ h3,h2 {
 #page {
 	position: absolute;
 	top:40px;
-	left:2%;
-	width:96%;
+	left:0%;
+	width:100%;
 }
 
 #apps  .bouton_app{
